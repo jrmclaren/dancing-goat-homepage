@@ -41,6 +41,142 @@ h1.headline {
     position: absolute;
     right: 5rem; }
 
+.menu-container {
+  position: fixed;
+  right: 5rem;
+  top: 2.5rem;
+  width: 80px;
+  height: 80px;
+  background-color: white;
+  border-radius: 200px;
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  transition: all .2s ease-out;
+  z-index: 6; }
+  .menu-container__inner {
+    position: absolute;
+    width: 60px;
+    height: auto;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); }
+    .menu-container__inner svg * {
+      transition: all .2s ease-out; }
+    .menu-container__inner svg .fill--cta {
+      fill: var(--cta); }
+    .menu-container__inner svg path[name="top"] {
+      transform-origin: center right; }
+    .menu-container__inner svg path[name="middle"] {
+      transform-origin: center center; }
+    .menu-container__inner svg path[name="bottom"] {
+      transform-origin: center center; }
+  .menu-container:hover, .menu-container:focus {
+    transform: translateY(-8px); }
+    .menu-container:hover svg .fill--cta, .menu-container:focus svg .fill--cta {
+      fill: var(--cta-darker); }
+    .menu-container:hover svg path[name="top"], .menu-container:focus svg path[name="top"] {
+      transform: rotate(15deg); }
+    .menu-container:hover svg path[name="bottom"], .menu-container:focus svg path[name="bottom"] {
+      transform: translateY(-10px); }
+  .menu-container:active {
+    background-color: var(--cta);
+    transform: translateY(-4px); }
+    .menu-container:active svg .fill--cta {
+      fill: var(--cta); }
+    .menu-container:active svg path[name="top"] {
+      transform-origin: center center;
+      transform: rotate(43deg) translateY(150px) scaleX(1.7); }
+    .menu-container:active svg path[name="bottom"] {
+      transform: translateX(-125px) translateY(-120px) rotate(-48deg) scaleX(1.9); }
+    .menu-container:active svg path[name="middle"] {
+      transform: scale(2.8);
+      border-radius: 200px;
+      fill: transparent; }
+
+.active {
+  background-color: transparent;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0); }
+
+input[type="checkbox"] {
+  display: none;
+  visibility: hidden; }
+
+#menu:checked ~ .menu-container__inner svg .fill--cta {
+  fill: var(--cta); }
+
+#menu:checked ~ .menu-container__inner svg path[name="top"] {
+  transform-origin: center center;
+  transform: rotate(43deg) translateY(150px) scaleX(1.7); }
+
+#menu:checked ~ .menu-container__inner svg path[name="bottom"] {
+  transform: translateX(-125px) translateY(-120px) rotate(-48deg) scaleX(1.9); }
+
+#menu:checked ~ .menu-container__inner svg path[name="middle"] {
+  transform: scale(2.8);
+  fill: transparent; }
+
+.nav-bg {
+  position: fixed;
+  right: 5rem;
+  top: 2.5rem;
+  width: 80px;
+  height: 80px;
+  transform: scale(0);
+  opacity: 0.01;
+  transition: all .5s ease-out;
+  z-index: 3;
+  border-radius: 200px;
+  background-color: var(--cta);
+  background: radial-gradient(circle at 100%, var(--cta), var(--cta-darker));
+  transform-origin: center center; }
+  .nav-bg.active {
+    transform: scale(85);
+    opacity: 1; }
+
+.nav {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  z-index: 5;
+  transform: translateY(-320px);
+  transition: transform .6s ease-out;
+  background-color: transparent; }
+  .nav ul {
+    list-style: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: top;
+    opacity: 0;
+    transition: all .4s ease-out .2s; }
+    .nav ul li {
+      color: white;
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: -2.2px;
+      background: linear-gradient(to left, white 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 100%);
+      background-size: 220%;
+      cursor: default;
+      transition: all .2s ease-out;
+      padding: 10px 15px; }
+      .nav ul li:hover {
+        background-position: 100%;
+        color: var(--cta);
+        transform: translateX(10px); }
+      .nav ul li:not(:last-child) {
+        margin-bottom: 15px; }
+  .nav.active {
+    transform: translateY(0); }
+    .nav.active ul {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+      transition: opacity .4s ease-out;
+      transition-delay: 0; }
+      .nav.active ul li {
+        cursor: pointer; }
+
 .section {
   width: 100vw;
   height: 100vh; }
