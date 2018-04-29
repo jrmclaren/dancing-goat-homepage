@@ -179,6 +179,9 @@ input[type="checkbox"] {
         transform: translateX(10px); }
       .nav ul li:not(:last-child) {
         margin-bottom: 15px; }
+      .nav ul li a:link, .nav ul li a:visited {
+        text-decoration: none;
+        color: currentColor; }
   .nav.active {
     transform: translateY(0); }
     .nav.active ul {

@@ -280,6 +280,14 @@ input[type="checkbox"]{
       &:not(:last-child){
         margin-bottom: 15px;
       }
+      a{
+        &:link,
+        &:visited{
+          text-decoration: none;
+          color: currentColor;
+        }
+      }
+
     }
   }
   &.active{
