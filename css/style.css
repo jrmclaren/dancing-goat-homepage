@@ -45,17 +45,17 @@ h1.headline {
   position: fixed;
   right: 5rem;
   top: 2.5rem;
-  width: 80px;
-  height: 80px;
+  width: 8rem;
+  height: 8rem;
   background-color: white;
-  border-radius: 200px;
-  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.12);
+  border-radius: 20rem;
+  box-shadow: 0 0 4rem rgba(0, 0, 0, 0.12);
   cursor: pointer;
   transition: all .2s ease-out;
   z-index: 6; }
   .menu-container__inner {
     position: absolute;
-    width: 60px;
+    width: 6rem;
     height: auto;
     left: 50%;
     top: 50%;
@@ -65,7 +65,7 @@ h1.headline {
     .menu-container__inner svg .fill--cta {
       fill: var(--cta); }
     .menu-container__inner svg path[name="top"] {
-      transform-origin: center right; }
+      transform-origin: right center; }
     .menu-container__inner svg path[name="middle"] {
       transform-origin: center center; }
     .menu-container__inner svg path[name="bottom"] {
@@ -80,12 +80,12 @@ h1.headline {
       transform: translateY(-10px); }
   .menu-container:active {
     background-color: var(--cta);
-    transform: translateY(-4px); }
+    transform: translateY(-0.4rem); }
     .menu-container:active svg .fill--cta {
       fill: var(--cta); }
     .menu-container:active svg path[name="top"] {
       transform-origin: center center;
-      transform: rotate(43deg) translateY(150px) scaleX(1.7); }
+      transform: rotate(43deg) translateY(15rem) scaleX(1.7); }
     .menu-container:active svg path[name="bottom"] {
       transform: translateX(-125px) translateY(-120px) rotate(-48deg) scaleX(1.9); }
     .menu-container:active svg path[name="middle"] {
@@ -106,10 +106,10 @@ input[type="checkbox"] {
 
 #menu:checked ~ .menu-container__inner svg path[name="top"] {
   transform-origin: center center;
-  transform: rotate(43deg) translateY(150px) scaleX(1.7); }
+  transform: rotate(43deg) translateY(15rem) scaleX(1.7); }
 
 #menu:checked ~ .menu-container__inner svg path[name="bottom"] {
-  transform: translateX(-125px) translateY(-120px) rotate(-48deg) scaleX(1.9); }
+  transform: translateX(-12.5rem) translateY(-12rem) rotate(-48deg) scaleX(1.9); }
 
 #menu:checked ~ .menu-container__inner svg path[name="middle"] {
   transform: scale(2.8);
@@ -119,8 +119,8 @@ input[type="checkbox"] {
   position: fixed;
   right: 5rem;
   top: 2.5rem;
-  width: 80px;
-  height: 80px;
+  width: 8rem;
+  height: 8rem;
   transform: scale(0);
   opacity: 0.01;
   transition: all .5s ease-out;
@@ -134,12 +134,13 @@ input[type="checkbox"] {
     opacity: 1; }
 
 .nav {
-  position: relative;
+  position: fixed;
+  top: 0;
   width: 100vw;
   height: 100vh;
   text-align: center;
   z-index: 5;
-  transform: translateY(-320px);
+  transform: translateY(-32rem);
   transition: transform .6s ease-out;
   background-color: transparent; }
   .nav ul {
@@ -155,12 +156,12 @@ input[type="checkbox"] {
       color: white;
       font-size: 40px;
       font-weight: 700;
-      letter-spacing: -2.2px;
+      letter-spacing: -.22rem;
       background: linear-gradient(to left, white 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 100%);
       background-size: 220%;
       cursor: default;
       transition: all .2s ease-out;
-      padding: 10px 15px; }
+      padding: 1.0rem 1.5rem; }
       .nav ul li:hover {
         background-position: 100%;
         color: var(--cta);
@@ -176,12 +177,16 @@ input[type="checkbox"] {
       transition-delay: 0; }
       .nav.active ul li {
         cursor: pointer; }
+        .nav.active ul li a:link, .nav.active ul li a:visited {
+          text-decoration: none; }
 
 .section {
   width: 100vw;
-  height: 100vh; }
+  position: relative;
+  z-index: -1; }
   .section__home {
-    background: linear-gradient(to bottom, white, #d9d9d9); }
+    background: linear-gradient(to bottom, white, #d9d9d9);
+    height: 100vh; }
     .section__home-logo-box {
       position: absolute;
       width: 30rem;

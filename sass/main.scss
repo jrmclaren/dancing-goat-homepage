@@ -84,33 +84,32 @@ h1.headline{
   position: fixed;
   top: 10.9rem;
   font-size: 1.3rem;
-
   i{
     position: absolute;
     right: 5rem;
   }
-
 }
 
 // Nav Menu styles
 // TODO: migrate into .header
+// TODO: Convert values to rem
 .menu-container{
 
   @include burgerMenuPositioning();
 
   // container styles
-  width: 80px;
-  height: 80px;
+  width: 8rem;
+  height: 8rem;
   background-color: white;
-  border-radius: 200px;
-  box-shadow: 0px 0px 40px rgba(0,0,0,0.12);
+  border-radius: 20rem;
+  box-shadow: 0 0 4rem rgba(0,0,0,0.12);
   cursor: pointer;
   transition: all .2s ease-out;
   z-index: 6;
 
   &__inner{
     position: absolute;
-    width: 60px;
+    width: 6rem;
     height: auto;
     left: 50%;
     top: 50%;
@@ -123,7 +122,7 @@ h1.headline{
         fill: var(--cta);
       }
       path[name="top"]{
-        transform-origin: center right;
+        transform-origin: right center;
       }
       path[name="middle"]{
         transform-origin: center center;
@@ -149,18 +148,17 @@ h1.headline{
     }
   } // end :hover + :focus
 
-  //TODO: convert to checkbox hack and make this the checked style
   // make the black cross.
   &:active{
     background-color: var(--cta);
-    transform: translateY(-4px);
+    transform: translateY(-.4rem);
     svg{
       .fill--cta{
         fill: var(--cta);
       }
       path[name="top"]{
         transform-origin: center center;
-        transform: rotate(43deg) translateY(150px) scaleX(1.7);
+        transform: rotate(43deg) translateY(15rem) scaleX(1.7);
       }
       path[name="bottom"]{
         transform: translateX(-125px) translateY(-120px) rotate(-48deg) scaleX(1.9);
@@ -194,10 +192,10 @@ input[type="checkbox"]{
       }
       path[name="top"]{
         transform-origin: center center;
-        transform: rotate(43deg) translateY(150px) scaleX(1.7);
+        transform: rotate(43deg) translateY(15rem) scaleX(1.7);
       }
       path[name="bottom"]{
-        transform: translateX(-125px) translateY(-120px) rotate(-48deg) scaleX(1.9);
+        transform: translateX(-12.5rem) translateY(-12.0rem) rotate(-48deg) scaleX(1.9);
       }
       path[name="middle"]{
         transform: scale(2.8);
@@ -212,8 +210,8 @@ input[type="checkbox"]{
   @include burgerMenuPositioning();
 
   // styles
-  width: 80px;
-  height: 80px;
+  width: 8rem;
+  height: 8rem;
   transform: scale(0);
   opacity: 0.01;
   transition: all .5s ease-out;
@@ -230,12 +228,13 @@ input[type="checkbox"]{
 } // end nav-bg
 
 .nav{
-  position: relative;
+  position: fixed;
+  top: 0;
   width: 100vw;
   height: 100vh;
   text-align: center;
   z-index: 5;
-  transform: translateY(-320px);
+  transform: translateY(-32rem);
   transition: transform .6s ease-out;
   background-color: transparent;
   ul{
@@ -251,7 +250,7 @@ input[type="checkbox"]{
       color: white;
       font-size: 40px;
       font-weight: 700;
-      letter-spacing: -2.2px;
+      letter-spacing: -.22rem;
       background: linear-gradient(to left,
               rgba(255,255,255,1) 50%,
               rgba(255,255,255,0) 50%,
@@ -259,7 +258,7 @@ input[type="checkbox"]{
       background-size: 220%;
       cursor: default;
       transition: all .2s ease-out;
-      padding: 10px 15px;
+      padding: 1.0rem 1.5rem;
       &:hover{
         background-position: 100%;
         color: var(--cta);
@@ -279,6 +278,12 @@ input[type="checkbox"]{
       transition-delay: 0;
       li{
         cursor: pointer;
+        a{
+          &:link,
+          &:visited{
+            text-decoration: none;
+          }
+        }
       }
     }
   }
@@ -286,11 +291,13 @@ input[type="checkbox"]{
 
 .section{
   width: 100vw;
-  height: 100vh;
+  position: relative;
+  z-index: -1;
   &__home{
     background: linear-gradient(to bottom,
             rgba(255,255,255,1),
             rgba(217,217,217,1));
+    height: 100vh;
     &-logo-box{
       position: absolute;
       width: 30rem;
@@ -312,6 +319,7 @@ input[type="checkbox"]{
       right: 0;
       width: 80vw;
       height: auto;
+      //background: linear-gradient(to right, rgba($cta,.5), rgba($cta-darker,.5)) url('../img/hero_image@300x.png');
       img{
         height: 100%;
         width: 100%;
