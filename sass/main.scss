@@ -11,11 +11,11 @@ $cta-darker: #9e465b;
 :root{
   --cta: #b14d61;
   --cta-darker: #9e465b;
+  --section-headline: rgb(242,242,242);
+  --body-color: rgb(51,51,51);
   --font-family: Raleway, sans-serif;
 }
-
 // @mixins
-
 @mixin debug($c){
   border: solid 2px $c;
 }
@@ -293,6 +293,22 @@ input[type="checkbox"]{
   width: 100vw;
   position: relative;
   z-index: -1;
+
+  &__headline-box{
+    position: absolute;
+    width: 100vw;
+    top: 2.5rem;
+  }
+  &__headline{
+    width: 100%;
+    font-size: 20rem;
+    line-height: 6.5rem;
+    letter-spacing: -0.01rem;
+    text-align: left;
+    font-weight: 900;
+    color: var(--section-headline);
+  }
+
   &__home{
     background: linear-gradient(to bottom,
             rgba(255,255,255,1),
@@ -326,5 +342,51 @@ input[type="checkbox"]{
       }
     }
   }//end __home
+  &__story{
+    height: 100vh;
+    z-index: -2;
+
+    &-textbox{
+
+      &__headline{
+        font-size: 6rem;
+        color: var(--cta);
+        letter-spacing: -0.01rem;
+        margin-bottom: 1.6rem;
+      }
+
+      &__content{
+        font-size: 2.8rem;
+        color: var(--body-color);
+        line-height: 3.4rem;
+        letter-spacing: 0;
+        font-weight: 700;
+      }
+
+      &--left{
+        position: absolute;
+        width: 44.7rem;
+        height: 29.1rem;
+        left: 29.1rem;
+        top: 27.3rem;
+      }
+      &--right{
+
+        //POSITION
+        position: absolute;
+        left: 105rem;
+        top: 26.5rem;
+
+        //SIZING
+        width: 32.4rem;
+        height: 29.1rem;
+
+
+
+      }
+    }
+
+  }
+
 }// end .section
 
