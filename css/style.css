@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:700,900");
+:root {
+  --cta: #b14d61;
+  --cta-darker: #9e465b;
+  --font-family: Raleway, sans-serif; }
+
+*, *:after, *:before {
+  margin: 0;
+  padding: 0; }
+
+html {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  font-size: 62.5%;
+  font-family: var(--font-family); }
+
+.logo {
+  display: block;
+  text-indent: -9999rem;
+  width: 100%;
+  height: 100%; }
+  .logo__hero--dark {
+    background: url(../img/logo_hero--dark.svg);
+    background-repeat: no-repeat; }
+
+h1.headline {
+  font-size: 6rem;
+  color: var(--cta);
+  font-weight: 900;
+  line-height: 6.5rem;
+  letter-spacing: -0.01rem; }
+
+.header {
+  width: 100vw;
+  position: fixed;
+  top: 10.9rem;
+  font-size: 1.3rem; }
+  .header i {
+    position: absolute;
+    right: 5rem; }
+
+.section {
+  width: 100vw;
+  height: 100vh; }
+  .section__home {
+    background: linear-gradient(to bottom, white, #d9d9d9); }
+    .section__home-logo-box {
+      position: absolute;
+      width: 30rem;
+      height: 17.1rem;
+      left: 16.4rem;
+      top: 6.9rem; }
+    .section__home-headline-box {
+      position: absolute;
+      left: 16.3rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 54.2rem;
+      height: 17.4rem; }
+    .section__home-hero-image-box {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 80vw;
+      height: auto; }
+      .section__home-hero-image-box img {
+        height: 100%;
+        width: 100%; }

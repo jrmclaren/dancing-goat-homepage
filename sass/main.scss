@@ -1,0 +1,123 @@
+// Import Raleway
+@import url('https://fonts.googleapis.com/css?family=Raleway:700,900');
+
+// SASS Variables
+// cta a.k.a BEAN
+$cta: #b14d61;
+// bean darker
+$cta-darker: #9e465b;
+
+// CSS Variables
+:root{
+  --cta: #b14d61;
+  --cta-darker: #9e465b;
+  --font-family: Raleway, sans-serif;
+}
+
+// @mixins
+
+@mixin debug($c){
+  border: solid 2px $c;
+}
+
+
+// reset
+*{
+  &, &:after, &:before{
+    margin: 0;
+    padding: 0;
+  }
+}
+html{
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  // make 1rem equal 10px
+  font-size: 62.5%; // 16px / 100 = 62.5% i.e. 10px = 1rem
+  font-family: var(--font-family);
+}
+.logo{
+  display: block;
+  text-indent: -9999rem;
+  width: 100%;
+  height: 100%;
+  &__hero{
+    &--dark{
+      background: url(../img/logo_hero--dark.svg);
+      background-repeat: no-repeat;
+    }
+    &--light{
+
+    }
+  }
+  &__secondary{
+    &--bean{
+
+    }
+    &--black{
+
+    }
+    &--white{
+
+    }
+  }
+}
+
+h1.headline{
+  font-size: 6rem;
+  color: var(--cta);
+  font-weight: 900;
+  line-height: 6.5rem;
+  letter-spacing: -0.01rem;
+}
+
+.header{
+  width: 100vw;
+  position: fixed;
+  top: 10.9rem;
+  font-size: 1.3rem;
+
+  i{
+    position: absolute;
+    right: 5rem;
+  }
+
+}
+
+.section{
+  width: 100vw;
+  height: 100vh;
+  &__home{
+    background: linear-gradient(to bottom,
+            rgba(255,255,255,1),
+            rgba(217,217,217,1));
+    &-logo-box{
+      position: absolute;
+      width: 30rem;
+      height: 17.1rem;
+      left: 16.4rem;
+      top: 6.9rem;
+    }
+    &-headline-box{
+      position: absolute;
+      left: 16.3rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 54.2rem;
+      height: 17.4rem;
+    }
+    &-hero-image-box{
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 80vw;
+      height: auto;
+      img{
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }//end __home
+}// end .section
+
