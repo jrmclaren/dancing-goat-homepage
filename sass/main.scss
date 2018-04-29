@@ -66,7 +66,8 @@ html{
 
     }
     &--white{
-
+      background: url(../img/logo_secondary--white.svg);
+      background-repeat: no-repeat;
     }
   }
 }
@@ -237,6 +238,18 @@ input[type="checkbox"]{
   transform: translateY(-32rem);
   transition: transform .6s ease-out;
   background-color: transparent;
+
+  &__logo-box{
+    //position
+    position: absolute;
+    left: 16.4rem;
+    top: 6.9rem;
+    //size
+    width: 30rem;
+    height: 17.1rem;
+  }
+
+
   ul{
     list-style: none;
     position: absolute;
@@ -350,6 +363,7 @@ input[type="checkbox"]{
 
       &__headline{
         font-size: 6rem;
+        font-weight: 900;
         color: var(--cta);
         letter-spacing: -0.01rem;
         margin-bottom: 1.6rem;
@@ -367,7 +381,7 @@ input[type="checkbox"]{
         position: absolute;
         width: 44.7rem;
         height: 29.1rem;
-        left: 29.1rem;
+        left: 16.3rem;
         top: 27.3rem;
       }
       &--right{
@@ -380,13 +394,50 @@ input[type="checkbox"]{
         //SIZING
         width: 32.4rem;
         height: 29.1rem;
-
-
-
       }
+    }
+  }
+  &__order{
+    //positioning
+    position: relative;
+    margin-top: -50vh;
+    //sizing
+    width: 100vw;
+    height: 73rem;
+    background-color: var(--cta-darker);
+
+    //order form
+
+    &-form-container{
+      //position
+      position: absolute;
+      left: 50%;
+      top: -41rem;
+      transform: translateX(-50%);
+
+      //size
+      width: 127.3rem;
+      height: 114.6rem;
+
+      //style
+      background-color: white;
+      border-radius: 80px 80px 0 0;
+      box-shadow: 0 2rem 4rem rgba(0,0,0,.3);
     }
 
   }
-
 }// end .section
 
+.coffee-feature-container{
+  // position
+  position: relative;
+  margin-top: -35rem;
+  z-index: -4;
+  //size
+  width: 100vw;
+  height: auto;
+  overflow: hidden;
+}
+.coffee-feature{
+  width: 100%;
+}

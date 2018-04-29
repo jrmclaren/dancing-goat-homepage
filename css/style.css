@@ -26,6 +26,9 @@ html {
   .logo__hero--dark {
     background: url(../img/logo_hero--dark.svg);
     background-repeat: no-repeat; }
+  .logo__secondary--white {
+    background: url(../img/logo_secondary--white.svg);
+    background-repeat: no-repeat; }
 
 h1.headline {
   font-size: 6rem;
@@ -145,6 +148,12 @@ input[type="checkbox"] {
   transform: translateY(-32rem);
   transition: transform .6s ease-out;
   background-color: transparent; }
+  .nav__logo-box {
+    position: absolute;
+    left: 16.4rem;
+    top: 6.9rem;
+    width: 30rem;
+    height: 17.1rem; }
   .nav ul {
     list-style: none;
     position: absolute;
@@ -228,6 +237,7 @@ input[type="checkbox"] {
     z-index: -2; }
     .section__story-textbox__headline {
       font-size: 6rem;
+      font-weight: 900;
       color: var(--cta);
       letter-spacing: -0.01rem;
       margin-bottom: 1.6rem; }
@@ -241,7 +251,7 @@ input[type="checkbox"] {
       position: absolute;
       width: 44.7rem;
       height: 29.1rem;
-      left: 29.1rem;
+      left: 16.3rem;
       top: 27.3rem; }
     .section__story-textbox--right {
       position: absolute;
@@ -249,3 +259,30 @@ input[type="checkbox"] {
       top: 26.5rem;
       width: 32.4rem;
       height: 29.1rem; }
+  .section__order {
+    position: relative;
+    margin-top: -50vh;
+    width: 100vw;
+    height: 73rem;
+    background-color: var(--cta-darker); }
+    .section__order-form-container {
+      position: absolute;
+      left: 50%;
+      top: -41rem;
+      transform: translateX(-50%);
+      width: 127.3rem;
+      height: 114.6rem;
+      background-color: white;
+      border-radius: 80px 80px 0 0;
+      box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.3); }
+
+.coffee-feature-container {
+  position: relative;
+  margin-top: -35rem;
+  z-index: -4;
+  width: 100vw;
+  height: auto;
+  overflow: hidden; }
+
+.coffee-feature {
+  width: 100%; }
