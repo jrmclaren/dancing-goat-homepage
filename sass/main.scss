@@ -19,8 +19,7 @@ $cta-darker: #9e465b;
 @mixin debug($c){
   border: solid 2px $c;
 }
-
-
+// burger menu position
 @mixin burgerMenuPositioning(){
   // the menu icon position
   position: fixed;
@@ -72,12 +71,27 @@ html{
   }
 }
 
-h1.headline{
+.headline{
   font-size: 6rem;
   color: var(--cta);
   font-weight: 900;
   line-height: 6.5rem;
   letter-spacing: -0.01rem;
+  &--2 {
+    font-size: 6rem;
+    font-weight: 900;
+    color: var(--cta);
+    letter-spacing: -0.01rem;
+    margin-bottom: 1.6rem;
+  }
+}
+
+.body-text{
+  font-size: 2.8rem;
+  color: var(--body-color);
+  line-height: 3.4rem;
+  letter-spacing: 0;
+  font-weight: 700;
 }
 
 .header{
@@ -85,22 +99,18 @@ h1.headline{
   position: fixed;
   top: 10.9rem;
   font-size: 1.3rem;
-  i{
-    position: absolute;
-    right: 5rem;
-  }
 }
 
 // Nav Menu styles
 // TODO: migrate into .header
 // TODO: Convert values to rem
 .menu-container{
-
+  // positioning
   @include burgerMenuPositioning();
-
-  // container styles
+  // size
   width: 8rem;
   height: 8rem;
+  // container styles
   background-color: white;
   border-radius: 20rem;
   box-shadow: 0 0 4rem rgba(0,0,0,0.12);
@@ -108,7 +118,7 @@ h1.headline{
   transition: all .2s ease-out;
   z-index: 6;
 
-  &__inner{
+  /*.menu-container*/&__inner{
     position: absolute;
     width: 6rem;
     height: auto;
@@ -134,7 +144,7 @@ h1.headline{
     } // end svg
   } // end __inner
 
-  &:hover, &:focus{
+  /*.menu-container*/&:hover, &:focus{
     transform: translateY(-8px);
     svg{
       .fill--cta{
@@ -160,9 +170,11 @@ h1.headline{
       path[name="top"]{
         transform-origin: center center;
         transform: rotate(43deg) translateY(15rem) scaleX(1.7);
+        fill: white !important;
       }
       path[name="bottom"]{
         transform: translateX(-125px) translateY(-120px) rotate(-48deg) scaleX(1.9);
+        fill: white !important;
       }
       path[name="middle"]{
         transform: scale(2.8);
@@ -194,9 +206,11 @@ input[type="checkbox"]{
       path[name="top"]{
         transform-origin: center center;
         transform: rotate(43deg) translateY(15rem) scaleX(1.7);
+        fill: white !important;
       }
       path[name="bottom"]{
         transform: translateX(-12.5rem) translateY(-12.0rem) rotate(-48deg) scaleX(1.9);
+        fill: white !important;
       }
       path[name="middle"]{
         transform: scale(2.8);
@@ -247,8 +261,9 @@ input[type="checkbox"]{
     //size
     width: 30rem;
     height: 17.1rem;
+    opacity: 0;
+    transition: opacity .4s ease-out .6s;
   }
-
 
   ul{
     list-style: none;
@@ -292,6 +307,11 @@ input[type="checkbox"]{
   }
   &.active{
     transform: translateY(0);
+
+    .nav__logo-box{
+      opacity: 1;
+    }
+
     ul{
       opacity: 1;
       transform: translate(-50%, -50%);
@@ -319,6 +339,11 @@ input[type="checkbox"]{
     position: absolute;
     width: 100vw;
     top: 2.5rem;
+    &--order {
+      top: 0;
+      margin-top: -55rem;
+      opacity: .5;
+    }
   }
   &__headline{
     width: 100%;
@@ -369,20 +394,8 @@ input[type="checkbox"]{
 
     &-textbox{
 
-      &__headline{
-        font-size: 6rem;
-        font-weight: 900;
-        color: var(--cta);
-        letter-spacing: -0.01rem;
-        margin-bottom: 1.6rem;
-      }
-
       &__content{
-        font-size: 2.8rem;
-        color: var(--body-color);
-        line-height: 3.4rem;
-        letter-spacing: 0;
-        font-weight: 700;
+
       }
 
       &--left{
@@ -433,6 +446,15 @@ input[type="checkbox"]{
       box-shadow: 0 2rem 4rem rgba(0,0,0,.3);
     }
 
+    &-form{
+      //position
+      position: absolute;
+      margin: 0 auto;
+      left: 10rem;
+      top: 8rem;
+      //size
+      width: 80%;
+    }
   }
 }// end .section
 
