@@ -99,6 +99,72 @@ html{
   position: fixed;
   top: 10.9rem;
   font-size: 1.3rem;
+  z-index: 5;
+}
+
+// button styles
+.btn{
+  //resets
+  outline: none;
+  border: none;
+
+  //styles
+  padding: 1rem 2rem;
+  font-weight: 700;
+  font-size: 1.8rem;
+  background-color: var(--cta);
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all .3s ease-out;
+
+  &:hover{
+    transform: translateY(-.4rem);
+    background-color: var(--cta-darker);
+    box-shadow: 0 2rem 4rem rgba(0,0,0,0.2);
+  }
+
+  &:active{
+    transform: translateY(-.2rem);
+    background-color: var(--cta);
+    box-shadow: 0 2rem 2rem rgba(0,0,0,0.1);
+  }
+
+  &--outline{
+
+    background-color: transparent;
+    background: linear-gradient(to right,
+            rgba($cta,1) 50%,                         rgba(0,0,0,0) 50%);
+    background-size: 200%;
+    background-position: -100%;
+    color: var(--cta);
+    border: 2px solid currentColor;
+    &:hover{
+      color: white;
+      border-color: transparent;
+      background-position: 100%;
+    }
+  }
+  &--light{
+    background-color: white;
+    color: var(--cta);
+    &:hover{
+      background-color: white;
+    }
+    &:active{
+      color: var(--cta-darker);
+    }
+  }
+  &--text{
+    background-color: transparent;
+    color: var(--cta);
+    &:hover{
+      background-color: transparent;
+    }
+    &:active{
+      color: var(--cta-darker);
+    }
+  }
 }
 
 // Nav Menu styles
@@ -248,8 +314,8 @@ input[type="checkbox"]{
   width: 100vw;
   height: 100vh;
   text-align: center;
-  z-index: 5;
-  transform: translateY(-32rem);
+  z-index: -5;
+  transform: translateY(-100vh);
   transition: transform .6s ease-out;
   background-color: transparent;
 
@@ -307,7 +373,7 @@ input[type="checkbox"]{
   }
   &.active{
     transform: translateY(0);
-
+    z-index: 5;
     .nav__logo-box{
       opacity: 1;
     }
@@ -333,7 +399,6 @@ input[type="checkbox"]{
 .section{
   width: 100vw;
   position: relative;
-  z-index: -1;
 
   &__headline-box{
     position: absolute;

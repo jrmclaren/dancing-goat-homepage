@@ -54,7 +54,53 @@ html {
   width: 100vw;
   position: fixed;
   top: 10.9rem;
-  font-size: 1.3rem; }
+  font-size: 1.3rem;
+  z-index: 5; }
+
+.btn {
+  outline: none;
+  border: none;
+  padding: 1rem 2rem;
+  font-weight: 700;
+  font-size: 1.8rem;
+  background-color: var(--cta);
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all .3s ease-out; }
+  .btn:hover {
+    transform: translateY(-0.4rem);
+    background-color: var(--cta-darker);
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.2); }
+  .btn:active {
+    transform: translateY(-0.2rem);
+    background-color: var(--cta);
+    box-shadow: 0 2rem 2rem rgba(0, 0, 0, 0.1); }
+  .btn--outline {
+    background-color: transparent;
+    background: linear-gradient(to right, #b14d61 50%, rgba(0, 0, 0, 0) 50%);
+    background-size: 200%;
+    background-position: -100%;
+    color: var(--cta);
+    border: 2px solid currentColor; }
+    .btn--outline:hover {
+      color: white;
+      border-color: transparent;
+      background-position: 100%; }
+  .btn--light {
+    background-color: white;
+    color: var(--cta); }
+    .btn--light:hover {
+      background-color: white; }
+    .btn--light:active {
+      color: var(--cta-darker); }
+  .btn--text {
+    background-color: transparent;
+    color: var(--cta); }
+    .btn--text:hover {
+      background-color: transparent; }
+    .btn--text:active {
+      color: var(--cta-darker); }
 
 .menu-container {
   position: fixed;
@@ -160,8 +206,8 @@ input[type="checkbox"] {
   width: 100vw;
   height: 100vh;
   text-align: center;
-  z-index: 5;
-  transform: translateY(-32rem);
+  z-index: -5;
+  transform: translateY(-100vh);
   transition: transform .6s ease-out;
   background-color: transparent; }
   .nav__logo-box {
@@ -201,7 +247,8 @@ input[type="checkbox"] {
         text-decoration: none;
         color: currentColor; }
   .nav.active {
-    transform: translateY(0); }
+    transform: translateY(0);
+    z-index: 5; }
     .nav.active .nav__logo-box {
       opacity: 1; }
     .nav.active ul {
@@ -216,8 +263,7 @@ input[type="checkbox"] {
 
 .section {
   width: 100vw;
-  position: relative;
-  z-index: -1; }
+  position: relative; }
   .section__headline-box {
     position: absolute;
     width: 100vw;

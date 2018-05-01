@@ -1,3 +1,6 @@
+/*jshint esversion: 6 */
+/*jshint strict:false */
+
 // Wait for the DOM Content to finish loading
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -58,6 +61,7 @@ UTILITY FUNCTIONS
     in edgecase where elements === className you want to remove,
     just pass in the string of the className
  */
+
 const manipulateClasses = (action,className, elements) => {
     // check if elements were passed
     // to function

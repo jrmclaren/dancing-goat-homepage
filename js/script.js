@@ -2,6 +2,9 @@
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
+/*jshint esversion: 6 */
+/*jshint strict:false */
+
 // Wait for the DOM Content to finish loading
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -62,6 +65,7 @@ UTILITY FUNCTIONS
     in edgecase where elements === className you want to remove,
     just pass in the string of the className
  */
+
 var manipulateClasses = function manipulateClasses(action, className, elements) {
     // check if elements were passed
     // to function
