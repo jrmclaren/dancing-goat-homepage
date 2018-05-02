@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         getToggleElements() {
-            return [this.menuIcon, this.navigationBackground, this.menuContainer];
+            return [this.menuIcon, this.nav, this.navigationBackground, this.menuContainer];
         }
 
         handleSelection() {
@@ -72,6 +72,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const menu = new Menu(menuElementsObject);
     menu.init();
 
+//     // toggleMenu functions
+//
+//     const toggleMenu = () => {
+//         // if the menuContainer contains active
+//         // remove the active class
+//         let menuArrayCopy = [...menuArray];
+//         if( menuContainer.classList.contains('active') ){
+//             manipulateClasses('remove', 'active', menuArrayCopy);
+//         }
+//         // else add the active class
+//         else {
+//             manipulateClasses('add', 'active', menuArrayCopy);
+//         }
+//     };
+//     // If a selection is made the menu
+//     // checkbox should also toggle
+//     const handleSelection = () => {
+//         menu.checked = false;
+//         toggleMenu();
+//     };
+//     // add handleSelection listener to allMenuLinks
+//     const allMenuLinks = [...document.querySelectorAll('.nav__link')];
+//     allMenuLinks.map( link => {
+//         link.addEventListener( 'click', handleSelection);
+//     });
+//     // add toggleMenu function to
+//     // change event of menu checkbox
+//     menu.addEventListener('change', toggleMenu);
+// });
+// end of menu functionality
 /*
 UTILITY FUNCTIONS
  */
