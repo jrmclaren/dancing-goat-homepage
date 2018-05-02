@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         handleSelection() {
-            this.menu.checked = false;
+            this.menuIcon.checked = false;
             this.toggleMenu();
         };
 
@@ -68,7 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
     }
-
     const menu = new Menu(menuElementsObject);
     menu.init();
 /*
