@@ -39,6 +39,8 @@ html{
   width: 100vw;
   height: 100vh;
   box-sizing: border-box;
+  scroll-behavior: smooth;
+
   // make 1rem equal 10px
   font-size: 62.5%; // 16px / 100 = 62.5% i.e. 10px = 1rem
   font-family: var(--font-family);

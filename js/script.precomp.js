@@ -1,26 +1,29 @@
 // Wait for the DOM Content to finish loading
 document.addEventListener('DOMContentLoaded', () => {
-
-    /*
-    Menu functionality
+    /**
+     * @class Menu contains all logic and functionality for
+     * the menu.
+     * Call function Menu.init() to operate.
+     *
+     * Pass in an Object {} containing
+     * menuIcon - Icon being used for the menu (usually
+     * the label in the 'checkbox' hack.
+     *
+     * nav – the high container element that
+     * has all the menu items in it. Usually
+     * a <nav> element.
+     *
+     * navItems – Array of all the links in the
+     * navigation.
+     *
+     * navigationBackground – The element to put up
+     * when the menu is active.
+     *
+     * menuContainer – the parent container element of
+     * all the elements that pertain to navigation
+     *
      */
-
-    const menuIcon = document.getElementById('menu');
-    const navigationBackground = document.getElementsByClassName('nav-bg')[0];
-    const nav = document.getElementsByClassName('nav')[0];
-    const menuContainer = document.querySelector('.menu-container');
-    const navItems = [...document.querySelectorAll('.nav__link')];
-
-    const menuElementsObject = {
-        menuIcon,
-        nav,
-        navItems,
-        navigationBackground,
-        menuContainer
-    };
-
     class Menu {
-
         constructor( menuItems ){
             this.menuIcon = menuItems.menuIcon;
             this.nav = menuItems.nav;
@@ -34,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
             this.toggleMenu = this.toggleMenu.bind(this);
             this.init = this.init.bind(this);
         }
-
         init(){
             // add handleSelection to each link
             this.navItems.map( link => {
@@ -54,46 +56,40 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         toggleMenu() {
-            // if the menuContainer contains active
-            // remove the active class
+            // get the toggleElements;
             let toggleElements = this.getToggleElements();
-            if( this.isOpen ){
-                manipulateClasses('remove', 'active', toggleElements);
-                this.isOpen = false;
-            }
-            // else add the active class
-            else {
-                manipulateClasses('add', 'active', toggleElements);
-                this.isOpen = true;
-            }
+            this.isOpen
+                // if isOpen == true remove classes
+                ? Utilities.removeClass('active', toggleElements)
+                // else if isOpen == false add classes
+                : Utilities.addClass('active', toggleElements);
+            // toggle state
+            this.isOpen = !this.isOpen;
         };
-    }
-    const menu = new Menu(menuElementsObject);
+    } // end of class Menu
+    /*
+   Menu elements
+    */
+    const menuElements = {
+        menuIcon: document.getElementById('menu'),
+        nav: document.getElementsByClassName('nav')[0],
+        navItems: [...document.querySelectorAll('.nav__link')],
+        navigationBackground: document.getElementsByClassName('nav-bg')[0],
+        menuContainer: document.querySelector('.menu-container')
+    };
+    const menu = new Menu(menuElements);
     menu.init();
 /*
 UTILITY FUNCTIONS
  */
-/*
-manipulateClasses function
- */
-/**
- ** ************** Main usage *******************************
- * @param action = string of action to perform i.e. add or remove
- * @param className = a string of the className you want to remove
- * @param elements = a string or Array of classNames to remove the classes from
- *
- * ************** Alternative usage *******************************
- *
- * @param action = string of action to perform i.e. add or remove
- * @param className = a string that you want to remove from an element
- *                    the same className you want to remove
- */
-const manipulateClasses = (action,className, elements) => {
-    // check if elements were passed
-    // to function
-    switch (action) {
-        case 'add':
-            // add code
+const Utilities = {
+    /**
+     *
+     * @param className = className to add
+     * @param elements  = elements to add to
+     *
+     */
+    addClass: (className, elements) => {
             if (elements) {
                 switch (elements.constructor) {
                     //  If elements type is Array, sweet go through
@@ -119,15 +115,21 @@ const manipulateClasses = (action,className, elements) => {
                         throw new Error(`Could not add classNames from elements, check arguments`);
                         break;
                 }
-            } else if (className) {
-                const elements = [...document.getElementsByClassName(className)];
-                elements.map(element => (element.classList.add(className)));
-            } else {
-                throw new Error('Could not manipulate classes, check arguments');
+            }  else {
+                throw new Error('Could not add classes, check arguments');
             }
-            break;
-        case 'remove':
-            // remove code
+        }, // end of addClass() function
+    /**
+     *
+     * @param className = className to remove
+     * @param elements (option) = Array or String of element(s)
+     *                            to remove from
+     *
+     * If no elements are provided, the elements
+     * containing the class to remove will targeted.
+     *
+     */
+    removeClass: ( className, elements ) => {
             if (elements) {
                 switch (elements.constructor) {
                     //  If elements type is Array, sweet go through
@@ -145,7 +147,7 @@ const manipulateClasses = (action,className, elements) => {
                         while (collection.length) {
                             // take the last item off the array
                             let currentElement = collection.pop();
-                            // manipulate it's class
+                            // manipulate it's classes
                             currentElement.classList.remove(className);
                         }
                         break;
@@ -158,9 +160,6 @@ const manipulateClasses = (action,className, elements) => {
             } else {
                 throw new Error('Could not manipulate classes, check arguments');
             }
-            break;
-        default:
-            throw new Error('No action, please choose either add or remove.');
+        } // end of removeClass() function
     }
-}
 });

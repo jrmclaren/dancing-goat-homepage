@@ -2,31 +2,35 @@
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 // Wait for the DOM Content to finish loading
 document.addEventListener('DOMContentLoaded', function () {
-
-    /*
-    Menu functionality
+    /**
+     * @class Menu contains all logic and functionality for
+     * the menu.
+     * Call function Menu.init() to operate.
+     *
+     * Pass in an Object {} containing
+     * menuIcon - Icon being used for the menu (usually
+     * the label in the 'checkbox' hack.
+     *
+     * nav – the high container element that
+     * has all the menu items in it. Usually
+     * a <nav> element.
+     *
+     * navItems – Array of all the links in the
+     * navigation.
+     *
+     * navigationBackground – The element to put up
+     * when the menu is active.
+     *
+     * menuContainer – the parent container element of
+     * all the elements that pertain to navigation
+     *
      */
-
-    var menuIcon = document.getElementById('menu');
-    var navigationBackground = document.getElementsByClassName('nav-bg')[0];
-    var nav = document.getElementsByClassName('nav')[0];
-    var menuContainer = document.querySelector('.menu-container');
-    var navItems = [].concat(_toConsumableArray(document.querySelectorAll('.nav__link')));
-
-    var menuElementsObject = {
-        menuIcon: menuIcon,
-        nav: nav,
-        navItems: navItems,
-        navigationBackground: navigationBackground,
-        menuContainer: menuContainer
-    };
-
     var Menu = function () {
         function Menu(menuItems) {
             _classCallCheck(this, Menu);
@@ -70,126 +74,122 @@ document.addEventListener('DOMContentLoaded', function () {
         }, {
             key: 'toggleMenu',
             value: function toggleMenu() {
-                // if the menuContainer contains active
-                // remove the active class
+                // get the toggleElements;
                 var toggleElements = this.getToggleElements();
-                if (this.isOpen) {
-                    manipulateClasses('remove', 'active', toggleElements);
-                    this.isOpen = false;
-                }
-                // else add the active class
-                else {
-                        manipulateClasses('add', 'active', toggleElements);
-                        this.isOpen = true;
-                    }
+                this.isOpen
+                // if isOpen == true remove classes
+                ? Utilities.removeClass('active', toggleElements)
+                // else if isOpen == false add classes
+                : Utilities.addClass('active', toggleElements);
+                // toggle state
+                this.isOpen = !this.isOpen;
             }
         }]);
 
         return Menu;
-    }();
+    }(); // end of class Menu
+    /*
+    Menu elements
+    */
 
-    var menu = new Menu(menuElementsObject);
+
+    var menuElements = {
+        menuIcon: document.getElementById('menu'),
+        nav: document.getElementsByClassName('nav')[0],
+        navItems: [].concat(_toConsumableArray(document.querySelectorAll('.nav__link'))),
+        navigationBackground: document.getElementsByClassName('nav-bg')[0],
+        menuContainer: document.querySelector('.menu-container')
+    };
+    var menu = new Menu(menuElements);
     menu.init();
     /*
     UTILITY FUNCTIONS
      */
-    /*
-    manipulateClasses function
-     */
-    /**
-     ** ************** Main usage *******************************
-     * @param action = string of action to perform i.e. add or remove
-     * @param className = a string of the className you want to remove
-     * @param elements = a string or Array of classNames to remove the classes from
-     *
-     * ************** Alternative usage *******************************
-     *
-     * @param action = string of action to perform i.e. add or remove
-     * @param className = a string that you want to remove from an element
-     *                    the same className you want to remove
-     */
-    var manipulateClasses = function manipulateClasses(action, className, elements) {
-        // check if elements were passed
-        // to function
-        switch (action) {
-            case 'add':
-                // add code
-                if (elements) {
-                    switch (elements.constructor) {
-                        //  If elements type is Array, sweet go through
-                        // add the className from the element.classList
-                        case Array:
-                            elements.map(function (element) {
-                                return element.classList.add(className);
-                            });
-                            break;
-                        //  If elements type is String, sweet go through
-                        //  define an array of that String and add the
-                        //  className from each element.classList
-                        case String:
-                            // make the array
-                            var collection = [].concat(_toConsumableArray(document.getElementsByClassName(elements)));
-                            // while the array has a length
-                            while (collection.length) {
-                                // take the last item off the array
-                                var currentElement = collection.pop();
-                                // manipulate it's class
-                                currentElement.classList.add(className);
-                            }
-                            break;
-                        default:
-                            throw new Error('Could not add classNames from elements, check arguments');
-                            break;
-                    }
-                } else if (className) {
-                    var _elements = [].concat(_toConsumableArray(document.getElementsByClassName(className)));
-                    _elements.map(function (element) {
-                        return element.classList.add(className);
-                    });
-                } else {
-                    throw new Error('Could not manipulate classes, check arguments');
+    var Utilities = {
+        /**
+         *
+         * @param className = className to add
+         * @param elements  = elements to add to
+         *
+         */
+        addClass: function addClass(className, elements) {
+            if (elements) {
+                switch (elements.constructor) {
+                    //  If elements type is Array, sweet go through
+                    // add the className from the element.classList
+                    case Array:
+                        elements.map(function (element) {
+                            return element.classList.add(className);
+                        });
+                        break;
+                    //  If elements type is String, sweet go through
+                    //  define an array of that String and add the
+                    //  className from each element.classList
+                    case String:
+                        // make the array
+                        var collection = [].concat(_toConsumableArray(document.getElementsByClassName(elements)));
+                        // while the array has a length
+                        while (collection.length) {
+                            // take the last item off the array
+                            var currentElement = collection.pop();
+                            // manipulate it's class
+                            currentElement.classList.add(className);
+                        }
+                        break;
+                    default:
+                        throw new Error('Could not add classNames from elements, check arguments');
+                        break;
                 }
-                break;
-            case 'remove':
-                // remove code
-                if (elements) {
-                    switch (elements.constructor) {
-                        //  If elements type is Array, sweet go through
-                        // remove the className from the element.classList
-                        case Array:
-                            elements.map(function (element) {
-                                return element.classList.remove(className);
-                            });
-                            break;
-                        //  If elements type is String, sweet go through
-                        //  define an array of that String and remove the
-                        //  className from each element.classList
-                        case String:
-                            // make the array
-                            var _collection = [].concat(_toConsumableArray(document.getElementsByClassName(elements)));
-                            // while the array has a length
-                            while (_collection.length) {
-                                // take the last item off the array
-                                var _currentElement = _collection.pop();
-                                // manipulate it's class
-                                _currentElement.classList.remove(className);
-                            }
-                            break;
-                        default:
-                            throw new Error('Could not remove classNames from elements, check arguments');
-                    }
-                } else if (className) {
-                    var _elements2 = [].concat(_toConsumableArray(document.getElementsByClassName(className)));
-                    _elements2.map(function (element) {
-                        return element.classList.remove(className);
-                    });
-                } else {
-                    throw new Error('Could not manipulate classes, check arguments');
+            } else {
+                throw new Error('Could not add classes, check arguments');
+            }
+        }, // end of addClass() function
+        /**
+         *
+         * @param className = className to remove
+         * @param elements (option) = Array or String of element(s)
+         *                            to remove from
+         *
+         * If no elements are provided, the elements
+         * containing the class to remove will targeted.
+         *
+         */
+        removeClass: function removeClass(className, elements) {
+            if (elements) {
+                switch (elements.constructor) {
+                    //  If elements type is Array, sweet go through
+                    // remove the className from the element.classList
+                    case Array:
+                        elements.map(function (element) {
+                            return element.classList.remove(className);
+                        });
+                        break;
+                    //  If elements type is String, sweet go through
+                    //  define an array of that String and remove the
+                    //  className from each element.classList
+                    case String:
+                        // make the array
+                        var collection = [].concat(_toConsumableArray(document.getElementsByClassName(elements)));
+                        // while the array has a length
+                        while (collection.length) {
+                            // take the last item off the array
+                            var currentElement = collection.pop();
+                            // manipulate it's classes
+                            currentElement.classList.remove(className);
+                        }
+                        break;
+                    default:
+                        throw new Error('Could not remove classNames from elements, check arguments');
                 }
-                break;
-            default:
-                throw new Error('No action, please choose either add or remove.');
-        }
+            } else if (className) {
+                var _elements = [].concat(_toConsumableArray(document.getElementsByClassName(className)));
+                _elements.map(function (element) {
+                    return element.classList.remove(className);
+                });
+            } else {
+                throw new Error('Could not manipulate classes, check arguments');
+            }
+        } // end of removeClass() function
     };
 });
 
