@@ -1,4 +1,134 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:700,900");
+/*
+Margins
+
+ */
+.u-margin {
+  margin: 2rem !important; }
+
+.u-margin__ends {
+  margin: 2rem 0 !important; }
+
+.u-margin__sides {
+  margin: 0 2rem !important; }
+
+.u-margin__left {
+  margin: 0 0 0 2rem !important; }
+
+.u-margin__right {
+  margin: 0 2rem 0 0 !important; }
+
+.u-margin__top {
+  margin: 2rem 0 0 0 !important; }
+
+.u-margin__bottom {
+  margin: 0 0 2rem 0 !important; }
+
+.u-margin--xs {
+  margin: 0.5rem !important; }
+
+.u-margin__ends--xs {
+  margin: 0.5rem 0 !important; }
+
+.u-margin__sides--xs {
+  margin: 0 0.5rem !important; }
+
+.u-margin__left--xs {
+  margin: 0 0 0 0.5rem !important; }
+
+.u-margin__right--xs {
+  margin: 0 0.5rem 0 0 !important; }
+
+.u-margin__top--xs {
+  margin: 0.5rem 0 0 0 !important; }
+
+.u-margin__bottom--xs {
+  margin: 0 0 0.5rem 0 !important; }
+
+.u-margin--s {
+  margin: 1rem !important; }
+
+.u-margin__ends--s {
+  margin: 1rem 0 !important; }
+
+.u-margin__sides--s {
+  margin: 0 1rem !important; }
+
+.u-margin__left--s {
+  margin: 0 0 0 1rem !important; }
+
+.u-margin__right--s {
+  margin: 0 1rem 0 0 !important; }
+
+.u-margin__top--s {
+  margin: 1rem 0 0 0 !important; }
+
+.u-margin__bottom--s {
+  margin: 0 0 1rem 0 !important; }
+
+.u-margin--m {
+  margin: 3rem !important; }
+
+.u-margin__ends--m {
+  margin: 3rem 0 !important; }
+
+.u-margin__sides--m {
+  margin: 0 3rem !important; }
+
+.u-margin__left--m {
+  margin: 0 0 0 3rem !important; }
+
+.u-margin__right--m {
+  margin: 0 3rem 0 0 !important; }
+
+.u-margin__top--m {
+  margin: 3rem 0 0 0 !important; }
+
+.u-margin__bottom--m {
+  margin: 0 0 3rem 0 !important; }
+
+.u-margin--l {
+  margin: 4rem !important; }
+
+.u-margin__ends--l {
+  margin: 4rem 0 !important; }
+
+.u-margin__sides--l {
+  margin: 0 4rem !important; }
+
+.u-margin__left--l {
+  margin: 0 0 0 4rem !important; }
+
+.u-margin__right--l {
+  margin: 0 4rem 0 0 !important; }
+
+.u-margin__top--l {
+  margin: 4rem 0 0 0 !important; }
+
+.u-margin__bottom--l {
+  margin: 0 0 4rem 0 !important; }
+
+.u-margin--xl {
+  margin: 5rem !important; }
+
+.u-margin__ends--xl {
+  margin: 5rem 0 !important; }
+
+.u-margin__sides--xl {
+  margin: 0 5rem !important; }
+
+.u-margin__left--xl {
+  margin: 0 0 0 5rem !important; }
+
+.u-margin__right--xl {
+  margin: 0 5rem 0 0 !important; }
+
+.u-margin__top--xl {
+  margin: 5rem 0 0 0 !important; }
+
+.u-margin__bottom--xl {
+  margin: 0 0 5rem 0 !important; }
+
 :root {
   --cta: #b14d61;
   --cta-darker: #9e465b;
@@ -15,6 +145,7 @@ html {
   width: 100vw;
   height: 100vh;
   box-sizing: border-box;
+  scroll-behavior: smooth;
   font-size: 62.5%;
   font-family: var(--font-family); }
 
@@ -101,6 +232,34 @@ html {
       background-color: transparent; }
     .btn--text:active {
       color: var(--cta-darker); }
+
+.text-input {
+  position: absolute;
+  top: 0;
+  width: 30%;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1.2px solid black;
+  padding: 1.2rem 1rem;
+  transition: all .4s ease-out; }
+  .text-input__container {
+    border: solid 2px red;
+    padding: 4rem 0rem;
+    position: relative;
+    display: block; }
+  .text-input__label {
+    position: absolute;
+    padding: 1.2rem 1rem;
+    font-weight: 900;
+    font-size: 1.4rem;
+    top: 0;
+    transition: all .2s ease-out; }
+  .text-input:not(:placeholder-shown) ~ .text-input__label {
+    transform: translateY(-2rem);
+    color: var(--cta-darker); }
+  .text-input:focus {
+    outline: none;
+    border-bottom-color: var(--cta); }
 
 .menu-container {
   position: fixed;
