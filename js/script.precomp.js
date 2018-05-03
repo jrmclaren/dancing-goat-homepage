@@ -1,3 +1,82 @@
+// end of removeClass() function
+/*
+Class autobind function
+
+Inspired heavily by react-autobind which I <3.
+
+I wanted to see how it works under the hood and replicate
+it and change things to ES6 where I can, but mostly
+to learn something! I don't claim any of this work
+'as my own' The genius lies with the original
+authors.
+
+Check out react-autobind here:
+https://github.com/cassiozen/React-autobind/blob/master/src/autoBind.js
+
+// */
+// const bindAll = (context) => {
+//
+//     let dontBind = [
+//         'constructor'
+//     ];
+//
+//     let toBind = [];
+//
+//
+//     /**
+//      * From autobind-decorator (https://github.com/andreypopp/autobind-decorator/tree/master)
+//      * Rewritten in an arrow function
+//      * Return a descriptor removing the value and returning a getter
+//      * The getter will return a .bind version of the function
+//      * and memoize the result against a symbol on the instance
+//      */
+//     const getBoundMethod = ( objectPrototype, method, descriptor ) => {
+//
+//         let func = descriptor.value;
+//
+//         return{
+//             configurable: true,
+//             get(){
+//                 if( this === objectPrototype || this.hasOwnProperty(method)){
+//                     return func;
+//                 }
+//                 let boundFunc = func.bind(this);
+//                 Object.defineProperty(this, method, {
+//                     value: boundFunc,
+//                     configurable: true,
+//                     writable: true
+//                 });
+//                 return boundFunc;
+//             }
+//         }
+//     };
+//     // Onto binding them all
+//
+//     if(context === undefined){
+//         throw new Error('bindAll Error: No context provided');
+//     }
+//
+//     // get Object Prototype
+//     let objectPrototype = Object.getPrototypeOf(context);
+//     // prepare to bind all methods on the class
+//     toBind = Object.getOwnPropertyNames(objectPrototype);
+//
+//     toBind.forEach( (method) => {
+//         let descriptor = Object.getOwnPropertyDescriptor(objectPrototype, method);
+//         // if the method doesn't exist, warn user
+//         if(descriptor === undefined ){
+//             console.warn(`bindAll Error: "${method}" not found in class`)
+//             // then return;
+//             return;
+//         }
+//         // if it isn't a function or is a abnormal function return
+//         if( dontBind.indexOf(method) !== -1 || typeof descriptor.value !== 'function'){
+//             return;
+//         }
+//         Object.defineProperty(objectPrototype, method, getBoundMethod(objectPrototype, method, descriptor));
+//     });
+// };
+import bindAll from './bindAll';
 // Wait for the DOM Content to finish loading
 document.addEventListener('DOMContentLoaded', () => {
     /**
@@ -32,10 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.menuContainer = menuItems.menuContainer;
             this.isOpen = false;
             // bind those functions up to 'this'
-            this.getToggleElements = this.getToggleElements.bind(this);
-            this.handleSelection = this.handleSelection.bind(this);
-            this.toggleMenu = this.toggleMenu.bind(this);
-            this.init = this.init.bind(this);
+           bindAll(this);
         }
         init(){
             // add handleSelection to each link
@@ -160,6 +236,6 @@ const Utilities = {
             } else {
                 throw new Error('Could not manipulate classes, check arguments');
             }
-        } // end of removeClass() function
-    }
-});
+        }
+} /*end of Utilities*/
+}); /*end of DOMContentLoaded*/
