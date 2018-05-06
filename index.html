@@ -114,9 +114,7 @@
                order
             </h3>
         </div>
-
         <div class="section__order-form-container">
-
             <div class="section__order-form-headline">
                 <form action="" class="section__order-form">
                     <h4 class="headline headline--2">
@@ -127,47 +125,63 @@
                         be good to your future self and order ahead.
                     </p>
 
-                    <div class="text-input__container u-margin__ends--l">
+                    <div class="text-input__container u-margin__top--l">
                         <input id="name" type="text" class="text-input" name="name" placeholder="name"  />
                         <label class="text-input__label" for="name">
                             Name
                         </label>
                     </div>
-                    <label  class="radio-input__group-label">
-                        Size
-                        <label  class="radio-input__label">
-                            Small
-                            <input type="radio" class="radio-input" name="size" />
-                        </label>
-                        <label  class="radio-input__label">
-                            Medium
-                            <input type="radio" class="radio-input" name="size" />
-                        </label>
-                        <label  class="radio-input__label">
-                            Bucket
-                            <input type="radio" class="radio-input" name="size" />
-                        </label>
-                    </label>
-                    <label  class="radio-input__group-label">
-                        Size
-                        <label  class="radio-input__label">
-                            Flattie
-                            <input type="radio" class="radio-input" name="type" />
-                        </label>
-                        <label  class="radio-input__label">
-                            Latte
-                            <input type="radio" class="radio-input" name="type" />
-                        </label>
-                        <label  class="radio-input__label">
-                            Long black
-                            <input type="radio" class="radio-input" name="type" />
-                        </label>
-                    </label>
-                    <div class="text-input__container">
+                    <div  class="radio-input__group ">
+                        <div class="radio-input__group-label">Size</div>
+                        <div class="radio-input-container">
+                            <!--Small-->
+                            <input id="small" type="radio" class="radio-input" name="size" />
+                            <label for="small"  class="radio-input__label">
+                                Small
+                            </label>
+                        </div>
+                        <div class="radio-input-container">
+                            <!--Medium-->
+                            <input id="medium" type="radio" class="radio-input" name="size" />
+                            <label for="medium"  class="radio-input__label">
+                                Medium
+                            </label>
+                        </div>
+                        <div class="radio-input-container">
+                        <!--Bucket-->
+                            <input id="bucket" type="radio" class="radio-input" name="size" />
+                            <label for="bucket"  class="radio-input__label">
+                                Bucket
+                            </label>
+                        </div>
+                    </div>
+                    <div  class="radio-input__group ">
+                        <div class="radio-input__group-label">type</div>
+
+                        <div class="radio-input-container">
+                            <input id="flattie" type="radio" class="radio-input" name="type" />
+                            <label for="flattie" class="radio-input__label">
+                                Flattie
+                            </label>
+                        </div>
+                        <div class="radio-input-container">
+                            <input id="latte" type="radio" class="radio-input" name="type" />
+                            <label for="latte" class="radio-input__label">
+                                Latte
+                            </label>
+                        </div>
+                      <div class="radio-input-container">
+                          <input id="longblack" type="radio" class="radio-input" name="type" />
+                          <label for="longblack"  class="radio-input__label">
+                              Long black
+                          </label>
+                      </div>
+                    </div>
+                    <div class="text-input__container u-margin__bottom--l">
+                        <input id="comments" type="text" class="text-input" name="comments" placeholder="comments"  />
                         <label for="comments" class="text-input__label">
                             Comments for the barista
                         </label>
-                            <input id="comments" type="text" class="text-input" name="comments"  />
                     </div>
                     <button class="btn">Make it so <i class="icon icon__arrow-right">&rarr;</i></button>
                 </form>

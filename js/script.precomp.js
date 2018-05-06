@@ -21,7 +21,6 @@ const bindAll = (context) => {
 
     let toBind = [];
 
-
     /**
      * From autobind-decorator (https://github.com/andreypopp/autobind-decorator/tree/master)
      * Rewritten in an arrow function
@@ -153,6 +152,16 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     const menu = new Menu(menuElements);
     menu.init();
+
+    /**
+     * FORM FUNCTIONALITY
+     */
+
+    const form = document.forms[0];
+    form.addEventListener('submit', e => {
+       e.preventDefault();
+    });
+
 /*
 UTILITY FUNCTIONS
  */

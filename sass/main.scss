@@ -159,13 +159,12 @@ html{
 }
 // Text Input Styles
 
-
-
 .text-input{
 
+  $textInputFontSize: 2rem;
+
   &__container{
-    @include debug(red);
-    padding: 4rem 0rem;
+    padding: 4rem 0;
     position: relative;
     display: block;
   }
@@ -180,23 +179,23 @@ html{
   border-bottom: 1.2px solid black;
   padding: 1.2rem 1rem;
   transition: all .4s ease-out;
+  font-family: inherit;
+  font-size: $textInputFontSize;
+  caret-color: var(--cta-darker);
 
   // label
   &__label{
     position: absolute;
+    font-size: $textInputFontSize;
     padding: 1.2rem 1rem;
     font-weight: 900;
-    font-size: 1.4rem;
     top: 0;
     transition: all .2s ease-out;
-  }
 
-  &::placeholder{
-    opacity: 0;
   }
 
   &:not(:placeholder-shown) ~ .text-input__label{
-    transform: translateY(-2rem);
+    transform: translateY(-4rem);
     color: var(--cta-darker);
   }
 
@@ -205,7 +204,78 @@ html{
     border-bottom-color: var(--cta);
   }
 }
+.text-input::placeholder{
+  opacity: 0;
+}
 
+.radio-input__group{
+  padding: 2.5rem 0rem;
+  position: relative;
+  display: block;
+  &-label{
+    font-size: 2.8rem;
+    font-weight: 900;
+    text-transform: lowercase;
+    margin-bottom: 2rem;
+  }
+}
+
+.radio-input-container{
+  display: inline-block;
+  margin: 2rem 2rem 4rem 8rem;
+
+}
+
+.radio-input{
+  display: none;
+  position: absolute;
+
+  &__label{
+    position: relative;
+    font-size: 1.8rem;
+    text-transform: lowercase;
+    cursor: pointer;
+
+    @mixin radioStyles{
+      //position
+      position: absolute;
+      content: '';
+      top: -1rem;
+      left: -8rem;
+      //size
+      width: 4rem;
+      height: 4rem;
+    }
+
+    &:before{
+      @include radioStyles();
+      z-index: 4;
+
+      //style
+      background-color: white;
+      border-radius: 4rem;
+      transform-origin: center;
+      transform: scale(.6);
+      transition: all .5s ease-out;
+    }
+    &:after{
+      @include radioStyles();
+      // style
+      background-color: $cta;
+      border-radius: 4rem;
+      transition: all .5s ease-out;
+    }
+  }
+}
+
+input[type="radio"]:checked + .radio-input__label{
+  &:before{
+    transform: scale(0);
+  }
+  &:after{
+    background-color: var(--cta-darker);
+  }
+}
 
 // Nav Menu styles
 // TODO: migrate into .header

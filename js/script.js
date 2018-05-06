@@ -173,6 +173,16 @@ document.addEventListener('DOMContentLoaded', function () {
     };
     var menu = new Menu(menuElements);
     menu.init();
+
+    /**
+     * FORM FUNCTIONALITY
+     */
+
+    var form = document.forms[0];
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+    });
+
     /*
     UTILITY FUNCTIONS
      */
