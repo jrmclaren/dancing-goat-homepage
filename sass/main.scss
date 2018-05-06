@@ -28,7 +28,6 @@ $cta-darker: #9e465b;
   right: 5rem;
   top:2.5rem;
 }
-
 // reset
 *{
   &, &:after, &:before{
@@ -190,6 +189,10 @@ html{
     font-size: 1.4rem;
     top: 0;
     transition: all .2s ease-out;
+  }
+
+  &::placeholder{
+    opacity: 0;
   }
 
   &:not(:placeholder-shown) ~ .text-input__label{

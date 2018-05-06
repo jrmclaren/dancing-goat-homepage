@@ -1,6 +1,11 @@
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); // end of removeClass() function
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 /*
 Class autobind function
 
@@ -16,80 +21,65 @@ Check out react-autobind here:
 https://github.com/cassiozen/React-autobind/blob/master/src/autoBind.js
 
 // */
-// const bindAll = (context) => {
-//
-//     let dontBind = [
-//         'constructor'
-//     ];
-//
-//     let toBind = [];
-//
-//
-//     /**
-//      * From autobind-decorator (https://github.com/andreypopp/autobind-decorator/tree/master)
-//      * Rewritten in an arrow function
-//      * Return a descriptor removing the value and returning a getter
-//      * The getter will return a .bind version of the function
-//      * and memoize the result against a symbol on the instance
-//      */
-//     const getBoundMethod = ( objectPrototype, method, descriptor ) => {
-//
-//         let func = descriptor.value;
-//
-//         return{
-//             configurable: true,
-//             get(){
-//                 if( this === objectPrototype || this.hasOwnProperty(method)){
-//                     return func;
-//                 }
-//                 let boundFunc = func.bind(this);
-//                 Object.defineProperty(this, method, {
-//                     value: boundFunc,
-//                     configurable: true,
-//                     writable: true
-//                 });
-//                 return boundFunc;
-//             }
-//         }
-//     };
-//     // Onto binding them all
-//
-//     if(context === undefined){
-//         throw new Error('bindAll Error: No context provided');
-//     }
-//
-//     // get Object Prototype
-//     let objectPrototype = Object.getPrototypeOf(context);
-//     // prepare to bind all methods on the class
-//     toBind = Object.getOwnPropertyNames(objectPrototype);
-//
-//     toBind.forEach( (method) => {
-//         let descriptor = Object.getOwnPropertyDescriptor(objectPrototype, method);
-//         // if the method doesn't exist, warn user
-//         if(descriptor === undefined ){
-//             console.warn(`bindAll Error: "${method}" not found in class`)
-//             // then return;
-//             return;
-//         }
-//         // if it isn't a function or is a abnormal function return
-//         if( dontBind.indexOf(method) !== -1 || typeof descriptor.value !== 'function'){
-//             return;
-//         }
-//         Object.defineProperty(objectPrototype, method, getBoundMethod(objectPrototype, method, descriptor));
-//     });
-// };
+var bindAll = function bindAll(context) {
 
+    var dontBind = ['constructor'];
 
-var _bindAll = require('./bindAll');
+    var toBind = [];
 
-var _bindAll2 = _interopRequireDefault(_bindAll);
+    /**
+     * From autobind-decorator (https://github.com/andreypopp/autobind-decorator/tree/master)
+     * Rewritten in an arrow function
+     * Return a descriptor removing the value and returning a getter
+     * The getter will return a .bind version of the function
+     * and memoize the result against a symbol on the instance
+     */
+    var getBoundMethod = function getBoundMethod(objectPrototype, method, descriptor) {
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+        var func = descriptor.value;
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+        return {
+            configurable: true,
+            get: function get() {
+                if (this === objectPrototype || this.hasOwnProperty(method)) {
+                    return func;
+                }
+                var boundFunc = func.bind(this);
+                Object.defineProperty(this, method, {
+                    value: boundFunc,
+                    configurable: true,
+                    writable: true
+                });
+                return boundFunc;
+            }
+        };
+    };
+    // Onto binding them all
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+    if (context === undefined) {
+        throw new Error('bindAll Error: No context provided');
+    }
 
+    // get Object Prototype
+    var objectPrototype = Object.getPrototypeOf(context);
+    // prepare to bind all methods on the class
+    toBind = Object.getOwnPropertyNames(objectPrototype);
+
+    toBind.forEach(function (method) {
+        var descriptor = Object.getOwnPropertyDescriptor(objectPrototype, method);
+        // if the method doesn't exist, warn user
+        if (descriptor === undefined) {
+            console.warn('bindAll Error: "' + method + '" not found in class');
+            // then return;
+            return;
+        }
+        // if it isn't a function or is a abnormal function return
+        if (dontBind.indexOf(method) !== -1 || typeof descriptor.value !== 'function') {
+            return;
+        }
+        Object.defineProperty(objectPrototype, method, getBoundMethod(objectPrototype, method, descriptor));
+    });
+};
 // Wait for the DOM Content to finish loading
 document.addEventListener('DOMContentLoaded', function () {
     /**
@@ -126,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
             this.menuContainer = menuItems.menuContainer;
             this.isOpen = false;
             // bind those functions up to 'this'
-            (0, _bindAll2.default)(this);
+            bindAll(this);
         }
 
         _createClass(Menu, [{
@@ -270,8 +260,8 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 throw new Error('Could not manipulate classes, check arguments');
             }
-        } /*end of Utilities*/
-    };
+        }
+    }; /*end of Utilities*/
 }); /*end of DOMContentLoaded*/
 
 //# sourceMappingURL=script.js.map
