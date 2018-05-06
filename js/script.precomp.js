@@ -1,4 +1,3 @@
-// end of removeClass() function
 /*
 Class autobind function
 
@@ -14,69 +13,68 @@ Check out react-autobind here:
 https://github.com/cassiozen/React-autobind/blob/master/src/autoBind.js
 
 // */
-// const bindAll = (context) => {
-//
-//     let dontBind = [
-//         'constructor'
-//     ];
-//
-//     let toBind = [];
-//
-//
-//     /**
-//      * From autobind-decorator (https://github.com/andreypopp/autobind-decorator/tree/master)
-//      * Rewritten in an arrow function
-//      * Return a descriptor removing the value and returning a getter
-//      * The getter will return a .bind version of the function
-//      * and memoize the result against a symbol on the instance
-//      */
-//     const getBoundMethod = ( objectPrototype, method, descriptor ) => {
-//
-//         let func = descriptor.value;
-//
-//         return{
-//             configurable: true,
-//             get(){
-//                 if( this === objectPrototype || this.hasOwnProperty(method)){
-//                     return func;
-//                 }
-//                 let boundFunc = func.bind(this);
-//                 Object.defineProperty(this, method, {
-//                     value: boundFunc,
-//                     configurable: true,
-//                     writable: true
-//                 });
-//                 return boundFunc;
-//             }
-//         }
-//     };
-//     // Onto binding them all
-//
-//     if(context === undefined){
-//         throw new Error('bindAll Error: No context provided');
-//     }
-//
-//     // get Object Prototype
-//     let objectPrototype = Object.getPrototypeOf(context);
-//     // prepare to bind all methods on the class
-//     toBind = Object.getOwnPropertyNames(objectPrototype);
-//
-//     toBind.forEach( (method) => {
-//         let descriptor = Object.getOwnPropertyDescriptor(objectPrototype, method);
-//         // if the method doesn't exist, warn user
-//         if(descriptor === undefined ){
-//             console.warn(`bindAll Error: "${method}" not found in class`)
-//             // then return;
-//             return;
-//         }
-//         // if it isn't a function or is a abnormal function return
-//         if( dontBind.indexOf(method) !== -1 || typeof descriptor.value !== 'function'){
-//             return;
-//         }
-//         Object.defineProperty(objectPrototype, method, getBoundMethod(objectPrototype, method, descriptor));
-//     });
-// };
-import bindAll from './bindAll';
+const bindAll = (context) => {
+
+    let dontBind = [
+        'constructor'
+    ];
+
+    let toBind = [];
+
+
+    /**
+     * From autobind-decorator (https://github.com/andreypopp/autobind-decorator/tree/master)
+     * Rewritten in an arrow function
+     * Return a descriptor removing the value and returning a getter
+     * The getter will return a .bind version of the function
+     * and memoize the result against a symbol on the instance
+     */
+    const getBoundMethod = ( objectPrototype, method, descriptor ) => {
+
+        let func = descriptor.value;
+
+        return{
+            configurable: true,
+            get(){
+                if( this === objectPrototype || this.hasOwnProperty(method)){
+                    return func;
+                }
+                let boundFunc = func.bind(this);
+                Object.defineProperty(this, method, {
+                    value: boundFunc,
+                    configurable: true,
+                    writable: true
+                });
+                return boundFunc;
+            }
+        }
+    };
+    // Onto binding them all
+
+    if(context === undefined){
+        throw new Error('bindAll Error: No context provided');
+    }
+
+    // get Object Prototype
+    let objectPrototype = Object.getPrototypeOf(context);
+    // prepare to bind all methods on the class
+    toBind = Object.getOwnPropertyNames(objectPrototype);
+
+    toBind.forEach( (method) => {
+        let descriptor = Object.getOwnPropertyDescriptor(objectPrototype, method);
+        // if the method doesn't exist, warn user
+        if(descriptor === undefined ){
+            console.warn(`bindAll Error: "${method}" not found in class`)
+            // then return;
+            return;
+        }
+        // if it isn't a function or is a abnormal function return
+        if( dontBind.indexOf(method) !== -1 || typeof descriptor.value !== 'function'){
+            return;
+        }
+        Object.defineProperty(objectPrototype, method, getBoundMethod(objectPrototype, method, descriptor));
+    });
+};
 // Wait for the DOM Content to finish loading
 document.addEventListener('DOMContentLoaded', () => {
     /**

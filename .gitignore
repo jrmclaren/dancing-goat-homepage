@@ -1,2 +1,7 @@
 /node_modules/
 .idea
+/js/*.svg
+/js/bundle.js
+webpack.config.js
+.babelrc
+js/bindAll.js
