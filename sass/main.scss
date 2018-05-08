@@ -40,6 +40,7 @@ html{
   width: 100vw;
   height: 100vh;
   box-sizing: border-box;
+  overflow-x: hidden;
   scroll-behavior: smooth;
 
   // make 1rem equal 10px
@@ -79,6 +80,11 @@ html{
     color: var(--cta);
     letter-spacing: -0.01rem;
     margin-bottom: 1.6rem;
+  }
+  &--3{
+    font-size: 3rem;
+    font-weight: 900;
+    color: inherit;
   }
 }
 .body-text{
@@ -182,6 +188,7 @@ html{
   font-family: inherit;
   font-size: $textInputFontSize;
   caret-color: var(--cta-darker);
+  transition: all .4s ease-out;
 
   // label
   &__label{
@@ -191,7 +198,6 @@ html{
     font-weight: 900;
     top: 0;
     transition: all .2s ease-out;
-
   }
 
   &:not(:placeholder-shown) ~ .text-input__label{
@@ -199,9 +205,10 @@ html{
     color: var(--cta-darker);
   }
 
-  &:focus{
+  &:focus, &:active {
     outline: none;
     border-bottom-color: var(--cta);
+    box-shadow: 0 2rem 4rem rgba(0,0,0,0.2);
   }
 }
 .text-input::placeholder{
@@ -224,6 +231,11 @@ html{
   display: inline-block;
   margin: 2rem 2rem 4rem 8rem;
 
+  &:focus, &:active{
+    outline: none;
+    box-shadow: 0 2rem 4rem rgba(0,0,0,0.2);
+  }
+
 }
 
 .radio-input{
@@ -245,6 +257,8 @@ html{
       //size
       width: 4rem;
       height: 4rem;
+      // transition
+      transition: all .3s ease-out;
     }
 
     &:before{
@@ -256,14 +270,12 @@ html{
       border-radius: 4rem;
       transform-origin: center;
       transform: scale(.6);
-      transition: all .5s ease-out;
     }
     &:after{
       @include radioStyles();
       // style
       background-color: $cta;
       border-radius: 4rem;
-      transition: all .5s ease-out;
     }
   }
 }
@@ -500,6 +512,9 @@ input[type="checkbox"]{
           &:visited{
             text-decoration: none;
           }
+          &:active{
+            outline: none;
+          }
         }
       }
     }
@@ -601,8 +616,8 @@ input[type="checkbox"]{
     width: 100vw;
     height: 73rem;
     background-color: var(--cta-darker);
-
-    //order form
+    perspective: 2000px;
+    //order form styles
 
     &-form-container{
       //position
@@ -619,6 +634,22 @@ input[type="checkbox"]{
       background-color: white;
       border-radius: 80px 80px 0 0;
       box-shadow: 0 2rem 4rem rgba(0,0,0,.3);
+      backface-visibility: hidden;
+      //transition
+      transition: all .8s ease-in-out;
+
+      &--front{
+        &.submitted{
+          transform: rotateY(180deg) translateX(-50%);
+        }
+      }
+      &--back{
+          transform: rotateY(-180deg) translateX(-50%);
+        &.submitted{
+          transform: rotateY(0deg) translateX(-50%);
+        }
+      }
+
     }
 
     &-form{
@@ -627,8 +658,32 @@ input[type="checkbox"]{
       margin: 0 auto;
       left: 10rem;
       top: 8rem;
+
       //size
       width: 80%;
+
+      &-error-container{
+        display: block;
+        resize: none;
+
+        outline: none;
+        // sizing
+        width: 100%;
+        height: auto;
+        // style
+        font-family: inherit;
+        background-color: rgba($cta-darker, .5);
+        border: solid 2px var(--cta-darker);
+
+        color: darken($cta-darker, 20%);
+        transform: scaleY(0);
+        transition: all .2s ease-out;
+      &.active{
+        transform: scaleY(1);
+        padding: 2rem 1.4rem;
+        margin-bottom: 4rem;
+      }
+      }
     }
   }
 }// end .section

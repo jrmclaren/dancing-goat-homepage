@@ -145,6 +145,7 @@ html {
   width: 100vw;
   height: 100vh;
   box-sizing: border-box;
+  overflow-x: hidden;
   scroll-behavior: smooth;
   font-size: 62.5%;
   font-family: var(--font-family); }
@@ -173,6 +174,10 @@ html {
     color: var(--cta);
     letter-spacing: -0.01rem;
     margin-bottom: 1.6rem; }
+  .headline--3 {
+    font-size: 3rem;
+    font-weight: 900;
+    color: inherit; }
 
 .body-text {
   font-size: 2.8rem;
@@ -244,7 +249,8 @@ html {
   transition: all .4s ease-out;
   font-family: inherit;
   font-size: 2rem;
-  caret-color: var(--cta-darker); }
+  caret-color: var(--cta-darker);
+  transition: all .4s ease-out; }
   .text-input__container {
     padding: 4rem 0;
     position: relative;
@@ -259,9 +265,10 @@ html {
   .text-input:not(:placeholder-shown) ~ .text-input__label {
     transform: translateY(-4rem);
     color: var(--cta-darker); }
-  .text-input:focus {
+  .text-input:focus, .text-input:active {
     outline: none;
-    border-bottom-color: var(--cta); }
+    border-bottom-color: var(--cta);
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.2); }
 
 .text-input::placeholder {
   opacity: 0; }
@@ -279,6 +286,9 @@ html {
 .radio-input-container {
   display: inline-block;
   margin: 2rem 2rem 4rem 8rem; }
+  .radio-input-container:focus, .radio-input-container:active {
+    outline: none;
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.2); }
 
 .radio-input {
   display: none;
@@ -295,12 +305,12 @@ html {
       left: -8rem;
       width: 4rem;
       height: 4rem;
+      transition: all .3s ease-out;
       z-index: 4;
       background-color: white;
       border-radius: 4rem;
       transform-origin: center;
-      transform: scale(0.6);
-      transition: all .5s ease-out; }
+      transform: scale(0.6); }
     .radio-input__label:after {
       position: absolute;
       content: '';
@@ -308,9 +318,9 @@ html {
       left: -8rem;
       width: 4rem;
       height: 4rem;
+      transition: all .3s ease-out;
       background-color: #b14d61;
-      border-radius: 4rem;
-      transition: all .5s ease-out; }
+      border-radius: 4rem; }
 
 input[type="radio"]:checked + .radio-input__label:before {
   transform: scale(0); }
@@ -476,6 +486,8 @@ input[type="checkbox"] {
         cursor: pointer; }
         .nav.active ul li a:link, .nav.active ul li a:visited {
           text-decoration: none; }
+        .nav.active ul li a:active {
+          outline: none; }
 
 .section {
   width: 100vw;
@@ -541,7 +553,8 @@ input[type="checkbox"] {
     margin-top: -50vh;
     width: 100vw;
     height: 73rem;
-    background-color: var(--cta-darker); }
+    background-color: var(--cta-darker);
+    perspective: 2000px; }
     .section__order-form-container {
       position: absolute;
       left: 50%;
@@ -551,13 +564,37 @@ input[type="checkbox"] {
       height: 114.6rem;
       background-color: white;
       border-radius: 80px 80px 0 0;
-      box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.3); }
+      box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.3);
+      backface-visibility: hidden;
+      transition: all .8s ease-in-out; }
+      .section__order-form-container--front.submitted {
+        transform: rotateY(180deg) translateX(-50%); }
+      .section__order-form-container--back {
+        transform: rotateY(-180deg) translateX(-50%); }
+        .section__order-form-container--back.submitted {
+          transform: rotateY(0deg) translateX(-50%); }
     .section__order-form {
       position: absolute;
       margin: 0 auto;
       left: 10rem;
       top: 8rem;
       width: 80%; }
+      .section__order-form-error-container {
+        display: block;
+        resize: none;
+        outline: none;
+        width: 100%;
+        height: auto;
+        font-family: inherit;
+        background-color: rgba(158, 70, 91, 0.5);
+        border: solid 2px var(--cta-darker);
+        color: #572732;
+        transform: scaleY(0);
+        transition: all .2s ease-out; }
+        .section__order-form-error-container.active {
+          transform: scaleY(1);
+          padding: 2rem 1.4rem;
+          margin-bottom: 4rem; }
 
 .coffee-feature-container {
   position: relative;

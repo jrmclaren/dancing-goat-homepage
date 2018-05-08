@@ -171,26 +171,130 @@ document.addEventListener('DOMContentLoaded', function () {
         navigationBackground: document.getElementsByClassName('nav-bg')[0],
         menuContainer: document.querySelector('.menu-container')
     };
-    var menu = new Menu(menuElements);
-    menu.init();
+    var menu = new Menu(menuElements).init();
 
     /**
      * FORM FUNCTIONALITY
      */
+    //
 
-    var form = document.forms[0];
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-    });
+    var Form = function () {
+        function Form(form, callback) {
+            _classCallCheck(this, Form);
+
+            this.form = form;
+            this.callback = callback;
+            this.init = this.init.bind(this);
+            this.reject = this.reject.bind(this);
+            this.submit = this.submit.bind(this);
+            this.submitHandler = this.submitHandler.bind(this);
+        }
+
+        _createClass(Form, [{
+            key: 'init',
+            value: function init() {
+                this.form.addEventListener('submit', this.submitHandler);
+            }
+        }, {
+            key: 'submitHandler',
+            value: function submitHandler(e) {
+                e.preventDefault();
+
+                var order = {
+                    name: this.form.name.value,
+                    size: this.form.size.value,
+                    type: this.form.type.value,
+                    comments: this.form.comments.value
+                };
+
+                var orderStatus = Form.isOrderValid({ name: order.name, size: order.size, type: order.type });
+                // if orderStatus is all good, submit, otherwise reject and give reason
+                orderStatus ? this.submit(order) : this.reject(Form.generateErrors({ name: order.name, size: order.size, type: order.type }));
+            }
+        }, {
+            key: 'submit',
+            value: function submit(order) {
+                console.log('submit', order);
+                this.callback(order);
+            }
+        }, {
+            key: 'reject',
+            value: function reject(errors) {
+                // get the container
+                var errorContainer = document.getElementsByName('errors')[0];
+                // set the error text in the container
+                errorContainer.classList.contains('active') ? errorContainer.innerText = 'Oh no, the computer God\'s told us no for these reasons:' : errorContainer.classList.add('active');
+                errorContainer.innerText = errorContainer.innerText += '\n ' + errors.map(function (error) {
+                    return '\u2022 ' + error;
+                }).join('\n') + '  ';
+            }
+        }], [{
+            key: 'isOrderValid',
+            value: function isOrderValid(_ref) {
+                var name = _ref.name,
+                    size = _ref.size,
+                    type = _ref.type;
+
+                return !!name && !!size && !!type;
+            }
+        }, {
+            key: 'generateErrors',
+            value: function generateErrors(_ref2) {
+                var name = _ref2.name,
+                    size = _ref2.size,
+                    type = _ref2.type;
+
+                var nameValid = !!name,
+                    sizeValid = !!size,
+                    typeValid = !!type;
+                var errorReport = [];
+                if (!nameValid) {
+                    errorReport.push('Name is required (so you can get your coffee)');
+                }
+                if (!sizeValid) {
+                    errorReport.push('Size is required (i.e. how addicted are you?)');
+                }
+                if (!typeValid) {
+                    errorReport.push('Type is required (some people like milk, some don\'t)');
+                }
+                console.log(errorReport);
+                return errorReport;
+            }
+        }]);
+
+        return Form;
+    }();
+
+    var submitCallback = function submitCallback(_ref3) {
+        var name = _ref3.name,
+            type = _ref3.type,
+            size = _ref3.size;
+
+
+        // populate the order summary
+        var nameSpan = document.querySelector('[data-nameSpan]');
+        var orderSummarySpan = document.querySelector('[data-orderSummarySpan]');
+
+        nameSpan.textContent = name;
+        orderSummarySpan.textContent = 'Your ' + size + ' ' + type + ' will be ready for you. Until then, we chillin\'';
+
+        // flip the order card
+        var containers = [].concat(_toConsumableArray(document.getElementsByClassName('section__order-form-container')));
+        containers.forEach(function (container) {
+            return container.classList.add('submitted');
+        });
+    };
+
+    var form = new Form(document.forms[0], submitCallback).init();
 
     /*
     UTILITY FUNCTIONS
      */
     var Utilities = {
         /**
-         *
+         *  addClass method
          * @param className = className to add
-         * @param elements  = elements to add to
+         * @param elements  = elements to add className to
          *
          */
         addClass: function addClass(className, elements) {
@@ -219,7 +323,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         break;
                     default:
                         throw new Error('Could not add classNames from elements, check arguments');
-                        break;
                 }
             } else {
                 throw new Error('Could not add classes, check arguments');
@@ -241,6 +344,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     //  If elements type is Array, sweet go through
                     // remove the className from the element.classList
                     case Array:
+                        /*$FlowFixMe*/
                         elements.map(function (element) {
                             return element.classList.remove(className);
                         });
@@ -250,6 +354,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     //  className from each element.classList
                     case String:
                         // make the array
+                        console.log(elements);
+                        /*$FlowFixMe*/
                         var collection = [].concat(_toConsumableArray(document.getElementsByClassName(elements)));
                         // while the array has a length
                         while (collection.length) {
@@ -270,8 +376,8 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 throw new Error('Could not manipulate classes, check arguments');
             }
-        }
-    }; /*end of Utilities*/
+        } /*end of Utilities*/
+    };
 }); /*end of DOMContentLoaded*/
 
 //# sourceMappingURL=script.js.map

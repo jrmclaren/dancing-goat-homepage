@@ -150,26 +150,108 @@ document.addEventListener('DOMContentLoaded', () => {
         navigationBackground: document.getElementsByClassName('nav-bg')[0],
         menuContainer: document.querySelector('.menu-container')
     };
-    const menu = new Menu(menuElements);
-    menu.init();
+    const menu = new Menu(menuElements).init();
 
     /**
      * FORM FUNCTIONALITY
      */
+    //
+    class Form {
+        constructor(form, callback){
+            this.form = form;
+            this.callback = callback;
+            this.init = this.init.bind(this);
+            this.reject = this.reject.bind(this);
+            this.submit = this.submit.bind(this);
+            this.submitHandler = this.submitHandler.bind(this);
+        }
 
-    const form = document.forms[0];
-    form.addEventListener('submit', e => {
-       e.preventDefault();
-    });
+        init() {
+            this.form.addEventListener('submit', this.submitHandler);
+        }
+
+        submitHandler(e) {
+            e.preventDefault();
+
+            let order = {
+                name: this.form.name.value,
+                size: this.form.size.value,
+                type: this.form.type.value,
+                comments: this.form.comments.value
+            };
+
+            let orderStatus = Form.isOrderValid({name: order.name, size: order.size, type: order.type});
+            // if orderStatus is all good, submit, otherwise reject and give reason
+            orderStatus
+                ? this.submit(order)
+                : this.reject( Form.generateErrors( {name: order.name, size: order.size, type: order.type} ));
+        }
+
+        static isOrderValid({name, size, type}) {
+            return !!name && !!size && !!type;
+        };
+
+        static generateErrors({name, size, type}) {
+            const nameValid = !!name,
+                  sizeValid = !!size,
+                  typeValid = !!type;
+            let errorReport = [];
+            if( !nameValid ){
+                errorReport.push(`Name is required (so you can get your coffee)`);
+            }
+            if( !sizeValid ){
+                errorReport.push('Size is required (i.e. how addicted are you?)');
+            }
+            if( !typeValid ){
+                errorReport.push(`Type is required (some people like milk, some don't)`);
+            }
+            console.log(errorReport);
+            return errorReport;
+        }
+
+        submit(order) {
+            console.log('submit', order);
+            this.callback(order);
+        }
+
+        reject(errors){
+            // get the container
+            const errorContainer = document.getElementsByName('errors')[0];
+            // set the error text in the container
+            errorContainer.classList.contains('active')
+                                                    ? errorContainer.innerText = 'Oh no, the computer God\'s told us no for these reasons:'
+                                                    : errorContainer.classList.add('active');
+            errorContainer.innerText = errorContainer.innerText += `\n ${ errors.map( error => ( `\u2022 ${error}` )).join(`\n`) }  `;
+
+        }
+    }
+
+    const submitCallback = ({name, type, size}) => {
+
+        // populate the order summary
+        let nameSpan = document.querySelector('[data-nameSpan]');
+        let orderSummarySpan = document.querySelector('[data-orderSummarySpan]');
+
+        nameSpan.textContent = name;
+        orderSummarySpan.textContent = `Your ${size} ${type} will be ready for you. Until then, we chillin'`
+
+        // flip the order card
+        let containers = [...document.getElementsByClassName('section__order-form-container')];
+        containers.forEach( container => (container.classList.add('submitted')) );
+    };
+
+    const form = new Form(document.forms[0], submitCallback).init();
+
+
 
 /*
 UTILITY FUNCTIONS
  */
 const Utilities = {
     /**
-     *
+     *  addClass method
      * @param className = className to add
-     * @param elements  = elements to add to
+     * @param elements  = elements to add className to
      *
      */
     addClass: (className, elements) => {
@@ -196,7 +278,6 @@ const Utilities = {
                         break;
                     default:
                         throw new Error(`Could not add classNames from elements, check arguments`);
-                        break;
                 }
             }  else {
                 throw new Error('Could not add classes, check arguments');
@@ -218,6 +299,7 @@ const Utilities = {
                     //  If elements type is Array, sweet go through
                     // remove the className from the element.classList
                     case Array:
+                        /*$FlowFixMe*/
                         elements.map(element => (element.classList.remove(className)));
                         break;
                     //  If elements type is String, sweet go through
@@ -225,6 +307,8 @@ const Utilities = {
                     //  className from each element.classList
                     case String:
                         // make the array
+                        console.log(elements);
+                        /*$FlowFixMe*/
                         const collection = [...document.getElementsByClassName(elements)];
                         // while the array has a length
                         while (collection.length) {
