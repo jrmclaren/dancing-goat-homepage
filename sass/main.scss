@@ -86,7 +86,16 @@ html{
     font-weight: 900;
     color: inherit;
   }
+
 }
+
+.text-white{
+  color: white !important;
+}
+.text-cta{
+  color: var(--cta) !important;
+}
+
 .body-text{
   font-size: 2.8rem;
   color: var(--body-color);
@@ -543,6 +552,11 @@ input[type="checkbox"]{
     text-align: left;
     font-weight: 900;
     color: var(--section-headline);
+
+    &--bean{
+      color: var(--cta-darker);
+    }
+
   }
 
   &__home{
@@ -583,10 +597,6 @@ input[type="checkbox"]{
     z-index: -2;
 
     &-textbox{
-
-      &__content{
-
-      }
 
       &--left{
         position: absolute;
@@ -662,6 +672,12 @@ input[type="checkbox"]{
       //size
       width: 80%;
 
+      .confirmation-text-box{
+        position: absolute;
+        left: 64rem;
+        width: 45rem;
+      }
+
       &-error-container{
         display: block;
         resize: none;
@@ -683,7 +699,33 @@ input[type="checkbox"]{
         padding: 2rem 1.4rem;
         margin-bottom: 4rem;
       }
+
       }
+    }
+  }
+
+  &__contact{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    &--left{
+      position: absolute;
+      background-color: var(--cta);
+      width: 50vw;
+      height: 100%;
+    }
+    &--right{
+      position: absolute;
+      width: 50vw;
+      left: 50vw;
+      height: 100%;
+    }
+    &--content{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
     }
   }
 }// end .section
@@ -699,5 +741,14 @@ input[type="checkbox"]{
   overflow: hidden;
 }
 .coffee-feature{
+  width: 100%;
+}
+
+.order-confirmation-image-container{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.order-confirmation-image{
   width: 100%;
 }

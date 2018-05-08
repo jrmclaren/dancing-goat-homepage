@@ -102,7 +102,7 @@
             </div>
         </div>
     </section>
-    
+
     <div class="coffee-feature-container">
         <img src="./img/coffee-feature.png" alt="coffee" class="coffee-feature">
     </div>
@@ -113,7 +113,7 @@
                order
             </h3>
         </div>
-        <div class="section__order-form-container section__order-form-container--front">
+        <div class="section__order-form-container section__order-form-container--front submitted">
             <form action="#" class="section__order-form">
                 <div class="section__order-form-headline">
                     <h4 class="headline headline--2">
@@ -201,23 +201,58 @@
                 </form>
 
         </div>
-        <div class="section__order-form-container section__order-form-container--back">
+        <div class="section__order-form-container section__order-form-container--back submitted">
             <div class="section__order-form">
-                <div class="section__order-form-headline">
-                    <h5 class="headline headline--2">
-                        thanks <span data-nameSpan></span>
-                    </h5>
+                <div class="confirmation-text-box">
+                    <div class="section__order-form-headline">
+                        <h5 class="headline headline--2">
+                            thanks <span data-nameSpan></span>
+                        </h5>
 
+                    </div>
+                    <p class="body-text" data-orderSummarySpan>
+
+                    </p>
                 </div>
-                <p class="body-text" data-orderSummarySpan>
-
-                </p>
             </div>
+            <div class="order-confirmation-image-container">
+                <img src="./img/confirmation@300x.png" alt="confirmed" class="order-confirmation-image">
+            </div>
+        </div>
+    </section>
+    <section class="section section__contact">
+        <div class="section__contact--left">
+            <!--Section headline-->
+            <!--<div class="section__headline-box">-->
+                <!--<h4 id="contact" class="section__headline section__headline&#45;&#45;bean">-->
+                    <!--contact-->
+                <!--</h4>-->
+            <!--</div>-->
+
+            <!--Left content-->
+            <div class="section__contact--content">
+                <h6 class="headline headline--2 text-white">
+                    <div>send us</div>
+                    <div>loveletters 😍</div>
+                </h6>
+                <p class="body-text text-white">
+                    we take hate mail too, but we don't love it 😢
+                </p>
+
+
+                    <div class="text-input__container">
+                        <input id="contact-name" type="text" class="text-input" placeholder="name" />
+                        <label class="text-input__label" for="contact-name">Name</label>
+                    </div>
+
+
+            </div>
+        </div>
+        <div class="section__contact--right">
 
         </div>
     </section>
 </main>
 </body>
 <script src="js/script.js" type="text/javascript"></script>
-<!--<script src="js/bundle.js" type="text/javascript"></script>-->
 </html>
