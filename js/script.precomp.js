@@ -210,8 +210,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         submit(order) {
-            console.log('submit', order);
-            this.callback(order);
+            // console.log('submit', order);
+            this.callback && this.callback(order);
         }
 
         reject(errors){

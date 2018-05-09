@@ -727,6 +727,23 @@ input[type="checkbox"]{
       top: 50%;
       transform: translate(-50%,-50%);
     }
+    &--form{
+      .text-input__container {
+        .text-input{
+          //size
+          width: 100%;
+          // style
+          border-bottom-color: white;
+          color: white;
+        }
+        .text-input__label{
+          color: white;
+        }
+        .text-input:not(:placeholder-shown) + .text-input__label{
+          color: var(--cta-darker);
+        }
+      }
+    }
   }
 }// end .section
 

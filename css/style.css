@@ -627,6 +627,14 @@ input[type="checkbox"] {
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%); }
+    .section__contact--form .text-input__container .text-input {
+      width: 100%;
+      border-bottom-color: white;
+      color: white; }
+    .section__contact--form .text-input__container .text-input__label {
+      color: white; }
+    .section__contact--form .text-input__container .text-input:not(:placeholder-shown) + .text-input__label {
+      color: var(--cta-darker); }
 
 .coffee-feature-container {
   position: relative;

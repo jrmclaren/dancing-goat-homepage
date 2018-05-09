@@ -214,8 +214,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }, {
             key: 'submit',
             value: function submit(order) {
-                console.log('submit', order);
-                this.callback(order);
+                // console.log('submit', order);
+                this.callback && this.callback(order);
             }
         }, {
             key: 'reject',
