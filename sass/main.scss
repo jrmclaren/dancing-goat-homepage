@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:700,900');
 
 @import 'utilities';
+@import 'breakpoints';
 
 // SASS Variables
 // cta a.k.a BEAN
@@ -46,6 +47,9 @@ html{
   // make 1rem equal 10px
   font-size: 62.5%; // 16px / 100 = 62.5% i.e. 10px = 1rem
   font-family: var(--font-family);
+}
+main{
+  position: relative;
 }
 .logo{
   display: block;
@@ -106,6 +110,13 @@ html{
   letter-spacing: 0;
   font-weight: 700;
 }
+
+.legal{
+  font-size: 1rem;
+  color: currentColor;
+  line-height: 1;
+}
+
 .header{
   width: 100vw;
   position: fixed;
@@ -316,7 +327,7 @@ input[type="radio"]:checked + .radio-input__label{
   box-shadow: 0 0 4rem rgba(0,0,0,0.12);
   cursor: pointer;
   transition: all .2s ease-out;
-  z-index: 6;
+  z-index: 120;
 
   /*.menu-container*/&__inner{
     position: absolute;
@@ -596,9 +607,8 @@ input[type="checkbox"]{
     }
   }//end __home
   &__story{
-    height: 100vh;
-    z-index: -2;
 
+    height: 100vh;
     &-textbox{
 
       &--left{
@@ -754,7 +764,6 @@ input[type="checkbox"]{
   // position
   position: relative;
   margin-top: -35rem;
-  z-index: -4;
   //size
   width: 100vw;
   height: auto;
@@ -771,4 +780,36 @@ input[type="checkbox"]{
 }
 .order-confirmation-image{
   width: 100%;
+}
+
+.footer{
+  position: relative;
+  width: 100vw;
+  height: 45vh;
+  padding: 2rem;
+  background-color: var(--cta);
+
+  &__content{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
+  // footerLogoHeight is defined here to help position legal container
+  $footerLogoHeight: 14.9rem;
+  &__logo-container{
+    width: 25.3rem;
+    height: $footerLogoHeight;
+
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+  }
+  &__legal-container{
+    width: 30rem;
+    margin-top: $footerLogoHeight + 2rem;
+    text-align: left;
+  }
 }

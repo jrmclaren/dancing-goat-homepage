@@ -1,7 +1,19 @@
+/*
+Position
+ */
+
+.u-position-fixed{
+  position: fixed !important;
+}
+.u-position-absolute{
+  position: absolute !important;
+}
+.u-position-relative{
+  position: relative !important;
+}
 
 /*
 Margins
-
  */
 $margin-xs: .5rem;
 $margin-s: 1rem;
@@ -136,4 +148,27 @@ $margin-xl: 5rem;
 .u-margin__bottom--xl{
   margin: 0 0 $margin-xl 0 !important;
 }
+
+// Z-index utilites
+// this mixin returns a number
+// of z-index utility classes
+// it works by taking a number (10 should be fine)
+// it takes the number($num) and iterates($i) from 1 to it.
+// each iteration returns a z-index class with a value
+// of the two operands times each other.
+@mixin zIndexClasses {
+  $num: 10;
+  @for $i from 1 through $num{
+    .u-z-#{$i} {
+      position: relative;
+      z-index: $i*$num !important;
+      &--negative{
+        position: relative;
+        z-index: ($i*$num) * -1 !important;
+      }
+    }
+  }
+}
+@include zIndexClasses();
+
 
