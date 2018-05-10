@@ -1,3 +1,10 @@
+@mixin clearfix{
+  &::after{
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
 /*
 Position
  */
@@ -11,7 +18,6 @@ Position
 .u-position-relative{
   position: relative !important;
 }
-
 /*
 Margins
  */
@@ -147,6 +153,144 @@ $margin-xl: 5rem;
 }
 .u-margin__bottom--xl{
   margin: 0 0 $margin-xl 0 !important;
+}
+
+
+/*
+paddings
+ */
+$padding-xs: .5rem;
+$padding-s: 1rem;
+$padding: 2rem;
+$padding-m: 3rem;
+$padding-l: 4rem;
+$padding-xl: 5rem;
+
+.u-padding{
+  padding: $padding !important;
+}
+.u-padding__ends{
+  padding: $padding 0 !important;
+}
+.u-padding__sides{
+  padding: 0 $padding !important;
+}
+.u-padding__left{
+  padding: 0 0 0 $padding !important;
+}
+.u-padding__right{
+  padding: 0 $padding 0 0 !important;
+}
+.u-padding__top{
+  padding: $padding 0 0 0 !important;
+}
+.u-padding__bottom{
+  padding: 0 0 $padding 0 !important;
+}
+.u-padding--xs{
+  padding: $padding-xs !important;
+}
+.u-padding__ends--xs{
+  padding: $padding-xs 0 !important;
+}
+.u-padding__sides--xs{
+  padding: 0 $padding-xs !important;
+}
+.u-padding__left--xs{
+  padding: 0 0 0 $padding-xs !important;
+}
+.u-padding__right--xs{
+  padding: 0 $padding-xs 0 0 !important;
+}
+.u-padding__top--xs{
+  padding: $padding-xs 0 0 0 !important;
+}
+.u-padding__bottom--xs{
+  padding: 0 0 $padding-xs 0 !important;
+}
+.u-padding--s{
+  padding: $padding-s !important;
+}
+.u-padding__ends--s{
+  padding: $padding-s 0 !important;
+}
+.u-padding__sides--s{
+  padding: 0 $padding-s !important;
+}
+.u-padding__left--s{
+  padding: 0 0 0 $padding-s !important;
+}
+.u-padding__right--s{
+  padding: 0 $padding-s 0 0 !important;
+}
+.u-padding__top--s{
+  padding: $padding-s 0 0 0 !important;
+}
+.u-padding__bottom--s{
+  padding: 0 0 $padding-s 0 !important;
+}
+.u-padding--m{
+  padding: $padding-m !important;
+}
+.u-padding__ends--m{
+  padding: $padding-m 0 !important;
+}
+.u-padding__sides--m{
+  padding: 0 $padding-m !important;
+}
+.u-padding__left--m{
+  padding: 0 0 0 $padding-m !important;
+}
+.u-padding__right--m{
+  padding: 0 $padding-m 0 0 !important;
+}
+.u-padding__top--m{
+  padding: $padding-m 0 0 0 !important;
+}
+.u-padding__bottom--m{
+  padding: 0 0 $padding-m 0 !important;
+}
+.u-padding--l{
+  padding: $padding-l !important;
+}
+.u-padding__ends--l{
+  padding: $padding-l 0 !important;
+}
+.u-padding__sides--l{
+  padding: 0 $padding-l !important;
+}
+.u-padding__left--l{
+  padding: 0 0 0 $padding-l !important;
+}
+.u-padding__right--l{
+  padding: 0 $padding-l 0 0 !important;
+}
+.u-padding__top--l{
+  padding: $padding-l 0 0 0 !important;
+}
+.u-padding__bottom--l{
+  padding: 0 0 $padding-l 0 !important;
+}
+.u-padding--xl{
+  padding: $padding-xl !important;
+}
+.u-padding__ends--xl{
+  padding: $padding-xl 0 !important;
+}
+.u-padding__sides--xl{
+  padding: 0 $padding-xl !important;
+}
+.u-padding__left--xl{
+  padding: 0 0 0 $padding-xl !important;
+}
+.u-padding__right--xl{
+  padding: 0 $padding-xl 0 0 !important;
+}
+.u-padding__top--xl{
+  padding: $padding-xl 0 0 0 !important;
+}
+.u-padding__bottom--xl{
+  padding: 0 0 $padding-xl 0 !important;
 }
 
 // Z-index utilites

@@ -1,14 +1,23 @@
 // Import Raleway
 @import url('https://fonts.googleapis.com/css?family=Raleway:700,900');
 
-@import 'utilities';
-@import 'breakpoints';
-
 // SASS Variables
 // cta a.k.a BEAN
 $cta: #b14d61;
 // bean darker
 $cta-darker: #9e465b;
+
+// grid
+$grid-width: 114rem;
+$gutter-vertical: 8rem;
+$gutter-vertical-small: 6rem;
+$gutter-horizontal: 6rem;
+
+@import 'utilities';
+@import 'breakpoints';
+@import 'grid';
+
+
 
 // CSS Variables
 :root{
@@ -78,12 +87,28 @@ main{
   font-weight: 900;
   line-height: 6.5rem;
   letter-spacing: -0.01rem;
+
+  @include media(tab-port){
+    font-size: 4rem;
+    line-height: 4.5rem;
+  }
+  @include media(phone){
+    font-size: 3.2rem;
+    line-height: 3.8rem;
+  }
+
   &--2 {
     font-size: 6rem;
     font-weight: 900;
     color: var(--cta);
     letter-spacing: -0.01rem;
     margin-bottom: 1.6rem;
+    @include media(tab-port){
+      font-size: 4rem;
+    }
+    @include media(phone){
+      font-size: 2.8rem;
+    }
   }
   &--3{
     font-size: 3rem;
@@ -578,20 +603,31 @@ input[type="checkbox"]{
             rgba(255,255,255,1),
             rgba(217,217,217,1));
     height: 100vh;
+
     &-logo-box{
       position: absolute;
       width: 30rem;
       height: 17.1rem;
-      left: 16.4rem;
       top: 6.9rem;
+      @include media(tab-land){
+        left: 10rem;
+      }
     }
     &-headline-box{
       position: absolute;
-      left: 16.3rem;
       top: 50%;
       transform: translateY(-50%);
       width: 54.2rem;
       height: 17.4rem;
+
+      @include media(phone){
+        width: 35rem;
+      }
+      @include media(tab-land){
+        left: 10rem;
+      }
+
+
     }
     &-hero-image-box{
       position: absolute;
@@ -604,6 +640,15 @@ input[type="checkbox"]{
         height: 100%;
         width: 100%;
       }
+
+      @include media(tab-land){
+        width: 60vw;
+      }
+
+      @include media(tab-port){
+        width: 80vw;
+      }
+
     }
   }//end __home
   &__story{
@@ -611,20 +656,14 @@ input[type="checkbox"]{
     height: 100vh;
     &-textbox{
 
+      margin-top: 14rem;
+
       &--left{
-        position: absolute;
+        //SIZING
         width: 44.7rem;
         height: 29.1rem;
-        left: 16.3rem;
-        top: 27.3rem;
       }
       &--right{
-
-        //POSITION
-        position: absolute;
-        left: 105rem;
-        top: 26.5rem;
-
         //SIZING
         width: 32.4rem;
         height: 29.1rem;
