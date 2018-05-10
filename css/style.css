@@ -182,6 +182,9 @@ html {
 .text-white {
   color: white !important; }
 
+.text-body {
+  color: var(--body-color) !important; }
+
 .text-cta {
   color: var(--cta) !important; }
 

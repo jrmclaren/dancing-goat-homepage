@@ -1,3 +1,5 @@
+
+
 /*
 Class autobind function
 
@@ -76,6 +78,22 @@ const bindAll = (context) => {
 };
 // Wait for the DOM Content to finish loading
 document.addEventListener('DOMContentLoaded', () => {
+
+    // XMLRequest test
+    const request = new XMLHttpRequest();
+    const setMapbox = (response) => {
+        return JSON.parse(response);
+    };
+    let mapbox = {};
+    request.open("GET", '/map', true);
+    request.setRequestHeader("Content-Type", "application/json");
+    request.onreadystatechange = () => {
+        if(request.readyState == 4 && request.status == 200) {
+            mapbox = setMapbox(request.response);
+            console.log(mapbox);
+        }
+    };
+    request.send();
     /**
      * @class Menu contains all logic and functionality for
      * the menu.

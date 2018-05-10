@@ -82,6 +82,22 @@ var bindAll = function bindAll(context) {
 };
 // Wait for the DOM Content to finish loading
 document.addEventListener('DOMContentLoaded', function () {
+
+    // XMLRequest test
+    var request = new XMLHttpRequest();
+    var setMapbox = function setMapbox(response) {
+        return JSON.parse(response);
+    };
+    var mapbox = {};
+    request.open("GET", '/map', true);
+    request.setRequestHeader("Content-Type", "application/json");
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            mapbox = setMapbox(request.response);
+            console.log(mapbox);
+        }
+    };
+    request.send();
     /**
      * @class Menu contains all logic and functionality for
      * the menu.
@@ -105,6 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
      * all the elements that pertain to navigation
      *
      */
+
     var Menu = function () {
         function Menu(menuItems) {
             _classCallCheck(this, Menu);
