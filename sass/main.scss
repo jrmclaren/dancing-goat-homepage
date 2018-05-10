@@ -492,7 +492,7 @@ input[type="checkbox"]{
   &__logo-box{
     //position
     position: absolute;
-    left: 16.4rem;
+    //left: 16.4rem;
     top: 6.9rem;
     //size
     width: 30rem;
@@ -596,6 +596,9 @@ input[type="checkbox"]{
       color: var(--cta-darker);
     }
 
+    @include media(tab-port){
+      font-size: 15rem;
+    }
   }
 
   &__home{
@@ -657,16 +660,25 @@ input[type="checkbox"]{
     &-textbox{
 
       margin-top: 14rem;
-
+      @include media(tab-port){
+        margin-top: 0;
+      }
       &--left{
         //SIZING
         width: 44.7rem;
-        height: 29.1rem;
+
+        @include media(tab-port){
+          margin-top: 10rem;
+        }
       }
       &--right{
         //SIZING
         width: 32.4rem;
-        height: 29.1rem;
+
+        @include media(tab-port){
+          margin-bottom: 10rem;
+        }
+
       }
     }
   }
@@ -680,6 +692,10 @@ input[type="checkbox"]{
     background-color: var(--cta-darker);
     perspective: 2000px;
     //order form styles
+
+    @include media(tab-port){
+      margin-top: 0;
+    }
 
     &-form-container{
       //position
@@ -761,17 +777,39 @@ input[type="checkbox"]{
     width: 100vw;
     height: 100vh;
     background-color: white;
-    &--left{
-      position: absolute;
-      background-color: var(--cta);
-      width: 50vw;
+
+    @include media(tab-port){
       height: 100%;
     }
-    &--right{
-      position: absolute;
-      width: 50vw;
-      left: 50vw;
+
+    &--left{
+      position: relative;
+      background-color: var(--cta);
+      display: inline-block;
+      width: 48%;
       height: 100%;
+
+      @include media(tab-port){
+        width: 100%;
+        height: 85rem;
+        display: block;
+        position: relative;
+      }
+
+    }
+    &--right{
+      position: relative;
+      display: inline-block;
+      width: 48%;
+      height: 100%;
+
+      @include media(tab-port){
+        width: 100%;
+        height: 85rem;
+        display: block;
+        position: relative;
+      }
+
     }
     &--content{
       position: absolute;
@@ -807,6 +845,9 @@ input[type="checkbox"]{
   width: 100vw;
   height: auto;
   overflow: hidden;
+  @include media(tab-port){
+    margin-top: -14rem;
+  }
 }
 .coffee-feature{
   width: 100%;

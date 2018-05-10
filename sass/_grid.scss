@@ -41,6 +41,14 @@
 
   .col-1-of-3 {
     width: calc((100% - 2 * #{$gutter-horizontal}) / 3);
+
+    &__offset--1{
+      margin-left: calc((100% - 2 * #{$gutter-horizontal}) / 3);
+
+      @include media(tab-port){
+        margin-left: 0;
+      }
+    }
   }
 
   .col-2-of-3 {
