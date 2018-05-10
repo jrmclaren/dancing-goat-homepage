@@ -2,9 +2,122 @@
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+/*
+UTILITY FUNCTIONS
+ */
+var Utilities = {
+    /**
+     *  addClass method
+     * @param className = className to add
+     * @param elements  = elements to add className to
+     *
+     */
+    addClass: function addClass(className, elements) {
+        if (elements) {
+            switch (elements.constructor) {
+                //  If elements type is Array, sweet go through
+                // add the className from the element.classList
+                case Array:
+                    elements.map(function (element) {
+                        return element.classList.add(className);
+                    });
+                    break;
+                //  If elements type is String, sweet go through
+                //  define an array of that String and add the
+                //  className from each element.classList
+                case String:
+                    // make the array
+                    var collection = [].concat(_toConsumableArray(document.getElementsByClassName(elements)));
+                    // while the array has a length
+                    while (collection.length) {
+                        // take the last item off the array
+                        var currentElement = collection.pop();
+                        // manipulate it's class
+                        currentElement.classList.add(className);
+                    }
+                    break;
+                default:
+                    throw new Error('Could not add classNames from elements, check arguments');
+            }
+        } else {
+            throw new Error('Could not add classes, check arguments');
+        }
+    }, // end of addClass() function
+    /**
+     *
+     * @param className = className to remove
+     * @param elements (option) = Array or String of element(s)
+     *                            to remove from
+     *
+     * If no elements are provided, the elements
+     * containing the class to remove will targeted.
+     *
+     */
+    removeClass: function removeClass(className, elements) {
+        if (elements) {
+            switch (elements.constructor) {
+                //  If elements type is Array, sweet go through
+                // remove the className from the element.classList
+                case Array:
+                    /*$FlowFixMe*/
+                    elements.map(function (element) {
+                        return element.classList.remove(className);
+                    });
+                    break;
+                //  If elements type is String, sweet go through
+                //  define an array of that String and remove the
+                //  className from each element.classList
+                case String:
+                    // make the array
+                    console.log(elements);
+                    /*$FlowFixMe*/
+                    var collection = [].concat(_toConsumableArray(document.getElementsByClassName(elements)));
+                    // while the array has a length
+                    while (collection.length) {
+                        // take the last item off the array
+                        var currentElement = collection.pop();
+                        // manipulate it's classes
+                        currentElement.classList.remove(className);
+                    }
+                    break;
+                default:
+                    throw new Error('Could not remove classNames from elements, check arguments');
+            }
+        } else if (className) {
+            var _elements = [].concat(_toConsumableArray(document.getElementsByClassName(className)));
+            _elements.map(function (element) {
+                return element.classList.remove(className);
+            });
+        } else {
+            throw new Error('Could not manipulate classes, check arguments');
+        }
+    }, // end of removeClass
+    loadScript: function loadScript(src, callback) {
+        var script = document.createElement('script');
+        var loaded = false;
+        script.setAttribute('src', src);
+        if (callback) {
+            script.onreadystatechange = script.onload = function () {
+                if (!loaded) {
+                    callback();
+                }
+                loaded = true;
+            };
+        }
+        document.getElementsByTagName('head')[0].appendChild(script);
+    } // end loadScript
+    /*end of Utilities*/
+
+};var Styles = {
+    // cta a.k.a BEAN
+    cta: "#b14d61",
+    // bean darker
+    ctaDarker: "#9e465b"
+};
 
 /*
 Class autobind function
@@ -83,21 +196,73 @@ var bindAll = function bindAll(context) {
 // Wait for the DOM Content to finish loading
 document.addEventListener('DOMContentLoaded', function () {
 
-    // XMLRequest test
-    var request = new XMLHttpRequest();
-    var setMapbox = function setMapbox(response) {
-        return JSON.parse(response);
-    };
-    var mapbox = {};
-    request.open("GET", '/map', true);
-    request.setRequestHeader("Content-Type", "application/json");
-    request.onreadystatechange = function () {
-        if (request.readyState == 4 && request.status == 200) {
-            mapbox = setMapbox(request.response);
-            console.log(mapbox);
+    /**
+     * @class Map contains the logic needed to render
+     *        a mapbox map
+     *
+     * @function setToken gets the token from the server
+     *           and returns a promise with the token
+     *
+     * @function init initiates the map, should be called
+     *           in the resolve of the above function
+     */
+    var Map = function () {
+        function Map(container) {
+            _classCallCheck(this, Map);
+
+            this.container = container;
+            this.init.bind(this);
+            this.setToken.bind(this);
         }
-    };
-    request.send();
+
+        _createClass(Map, [{
+            key: 'init',
+            value: function init() {
+                var map = new mapboxgl.Map({
+                    container: this.container,
+                    style: 'mapbox://styles/mapbox/streets-v10',
+                    minZoom: 14,
+                    maxZoom: 24,
+                    center: [153.02138889, -27.47797222]
+                });
+                var marker = new mapboxgl.Marker();
+                marker.setLngLat([153.02138889, -27.47797222]).addTo(map);
+            }
+        }, {
+            key: 'setToken',
+            value: function setToken() {
+                return new Promise(function (resolve, reject) {
+                    var http = new XMLHttpRequest();
+                    var response = {};
+                    http.open("GET", '/map', true);
+                    http.setRequestHeader("Content-Type", "application/json");
+                    http.onreadystatechange = function () {
+                        if (http.readyState === 4 && http.status === 200) {
+                            var _response = JSON.parse(http.response);
+                            resolve(_response.token);
+                        }if (http.status === 403) {
+                            reject('403 Forbidden');
+                        }
+                    };
+                    http.send();
+                }); //  getToken()
+            }
+        }]);
+
+        return Map;
+    }(); // end Map
+
+    var map = new Map('map');
+    // to make sure mapboxgl is on the window element we'll append and load
+    // it using JS, and then grab the token to set it, followed finally by
+    // initiating the map
+    Utilities.loadScript("https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js", function () {
+        map.setToken().then(function (token) {
+            return window.mapboxgl.accessToken = token;
+        }).then(function () {
+            return map.init();
+        });
+    });
     /**
      * @class Menu contains all logic and functionality for
      * the menu.
@@ -303,98 +468,6 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     var form = new Form(document.forms[0], submitCallback).init();
-
-    /*
-    UTILITY FUNCTIONS
-     */
-    var Utilities = {
-        /**
-         *  addClass method
-         * @param className = className to add
-         * @param elements  = elements to add className to
-         *
-         */
-        addClass: function addClass(className, elements) {
-            if (elements) {
-                switch (elements.constructor) {
-                    //  If elements type is Array, sweet go through
-                    // add the className from the element.classList
-                    case Array:
-                        elements.map(function (element) {
-                            return element.classList.add(className);
-                        });
-                        break;
-                    //  If elements type is String, sweet go through
-                    //  define an array of that String and add the
-                    //  className from each element.classList
-                    case String:
-                        // make the array
-                        var collection = [].concat(_toConsumableArray(document.getElementsByClassName(elements)));
-                        // while the array has a length
-                        while (collection.length) {
-                            // take the last item off the array
-                            var currentElement = collection.pop();
-                            // manipulate it's class
-                            currentElement.classList.add(className);
-                        }
-                        break;
-                    default:
-                        throw new Error('Could not add classNames from elements, check arguments');
-                }
-            } else {
-                throw new Error('Could not add classes, check arguments');
-            }
-        }, // end of addClass() function
-        /**
-         *
-         * @param className = className to remove
-         * @param elements (option) = Array or String of element(s)
-         *                            to remove from
-         *
-         * If no elements are provided, the elements
-         * containing the class to remove will targeted.
-         *
-         */
-        removeClass: function removeClass(className, elements) {
-            if (elements) {
-                switch (elements.constructor) {
-                    //  If elements type is Array, sweet go through
-                    // remove the className from the element.classList
-                    case Array:
-                        /*$FlowFixMe*/
-                        elements.map(function (element) {
-                            return element.classList.remove(className);
-                        });
-                        break;
-                    //  If elements type is String, sweet go through
-                    //  define an array of that String and remove the
-                    //  className from each element.classList
-                    case String:
-                        // make the array
-                        console.log(elements);
-                        /*$FlowFixMe*/
-                        var collection = [].concat(_toConsumableArray(document.getElementsByClassName(elements)));
-                        // while the array has a length
-                        while (collection.length) {
-                            // take the last item off the array
-                            var currentElement = collection.pop();
-                            // manipulate it's classes
-                            currentElement.classList.remove(className);
-                        }
-                        break;
-                    default:
-                        throw new Error('Could not remove classNames from elements, check arguments');
-                }
-            } else if (className) {
-                var _elements = [].concat(_toConsumableArray(document.getElementsByClassName(className)));
-                _elements.map(function (element) {
-                    return element.classList.remove(className);
-                });
-            } else {
-                throw new Error('Could not manipulate classes, check arguments');
-            }
-        } /*end of Utilities*/
-    };
 }); /*end of DOMContentLoaded*/
 
 //# sourceMappingURL=script.js.map

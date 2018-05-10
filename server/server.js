@@ -15,8 +15,8 @@ app.get("/", ( req, res ) => {
 });
 
 app.get("/map", (req, res) => {
-    let host = req.get("host");
-    host.indexOf('localhost') !== 1 ? res.send({token   : MAPBOX_TOKEN}) : res.status(403).end();
+    let response = JSON.stringify({token: MAPBOX_TOKEN});
+    res.send(response);
 });
 
 app.listen( PORT, () => {

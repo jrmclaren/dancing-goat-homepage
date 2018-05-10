@@ -12,6 +12,7 @@
     "devserver": "live-server --browser='Google Chrome'",
     "start:local": "npm-run-all --parallel devserver watch:sass watch:js",
     "start": "node server/server.js",
+    "start:development": "nodemon server/server.js",
     "compile:js": "npx babel js/ --out-dir build/js/",
     "webpack": "webpack",
     "compile:sass": "node-sass sass/main.scss css/style.comp.css",
