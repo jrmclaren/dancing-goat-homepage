@@ -341,7 +341,9 @@ paddings
 
 .row {
   max-width: 114rem;
-  margin: 0 auto; }
+  margin: 0 auto;
+  border-left: solid 2px red;
+  border-right: solid 2px red; }
   .row:not(:last-child) {
     margin-bottom: 8rem; }
     @media only screen and (max-width: 56.25em) {
@@ -370,6 +372,11 @@ paddings
     width: calc((100% - 6rem) / 2); }
   .row .col-1-of-3 {
     width: calc((100% - 2 * 6rem) / 3); }
+    .row .col-1-of-3__offset--1 {
+      margin-left: calc((100% - 2 * 6rem) / 3); }
+      @media only screen and (max-width: 75em) {
+        .row .col-1-of-3__offset--1 {
+          margin-left: calc( ((100% - 2 * 6rem) / 3) / 2); } }
   .row .col-2-of-3 {
     width: calc(2 * ((100% - 2 * 6rem) / 3) + 6rem); }
   .row .col-1-of-4 {
@@ -401,7 +408,9 @@ html {
   font-family: var(--font-family); }
 
 main {
-  position: relative; }
+  position: relative;
+  overflow: hidden;
+  background-color: var(--cta-darker); }
 
 .logo {
   display: block;
@@ -522,7 +531,7 @@ main {
 .text-input {
   position: absolute;
   top: 0;
-  width: 30%;
+  width: 100%;
   background-color: transparent;
   border: none;
   border-bottom: 1.2px solid black;
@@ -535,7 +544,8 @@ main {
   .text-input__container {
     padding: 4rem 0;
     position: relative;
-    display: block; }
+    display: block;
+    width: 50%; }
   .text-input__label {
     position: absolute;
     font-size: 2rem;
@@ -718,11 +728,9 @@ input[type="checkbox"] {
   transition: transform .6s ease-out;
   background-color: transparent; }
   .nav__logo-box {
-    position: absolute;
-    left: 16.4rem;
-    top: 6.9rem;
     width: 30rem;
     height: 17.1rem;
+    padding-top: 8rem;
     opacity: 0;
     transition: opacity .4s ease-out .6s; }
   .nav ul {
@@ -791,21 +799,18 @@ input[type="checkbox"] {
     color: var(--section-headline); }
     .section__headline--bean {
       color: var(--cta-darker); }
+    @media only screen and (max-width: 56.25em) {
+      .section__headline {
+        font-size: 15rem; } }
   .section__home {
     background: linear-gradient(to bottom, white, #d9d9d9);
     height: 100vh; }
     .section__home-logo-box {
-      position: absolute;
       width: 30rem;
       height: 17.1rem;
-      top: 6.9rem; }
-      @media only screen and (max-width: 75em) {
-        .section__home-logo-box {
-          left: 10rem; } }
+      padding-top: 8rem;
+      padding-bottom: 4rem; }
     .section__home-headline-box {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
       width: 54.2rem;
       height: 17.4rem; }
       @media only screen and (max-width: 37.5em) {
@@ -830,46 +835,57 @@ input[type="checkbox"] {
         .section__home-hero-image-box {
           width: 80vw; } }
   .section__story {
+    background-color: white;
     height: 100vh; }
     .section__story-textbox {
       margin-top: 14rem; }
+      @media only screen and (max-width: 56.25em) {
+        .section__story-textbox {
+          margin-top: 0; } }
       .section__story-textbox--left {
-        width: 44.7rem;
-        height: 29.1rem; }
+        width: 44.7rem; }
+        @media only screen and (max-width: 56.25em) {
+          .section__story-textbox--left {
+            margin-top: 10rem; } }
       .section__story-textbox--right {
-        width: 32.4rem;
-        height: 29.1rem; }
+        width: 32.4rem; }
+        @media only screen and (max-width: 56.25em) {
+          .section__story-textbox--right {
+            margin-bottom: 10rem; } }
   .section__order {
     position: relative;
     margin-top: -50vh;
+    margin-bottom: 50rem;
     width: 100vw;
-    height: 73rem;
-    background-color: var(--cta-darker);
     perspective: 2000px; }
+    @media only screen and (max-width: 56.25em) {
+      .section__order {
+        margin-top: 0; } }
     .section__order-form-container {
       position: absolute;
       left: 50%;
       top: -41rem;
       transform: translateX(-50%);
       width: 127.3rem;
-      height: 114.6rem;
+      height: 82rem;
+      padding: 5rem;
       background-color: white;
       border-radius: 80px 80px 0 0;
       box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.3);
       backface-visibility: hidden;
       transition: all .8s ease-in-out; }
+      @media only screen and (max-width: 75em) {
+        .section__order-form-container {
+          margin-top: -20rem;
+          width: 95rem; } }
       .section__order-form-container--front.submitted {
-        transform: rotateY(180deg) translateX(-50%); }
+        transform: translateX(-50%) translateY(400rem); }
       .section__order-form-container--back {
-        transform: rotateY(-180deg) translateX(-50%); }
+        transform: translateX(-50%) translateY(400rem); }
         .section__order-form-container--back.submitted {
-          transform: rotateY(0deg) translateX(-50%); }
+          transform: translateX(-50%) translateY(0); }
     .section__order-form {
-      position: absolute;
-      margin: 0 auto;
-      left: 10rem;
-      top: 8rem;
-      width: 80%; }
+      top: 8rem; }
       .section__order-form .confirmation-text-box {
         position: absolute;
         left: 64rem;
@@ -895,16 +911,32 @@ input[type="checkbox"] {
     width: 100vw;
     height: 100vh;
     background-color: white; }
+    @media only screen and (max-width: 56.25em) {
+      .section__contact {
+        height: 100%; } }
     .section__contact--left {
-      position: absolute;
+      position: relative;
       background-color: var(--cta);
-      width: 50vw;
+      display: inline-block;
+      width: 48%;
       height: 100%; }
+      @media only screen and (max-width: 56.25em) {
+        .section__contact--left {
+          width: 100%;
+          height: 85rem;
+          display: block;
+          position: relative; } }
     .section__contact--right {
-      position: absolute;
-      width: 50vw;
-      left: 50vw;
+      position: relative;
+      display: inline-block;
+      width: 48%;
       height: 100%; }
+      @media only screen and (max-width: 56.25em) {
+        .section__contact--right {
+          width: 100%;
+          height: 85rem;
+          display: block;
+          position: relative; } }
     .section__contact--content {
       position: absolute;
       left: 50%;
@@ -925,6 +957,9 @@ input[type="checkbox"] {
   width: 100vw;
   height: auto;
   overflow: hidden; }
+  @media only screen and (max-width: 56.25em) {
+    .coffee-feature-container {
+      margin-top: -14rem; } }
 
 .coffee-feature {
   width: 100%; }

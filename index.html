@@ -36,10 +36,12 @@ because I'll need to add the above z-index system, which I'll likely do with uti
         <div class="nav-bg">
         </div>
         <nav class="nav">
-            <div class="nav__logo-box">
-                <i class="logo logo__secondary--white">
-                    the dancing goat
-                </i>
+            <div class="row">
+                <div class="nav__logo-box">
+                    <i class="logo logo__secondary--white">
+                        the dancing goat
+                    </i>
+                </div>
             </div>
             <ul class="nav__list" >
                 <li class="nav__item">
@@ -62,24 +64,20 @@ because I'll need to add the above z-index system, which I'll likely do with uti
     <section id="top" class="section section__home">
 
         <div class="row">
-            <div class="col-1-of-1">
                 <div class="section__home-logo-box">
                     <i class="logo logo__hero--dark">
                         the dancing goat
                     </i>
                 </div>
-            </div>
         </div>
 
         <div class="row">
-            <div class="col-1-of-1">
                 <div class="section__home-headline-box">
                     <h1 class="headline">
                         remember when goats discovered
                         coffee?
                     </h1>
                 </div>
-            </div>
         </div>
 
 
@@ -96,7 +94,7 @@ because I'll need to add the above z-index system, which I'll likely do with uti
         </div>
         <div class="u-padding__ends--xl">
             <div class="row">
-                <div class="col-1-of-2">
+                <div class="col-1-of-3">
                     <!-- left textbox -->
                     <div class="section__story-textbox section__story-textbox--left">
                         <h3 class="headline headline--2">
@@ -108,13 +106,12 @@ because I'll need to add the above z-index system, which I'll likely do with uti
                         </p>
                     </div>
                 </div>
-                <div class="col-1-of-2">
+                <div class="col-1-of-3 col-1-of-3__offset--1">
                     <!--// right textbox-->
                     <div class="section__story-textbox section__story-textbox--right">
                         <h3 class="headline headline--2">
                             since 1992
                         </h3>
-
                         <p class="body-text">
                             we’ve sourced the tastiest and most ethical beans.
                         </p>
@@ -135,104 +132,125 @@ because I'll need to add the above z-index system, which I'll likely do with uti
             </h3>
         </div>
         <div class="section__order-form-container section__order-form-container--front u-z-3">
-            <form action="#" class="section__order-form">
-                <div class="section__order-form-headline">
-                    <h4 class="headline headline--2">
-                        order ahead
-                    </h4>
-                </div>
-                    <p class="body-text">
-                        be good to your future self and order ahead.
-                    </p>
+           <div class="row">
+               <form action="#" class="section__order-form">
 
-                    <div class="text-input__container u-margin__top--l">
-                        <input type="text"
-                               id="name"
-                               name="name"
-                               class="text-input"
-                               placeholder="name"
-                               data-error="Name is required (so you can get your coffee)"
-                               tabindex="1"
-                                />
-                        <label class="text-input__label" for="name">
-                            Name
-                        </label>
-                    </div>
-                    <div  class="radio-input__group ">
-                        <div class="radio-input__group-label">Size</div>
-                        <div class="radio-input-container"
-                             tabindex="2"
-                             data-error="Size is required (i.e. how addicted are you?)"
-                            >
-                            <!--Small-->
-                            <input id="small" type="radio" class="radio-input" name="size"  value="small"  />
-                            <label for="small"  class="radio-input__label">
-                                Small
-                            </label>
-                        </div>
-                        <div class="radio-input-container">
-                            <!--Medium-->
-                            <input id="medium" type="radio" class="radio-input" name="size" value="medium" />
-                            <label for="medium"  class="radio-input__label">
-                                Medium
-                            </label>
-                        </div>
-                        <div class="radio-input-container">
-                        <!--Bucket-->
-                            <input id="bucket" type="radio" class="radio-input" name="size" value="bucket" />
-                            <label for="bucket"  class="radio-input__label">
-                                Bucket
+                   <div class="row">
+                       <div class="section__order-form-headline">
+                           <h4 class="headline headline--2">
+                               order ahead
+                           </h4>
+                       </div>
+                       <p class="body-text">
+                           be good to your future self and order ahead.
+                       </p>
+                   </div>
+                    <div class="row">
+                        <div class="text-input__container">
+                            <input type="text"
+                                   id="name"
+                                   name="name"
+                                   class="text-input"
+                                   placeholder="name"
+                                   data-error="Name is required (so you can get your coffee)"
+                                   tabindex="1"
+                            />
+                            <label class="text-input__label" for="name">
+                                Name
                             </label>
                         </div>
                     </div>
-                    <div  class="radio-input__group">
-                        <div class="radio-input__group-label">type</div>
+                   <div class="row">
+                       <div class="col-1-of-2">
+                           <div  class="radio-input__group ">
+                               <div class="radio-input__group-label">Size</div>
+                               <div class="radio-input-container"
+                                    tabindex="2"
+                                    data-error="Size is required (i.e. how addicted are you?)"
+                               >
+                                   <!--Small-->
+                                   <input id="small" type="radio" class="radio-input" name="size"  value="small"  />
+                                   <label for="small"  class="radio-input__label">
+                                       Small
+                                   </label>
+                               </div>
+                               <div class="radio-input-container">
+                                   <!--Medium-->
+                                   <input id="medium" type="radio" class="radio-input" name="size" value="medium" />
+                                   <label for="medium"  class="radio-input__label">
+                                       Medium
+                                   </label>
+                               </div>
+                               <div class="radio-input-container">
+                                   <!--Bucket-->
+                                   <input id="bucket" type="radio" class="radio-input" name="size" value="bucket" />
+                                   <label for="bucket"  class="radio-input__label">
+                                       Bucket
+                                   </label>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="col-1-of-2">
+                           <div  class="radio-input__group">
+                               <div class="radio-input__group-label">type</div>
 
-                        <div class="radio-input-container"
-                             tabindex="3"
-                             data-error="Type is required (some people like milk, some don't)">
-                            <input id="flattie" type="radio" class="radio-input" name="type" value="flattie"  />
-                            <label for="flattie" class="radio-input__label">
-                                Flattie
-                            </label>
-                        </div>
-                        <div class="radio-input-container">
-                            <input id="cap" type="radio" class="radio-input" name="type"  value="latte" />
-                            <label for="cap" class="radio-input__label">
-                                Cap
-                            </label>
-                        </div>
-                      <div class="radio-input-container">
-                          <input id="longblack" type="radio" class="radio-input" name="type" value="longblack" />
-                          <label for="longblack"  class="radio-input__label">
-                              Long black
-                          </label>
-                      </div>
-                    </div>
-                    <div class="text-input__container u-margin__bottom--l">
-                        <input id="comments" type="text" class="text-input" name="comments" placeholder="comments"  />
-                        <label for="comments" class="text-input__label">
-                            Comments for the barista
-                        </label>
-                    </div>
-                    <button class="btn" type="submit" tabindex="4">Make it so <i class="icon icon__arrow-right">&rarr;</i></button>
-                    <div class="section__order-form-error-container u-margin__top--l" name="errors" readonly>
-                        <h3 class="headline headline--3">Oh no, the computer God's told us no for these reasons: </h3>
-                    </div>
-                </form>
+                               <div class="radio-input-container"
+                                    tabindex="3"
+                                    data-error="Type is required (some people like milk, some don't)">
+                                   <input id="flattie" type="radio" class="radio-input" name="type" value="flattie"  />
+                                   <label for="flattie" class="radio-input__label">
+                                       Flattie
+                                   </label>
+                               </div>
+                               <div class="radio-input-container">
+                                   <input id="cap" type="radio" class="radio-input" name="type"  value="latte" />
+                                   <label for="cap" class="radio-input__label">
+                                       Cap
+                                   </label>
+                               </div>
+                               <div class="radio-input-container">
+                                   <input id="longblack" type="radio" class="radio-input" name="type" value="longblack" />
+                                   <label for="longblack"  class="radio-input__label">
+                                       Long black
+                                   </label>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="text-input__container u-margin__bottom--l">
+                       <input id="comments" type="text" class="text-input" name="comments" placeholder="comments"  />
+                       <label for="comments" class="text-input__label">
+                           Comments for the barista
+                       </label>
+                   </div>
+                   <button class="btn" type="submit" tabindex="4">Make it so <i class="icon icon__arrow-right">&rarr;</i></button>
+                   <div class="section__order-form-error-container u-margin__top--l" name="errors" readonly>
+                       <h3 class="headline headline--3">Oh no, the computer God's told us no for these reasons: </h3>
+                   </div>
+               </form>
+           </div>
+
         </div>
         <div class="section__order-form-container section__order-form-container--back">
-            <div class="section__order-form">
-                <div class="confirmation-text-box">
-                    <div class="section__order-form-headline">
-                        <h5 class="headline headline--2">
-                            thanks <span data-nameSpan></span>
-                        </h5>
-
+            <div class="row">
+                <div class="section__order-form">
+                    <div class="confirmation-text-box">
+                        <div class="section__order-form-headline">
+                            <h5 class="headline headline--2">
+                                thanks
+                                <span data-nameSpan>
+                                <!--populates customers name-->
+                                </span>
+                            </h5>
+                        </div>
+                        <p class="body-text" data-orderSummarySpan>
+                            <!-- Will be filled with a order summary to the effect of:
+                            Thanks customer
+                            your ${type} ${size} will be ready for you. Until
+                            then we chillin'
+                            -->
+                        </p>
                     </div>
-                    <p class="body-text" data-orderSummarySpan>
-
-                    </p>
                 </div>
             </div>
             <div class="order-confirmation-image-container">
@@ -297,6 +315,7 @@ because I'll need to add the above z-index system, which I'll likely do with uti
         </div>
     </section>
 </main>
+<!--Footer Section-->
 <footer class="footer">
 
     <div class="footer__content">

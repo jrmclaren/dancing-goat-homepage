@@ -59,6 +59,8 @@ html{
 }
 main{
   position: relative;
+  overflow: hidden;
+  background-color: var(--cta-darker);
 }
 .logo{
   display: block;
@@ -221,13 +223,14 @@ main{
     padding: 4rem 0;
     position: relative;
     display: block;
+    width: 50%;
   }
 
   // positioning
   position: absolute;
   top: 0;
   //styles
-  width: 30%;
+  width: 100%;
   background-color: transparent;
   border: none;
   border-bottom: 1.2px solid black;
@@ -490,13 +493,9 @@ input[type="checkbox"]{
   background-color: transparent;
 
   &__logo-box{
-    //position
-    position: absolute;
-    //left: 16.4rem;
-    top: 6.9rem;
-    //size
     width: 30rem;
     height: 17.1rem;
+    padding-top: 8rem;
     opacity: 0;
     transition: opacity .4s ease-out .6s;
   }
@@ -608,18 +607,12 @@ input[type="checkbox"]{
     height: 100vh;
 
     &-logo-box{
-      position: absolute;
       width: 30rem;
       height: 17.1rem;
-      top: 6.9rem;
-      @include media(tab-land){
-        left: 10rem;
-      }
+      padding-top: 8rem;
+      padding-bottom: 4rem;
     }
     &-headline-box{
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
       width: 54.2rem;
       height: 17.4rem;
 
@@ -656,6 +649,7 @@ input[type="checkbox"]{
   }//end __home
   &__story{
 
+    background-color: white;
     height: 100vh;
     &-textbox{
 
@@ -682,14 +676,13 @@ input[type="checkbox"]{
       }
     }
   }
-  &__order{
+  &__order {
     //positioning
     position: relative;
     margin-top: -50vh;
+    margin-bottom: 50rem;
     //sizing
     width: 100vw;
-    height: 73rem;
-    background-color: var(--cta-darker);
     perspective: 2000px;
     //order form styles
 
@@ -703,11 +696,10 @@ input[type="checkbox"]{
       left: 50%;
       top: -41rem;
       transform: translateX(-50%);
-
       //size
       width: 127.3rem;
-      height: 114.6rem;
-
+      height: 82rem;
+      padding: 5rem;
       //style
       background-color: white;
       border-radius: 80px 80px 0 0;
@@ -716,36 +708,33 @@ input[type="checkbox"]{
       //transition
       transition: all .8s ease-in-out;
 
+      @include media(tab-land){
+        margin-top: -20rem;
+        width: 95rem;
+      }
+
       &--front{
         &.submitted{
-          transform: rotateY(180deg) translateX(-50%);
+          transform:  translateX(-50%) translateY(400rem);
         }
       }
       &--back{
-          transform: rotateY(-180deg) translateX(-50%);
+          transform: translateX(-50%) translateY(400rem);
         &.submitted{
-          transform: rotateY(0deg) translateX(-50%);
+          transform: translateX(-50%) translateY(0);
         }
       }
 
     }
 
     &-form{
-      //position
-      position: absolute;
-      margin: 0 auto;
-      left: 10rem;
       top: 8rem;
-
       //size
-      width: 80%;
-
       .confirmation-text-box{
         position: absolute;
         left: 64rem;
         width: 45rem;
       }
-
       &-error-container{
         display: block;
         resize: none;
@@ -819,6 +808,7 @@ input[type="checkbox"]{
     }
     &--form{
       .text-input__container {
+
         .text-input{
           //size
           width: 100%;
