@@ -341,9 +341,7 @@ paddings
 
 .row {
   max-width: 114rem;
-  margin: 0 auto;
-  border-left: solid 2px red;
-  border-right: solid 2px red; }
+  margin: 0 auto; }
   .row:not(:last-child) {
     margin-bottom: 8rem; }
     @media only screen and (max-width: 56.25em) {
@@ -377,6 +375,11 @@ paddings
       @media only screen and (max-width: 75em) {
         .row .col-1-of-3__offset--1 {
           margin-left: calc( ((100% - 2 * 6rem) / 3) / 2); } }
+    .row .col-1-of-3__offset--2 {
+      margin-left: calc( ((100% - 2 * 6rem) / 3) * 2); }
+      @media only screen and (max-width: 75em) {
+        .row .col-1-of-3__offset--2 {
+          margin-left: calc( (((100% - 2 * 6rem) / 3) * 2) / 2); } }
   .row .col-2-of-3 {
     width: calc(2 * ((100% - 2 * 6rem) / 3) + 6rem); }
   .row .col-1-of-4 {
@@ -399,13 +402,19 @@ paddings
 
 html {
   position: relative;
-  width: 100vw;
-  height: 100vh;
   box-sizing: border-box;
   overflow-x: hidden;
   scroll-behavior: smooth;
   font-size: 62.5%;
   font-family: var(--font-family); }
+
+body {
+  background-color: #f4f4f4;
+  margin: 2rem;
+  overflow: hidden; }
+  @media only screen and (max-width: 56.25em) {
+    body {
+      margin: 0; } }
 
 main {
   position: relative;
@@ -576,7 +585,7 @@ main {
 
 .radio-input-container {
   display: inline-block;
-  margin: 2rem 2rem 4rem 8rem; }
+  margin: 2rem 2rem 2rem 8rem; }
   .radio-input-container:focus, .radio-input-container:active {
     outline: none;
     box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.2); }
@@ -787,7 +796,7 @@ input[type="checkbox"] {
     top: 2.5rem; }
     .section__headline-box--order {
       top: 0;
-      margin-top: -55rem;
+      margin-top: -14rem;
       opacity: .5; }
   .section__headline {
     width: 100%;
@@ -836,7 +845,8 @@ input[type="checkbox"] {
           width: 80vw; } }
   .section__story {
     background-color: white;
-    height: 100vh; }
+    height: 100vh;
+    overflow: hidden; }
     .section__story-textbox {
       margin-top: 14rem; }
       @media only screen and (max-width: 56.25em) {
@@ -854,42 +864,32 @@ input[type="checkbox"] {
             margin-bottom: 10rem; } }
   .section__order {
     position: relative;
-    margin-top: -50vh;
-    margin-bottom: 50rem;
-    width: 100vw;
-    perspective: 2000px; }
+    margin-top: -85rem;
+    width: 100vw; }
     @media only screen and (max-width: 56.25em) {
       .section__order {
         margin-top: 0; } }
     .section__order-form-container {
-      position: absolute;
-      left: 50%;
-      top: -41rem;
-      transform: translateX(-50%);
-      width: 127.3rem;
-      height: 82rem;
-      padding: 5rem;
+      position: relative;
+      max-width: 124rem;
+      margin: 0 auto;
+      padding: 4rem 3rem;
       background-color: white;
-      border-radius: 80px 80px 0 0;
-      box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.3);
-      backface-visibility: hidden;
-      transition: all .8s ease-in-out; }
-      @media only screen and (max-width: 75em) {
-        .section__order-form-container {
-          margin-top: -20rem;
-          width: 95rem; } }
+      overflow: hidden;
+      box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.3); }
+      .section__order-form-container > * {
+        transition: all .8s ease-in-out; }
       .section__order-form-container--front.submitted {
-        transform: translateX(-50%) translateY(400rem); }
+        transform: translateX(200rem); }
       .section__order-form-container--back {
-        transform: translateX(-50%) translateY(400rem); }
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translateX(-200rem); }
         .section__order-form-container--back.submitted {
-          transform: translateX(-50%) translateY(0); }
+          transform: translateX(0); }
     .section__order-form {
       top: 8rem; }
-      .section__order-form .confirmation-text-box {
-        position: absolute;
-        left: 64rem;
-        width: 45rem; }
       .section__order-form-error-container {
         display: block;
         resize: none;
@@ -909,39 +909,46 @@ input[type="checkbox"] {
   .section__contact {
     position: relative;
     width: 100vw;
-    height: 100vh;
     background-color: white; }
     @media only screen and (max-width: 56.25em) {
       .section__contact {
         height: 100%; } }
     .section__contact--left {
+      display: inline-block;
+      vertical-align: middle;
       position: relative;
       background-color: var(--cta);
       display: inline-block;
       width: 48%;
-      height: 100%; }
+      overflow: hidden; }
       @media only screen and (max-width: 56.25em) {
         .section__contact--left {
           width: 100%;
-          height: 85rem;
           display: block;
-          position: relative; } }
+          position: relative; }
+          .section__contact--left > .section__contact--content {
+            padding-top: 15rem; } }
     .section__contact--right {
+      display: inline-block;
+      vertical-align: middle;
       position: relative;
       display: inline-block;
-      width: 48%;
-      height: 100%; }
+      width: 48%; }
       @media only screen and (max-width: 56.25em) {
         .section__contact--right {
           width: 100%;
-          height: 85rem;
           display: block;
           position: relative; } }
+      .section__contact--right > .section__contact--content {
+        padding-top: 5rem; }
     .section__contact--content {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%); }
+      max-width: 57rem;
+      margin: 0 auto;
+      padding: 30rem 0 15rem 0; }
+      @media only screen and (max-width: 56.25em) {
+        .section__contact--content {
+          padding: 0;
+          padding-bottom: 5rem; } }
     .section__contact--form .text-input__container .text-input {
       width: 100%;
       border-bottom-color: white;
@@ -965,12 +972,15 @@ input[type="checkbox"] {
   width: 100%; }
 
 .order-confirmation-image-container {
-  position: absolute;
-  bottom: 0;
   width: 100%; }
 
 .order-confirmation-image {
   width: 100%; }
+
+.confirmation-text-box {
+  position: absolute;
+  top: 4rem;
+  width: 45rem; }
 
 .footer {
   position: relative;

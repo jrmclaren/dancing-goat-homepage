@@ -461,7 +461,7 @@ document.addEventListener('DOMContentLoaded', function () {
         orderSummarySpan.textContent = 'Your ' + size + ' ' + type + ' will be ready for you. Until then, we chillin\'';
 
         // flip the order card
-        var containers = [].concat(_toConsumableArray(document.getElementsByClassName('section__order-form-container')));
+        var containers = [].concat(_toConsumableArray(document.querySelectorAll("[class^='section__order-form-container--']")));
         containers.forEach(function (container) {
             return container.classList.add('submitted');
         });

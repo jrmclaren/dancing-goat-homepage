@@ -401,7 +401,7 @@ document.addEventListener('DOMContentLoaded', () => {
         orderSummarySpan.textContent = `Your ${size} ${type} will be ready for you. Until then, we chillin'`
 
         // flip the order card
-        let containers = [...document.getElementsByClassName('section__order-form-container')];
+        let containers = [...document.querySelectorAll("[class^='section__order-form-container--']")];
         containers.forEach( container => (container.classList.add('submitted')) );
     };
 

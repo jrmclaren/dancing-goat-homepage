@@ -3,11 +3,6 @@
   max-width: $grid-width;
   margin: 0 auto;
 
-  //ROW DEBUG ON
-  // TODO: Obvs turn this off..
-  border-left: solid 2px red;
-  border-right: solid 2px red;
-
   &:not(:last-child){
     margin-bottom: $gutter-vertical;
 
