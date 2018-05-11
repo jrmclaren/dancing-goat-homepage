@@ -47,8 +47,6 @@ $gutter-horizontal: 6rem;
 }
 html{
   position: relative;
-  width: 100vw;
-  height: 100vh;
   box-sizing: border-box;
   overflow-x: hidden;
   scroll-behavior: smooth;
@@ -57,6 +55,16 @@ html{
   font-size: 62.5%; // 16px / 100 = 62.5% i.e. 10px = 1rem
   font-family: var(--font-family);
 }
+
+body{
+  background-color: #f4f4f4;
+  margin: 2rem;
+  overflow: hidden;
+  @include media(tab-port){
+    margin: 0;
+  }
+}
+
 main{
   position: relative;
   overflow: hidden;
@@ -280,7 +288,7 @@ main{
 
 .radio-input-container{
   display: inline-block;
-  margin: 2rem 2rem 4rem 8rem;
+  margin: 2rem 2rem 2rem 8rem;
 
   &:focus, &:active{
     outline: none;
@@ -578,7 +586,7 @@ input[type="checkbox"]{
     top: 2.5rem;
     &--order {
       top: 0;
-      margin-top: -55rem;
+      margin-top: -14rem;
       opacity: .5;
     }
   }
@@ -679,11 +687,9 @@ input[type="checkbox"]{
   &__order {
     //positioning
     position: relative;
-    margin-top: -50vh;
-    margin-bottom: 50rem;
+    margin-top: -85rem;
     //sizing
     width: 100vw;
-    perspective: 2000px;
     //order form styles
 
     @include media(tab-port){
@@ -691,48 +697,33 @@ input[type="checkbox"]{
     }
 
     &-form-container{
-      //position
-      position: absolute;
-      left: 50%;
-      top: -41rem;
-      transform: translateX(-50%);
-      //size
-      width: 127.3rem;
-      height: 82rem;
-      padding: 5rem;
       //style
+      max-width: $grid-width + 10rem;
+      margin: 0 auto;
+      padding: 4rem 3rem;
       background-color: white;
       border-radius: 80px 80px 0 0;
       box-shadow: 0 2rem 4rem rgba(0,0,0,.3);
-      backface-visibility: hidden;
       //transition
       transition: all .8s ease-in-out;
 
-      @include media(tab-land){
-        margin-top: -20rem;
-        width: 95rem;
-      }
-
       &--front{
         &.submitted{
-          transform:  translateX(-50%) translateY(400rem);
+          transform:  translateX(-50%) translateY(200rem);
         }
       }
       &--back{
-          transform: translateX(-50%) translateY(400rem);
+          transform: translateX(-50%) translateY(200rem);
         &.submitted{
           transform: translateX(-50%) translateY(0);
         }
       }
-
     }
 
     &-form{
       top: 8rem;
       //size
       .confirmation-text-box{
-        position: absolute;
-        left: 64rem;
         width: 45rem;
       }
       &-error-container{
@@ -766,7 +757,8 @@ input[type="checkbox"]{
     width: 100vw;
     height: 100vh;
     background-color: white;
-
+    margin-top: -25rem;
+    z-index: 40;
     @include media(tab-port){
       height: 100%;
     }
@@ -845,7 +837,8 @@ input[type="checkbox"]{
 
 .order-confirmation-image-container{
   position: absolute;
-  bottom: 0;
+  left: 0;
+  top: 0;
   width: 100%;
 }
 .order-confirmation-image{

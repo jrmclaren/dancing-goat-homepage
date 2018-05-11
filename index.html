@@ -64,11 +64,13 @@ because I'll need to add the above z-index system, which I'll likely do with uti
     <section id="top" class="section section__home">
 
         <div class="row">
+            <div class="col-1-of-2">
                 <div class="section__home-logo-box">
                     <i class="logo logo__hero--dark">
                         the dancing goat
                     </i>
                 </div>
+            </div>
         </div>
 
         <div class="row">
@@ -233,23 +235,25 @@ because I'll need to add the above z-index system, which I'll likely do with uti
         </div>
         <div class="section__order-form-container section__order-form-container--back">
             <div class="row">
-                <div class="section__order-form">
-                    <div class="confirmation-text-box">
-                        <div class="section__order-form-headline">
-                            <h5 class="headline headline--2">
-                                thanks
-                                <span data-nameSpan>
+                <div class="col-1-of-3 col-1-of-3__offset--2">
+                    <div class="section__order-form">
+                        <div class="confirmation-text-box">
+                            <div class="section__order-form-headline">
+                                <h5 class="headline headline--2">
+                                    thanks
+                                    <span data-nameSpan>
                                 <!--populates customers name-->
                                 </span>
-                            </h5>
+                                </h5>
+                            </div>
+                            <p class="body-text" data-orderSummarySpan>
+                                <!-- Will be filled with a order summary to the effect of:
+                                Thanks customer
+                                your ${type} ${size} will be ready for you. Until
+                                then we chillin'
+                                -->
+                            </p>
                         </div>
-                        <p class="body-text" data-orderSummarySpan>
-                            <!-- Will be filled with a order summary to the effect of:
-                            Thanks customer
-                            your ${type} ${size} will be ready for you. Until
-                            then we chillin'
-                            -->
-                        </p>
                     </div>
                 </div>
             </div>
