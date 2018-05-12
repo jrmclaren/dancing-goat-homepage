@@ -184,7 +184,6 @@ const bindAll = (context) => {
 };
 // Wait for the DOM Content to finish loading
 document.addEventListener('DOMContentLoaded', () => {
-
     /**
      * @class Map contains the logic needed to render
      *        a mapbox map
@@ -208,7 +207,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 style: 'mapbox://styles/mapbox/streets-v10',
                 minZoom: 14,
                 maxZoom: 24,
-                center: [153.02138889, -27.47797222]
+                center: [153.02138889, -27.47797222],
+                interactive: false
             });
             let marker = new mapboxgl.Marker();
             marker.setLngLat([153.02138889, -27.47797222]).addTo(map);
@@ -322,13 +322,22 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     //
     class Form {
-        constructor(form, callback){
+        constructor(form, callback, rejectCallback){
             this.form = form;
             this.callback = callback;
+            this.rejectCallback = rejectCallback;
+            this.noValidate = false;
+            this.inputs = {
+                            radio: [...form.elements].filter( element =>    (element.type === 'radio' )),
+                            text: [...form.elements].filter(  element =>     (element.type === 'text' ||
+                                                                             element.type === 'textarea')),
+                            checkbox: [...form.elements].filter( element => (element.type === 'checkbox'))
+                        };
             this.init = this.init.bind(this);
-            this.reject = this.reject.bind(this);
             this.submit = this.submit.bind(this);
+            this.reject = this.reject.bind(this);
             this.submitHandler = this.submitHandler.bind(this);
+            this.isFormValid = this.isFormValid.bind(this);
         }
 
         init() {
@@ -337,74 +346,123 @@ document.addEventListener('DOMContentLoaded', () => {
 
         submitHandler(e) {
             e.preventDefault();
-
-            let order = {
-                name: this.form.name.value,
-                size: this.form.size.value,
-                type: this.form.type.value,
-                comments: this.form.comments.value
-            };
-
-            let orderStatus = Form.isOrderValid({name: order.name, size: order.size, type: order.type});
+            let elements = this.form.elements;
+            let formStatus = this.isFormValid(elements);
+            console.log(formStatus);
             // if orderStatus is all good, submit, otherwise reject and give reason
-            orderStatus
-                ? this.submit(order)
-                : this.reject( Form.generateErrors( {name: order.name, size: order.size, type: order.type} ));
+            formStatus
+                ? this.submit(elements)
+                : this.reject();
         }
 
-        static isOrderValid({name, size, type}) {
-            return !!name && !!size && !!type;
+        static checkRadioInputs(radioInputs) {
+            // TODO: add required support
+            // using the Set object by mapping over the names we can pick out the
+            // unique values and immediately return the size of the Set to get our
+            // number of radio groups
+            let numberOfRadioGroups = new Set(radioInputs.map( input => input.name )).size;
+            // similarly we can grab the checked values by filter(ing) through all the
+            // radio inputs and grabbing the length of that array
+            let numberOfCheckedInputs = radioInputs.filter( input => input.checked ).length;
+            // these number should equal each other.
+            return numberOfRadioGroups === numberOfCheckedInputs;
+        }
+        static checkTextInputs(textInputs) {
+            // map over text inputs, check if the input is required
+            // if it is coerce it's value to a boolean,
+            // if there are any falsey values
+            // in the returned array, it means we have
+            // an invalid input. Flip the return value
+            // to bring the result inline with
+            // the other validation functions
+            return !textInputs.map( input => input.required? !!input.value : true ).includes(false);
+        }
+        static checkCheckboxInputs(checkboxInputs) {
+            // pretty much a copy pasta from above.. but here is how it works:
+            // map over text inputs, check if the input is required
+            // if it return it's input.checked value (i.e. true or false),
+            // if there are any falsey values
+            // in the returned array, it means we have
+            // an invalid input. Flip the return value
+            // to bring the result inline with
+            // the other validation functions
+            return !checkboxInputs.map( input => input.required? input.checked : true ).includes(false);
+        }
+
+         isFormValid() {
+            // if noValidate === true just return true
+             if (this.noValidate === true) return true;
+            // name our inputs human friendly
+            let radioInputs     =   this.inputs.radio,
+                textInputs      =   this.inputs.text,
+                checkboxInputs  =   this.inputs.checkbox;
+            // check which types we need to validate
+            // and run validation where its required
+            // otherwise give us true
+            let radioValid      =   radioInputs? Form.checkRadioInputs(radioInputs) : true,
+                textValid       =   textInputs? Form.checkTextInputs(textInputs) : true,
+                checkboxValid   =   checkboxInputs? Form.checkCheckboxInputs(checkboxInputs): true;
+            // is the form valid? if all values are true–apparently so.
+            return radioValid && textValid && checkboxValid;
         };
 
-        static generateErrors({name, size, type}) {
-            const nameValid = !!name,
-                  sizeValid = !!size,
-                  typeValid = !!type;
-            let errorReport = [];
-            if( !nameValid ){
-                errorReport.push(`Name is required (so you can get your coffee)`);
-            }
-            if( !sizeValid ){
-                errorReport.push('Size is required (i.e. how addicted are you?)');
-            }
-            if( !typeValid ){
-                errorReport.push(`Type is required (some people like milk, some don't)`);
-            }
-            console.log(errorReport);
-            return errorReport;
+        static generateErrors(elements) {
+
+            // const nameValid = !!name,
+            //       sizeValid = !!size,
+            //       typeValid = !!type;
+            // let errorReport = [];
+            // if( !nameValid ){
+            //     errorReport.push(`Name is required (so you can get your coffee)`);
+            // }
+            // if( !sizeValid ){
+            //     errorReport.push('Size is required (i.e. how addicted are you?)');
+            // }
+            // if( !typeValid ){
+            //     errorReport.push(`Type is required (some people like milk, some don't)`);
+            // }
+            // console.log(errorReport);
+            // return errorReport;
         }
 
-        submit(order) {
-            // console.log('submit', order);
-            this.callback && this.callback(order);
+        submit(elements) {
+            this.callback && this.callback(elements);
         }
 
-        reject(errors){
-            // get the container
-            const errorContainer = document.getElementsByName('errors')[0];
-            // set the error text in the container
-            errorContainer.classList.contains('active')
-                                                    ? errorContainer.innerText = 'Oh no, the computer God\'s told us no for these reasons:'
-                                                    : errorContainer.classList.add('active');
-            errorContainer.innerText = errorContainer.innerText += `\n ${ errors.map( error => ( `\u2022 ${error}` )).join(`\n`) }  `;
-
+        reject(){
+            this.rejectCallback && this.rejectCallback();
         }
     }
 
-    const submitCallback = ({name, type, size}) => {
+    const submitCallback = (elements) => {
+
+        let name = elements.name.value,
+            size = elements.size.value||'',
+            type = elements.type.value||'coffee';
 
         // populate the order summary
         let nameSpan = document.querySelector('[data-nameSpan]');
         let orderSummarySpan = document.querySelector('[data-orderSummarySpan]');
 
-        nameSpan.textContent = name;
+        nameSpan.textContent = name.toLowerCase();
         orderSummarySpan.textContent = `Your ${size} ${type} will be ready for you. Until then, we chillin'`
 
-        // flip the order card
+        // drop the order card and rise the summary card
         let containers = [...document.querySelectorAll("[class^='section__order-form-container--']")];
         containers.forEach( container => (container.classList.add('submitted')) );
     };
 
-    const form = new Form(document.forms[0], submitCallback).init();
+    const rejectCallback = () => {
+        // get the container
+        const errorContainer = document.getElementsByName('errors')[0];
+        // set the error text in the container
+        errorContainer.classList.contains('active')
+                                                ? errorContainer.innerText = 'Oh no, the computer God\'s told us no for these reasons:'
+                                                : errorContainer.classList.add('active');
+        errorContainer.innerText = errorContainer.innerText += `\n ${ errors.map( error => ( `\u2022 ${error}` )).join(`\n`) }  `;
+    }
+
+    const form = new Form(document.forms[0], submitCallback, rejectCallback).init();
+    // const contactForm = new Form(document.forms[1],preventDefaultSubmission).init();
 
 }); /*end of DOMContentLoaded*/

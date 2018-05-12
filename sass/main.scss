@@ -99,12 +99,12 @@ main{
   letter-spacing: -0.01rem;
 
   @include media(tab-port){
-    font-size: 4rem;
-    line-height: 4.5rem;
+    font-size: 6rem;
+    line-height: 6.2rem;
   }
   @include media(phone){
-    font-size: 3.2rem;
-    line-height: 3.8rem;
+    font-size: 5.2rem;
+    line-height: 5.2rem;
   }
 
   &--2 {
@@ -114,10 +114,10 @@ main{
     letter-spacing: -0.01rem;
     margin-bottom: 1.6rem;
     @include media(tab-port){
-      font-size: 4rem;
+      font-size: 5rem;
     }
     @include media(phone){
-      font-size: 2.8rem;
+      font-size: 4rem;
     }
   }
   &--3{
@@ -307,6 +307,10 @@ main{
     text-transform: lowercase;
     cursor: pointer;
 
+    @include media(tab-land){
+      font-size: 1.4rem;
+    }
+
     @mixin radioStyles{
       //position
       position: absolute;
@@ -475,8 +479,8 @@ input[type="checkbox"]{
   width: 8rem;
   height: 8rem;
   transform: scale(0);
-  opacity: 0.01;
-  transition: all .5s ease-out;
+  //opacity: 0.01;
+  transition: all .6s ease-out;
   z-index: 3;
   border-radius: 200px;
   background-color: var(--cta);
@@ -485,7 +489,7 @@ input[type="checkbox"]{
 
   &.active{
     transform: scale(85);
-    opacity: 1;
+    //opacity: 1;
   }
 } // end nav-bg
 
@@ -506,6 +510,9 @@ input[type="checkbox"]{
     padding-top: 8rem;
     opacity: 0;
     transition: opacity .4s ease-out .6s;
+
+    @include media(tab-land){ padding-left: 2rem;}
+
   }
 
   ul{
@@ -559,7 +566,7 @@ input[type="checkbox"]{
       opacity: 1;
       transform: translate(-50%, -50%);
       transition: opacity .4s ease-out;
-      transition-delay: 0;
+      transition-delay: 0s;
       li{
         cursor: pointer;
         a{
@@ -576,7 +583,14 @@ input[type="checkbox"]{
   }
 } // end nav
 
-.section{
+.section {
+
+  @mixin tabletPadding {
+    @include media(tab-land) {
+      padding: 0 2rem;
+    }
+  }
+
   width: 100vw;
   position: relative;
 
@@ -584,6 +598,13 @@ input[type="checkbox"]{
     position: absolute;
     width: 100vw;
     top: 2.5rem;
+
+    &--story{
+      @include media(tab-land){
+        margin-left: -2rem;
+      }
+    }
+
     &--order {
       top: 0;
       margin-top: -14rem;
@@ -599,12 +620,12 @@ input[type="checkbox"]{
     font-weight: 900;
     color: var(--section-headline);
 
+    @include media(tab-port){
+      font-size: 10rem;
+      letter-spacing: -0.5rem;
+    }
     &--bean{
       color: var(--cta-darker);
-    }
-
-    @include media(tab-port){
-      font-size: 15rem;
     }
   }
 
@@ -613,6 +634,7 @@ input[type="checkbox"]{
             rgba(255,255,255,1),
             rgba(217,217,217,1));
     height: 100vh;
+    @include tabletPadding();
 
     &-logo-box{
       width: 30rem;
@@ -650,7 +672,7 @@ input[type="checkbox"]{
       }
 
       @include media(tab-port){
-        width: 80vw;
+        width: 70vw;
       }
 
     }
@@ -660,6 +682,7 @@ input[type="checkbox"]{
     background-color: white;
     height: 100vh;
     overflow: hidden;
+    @include tabletPadding;
     &-textbox{
 
       margin-top: 14rem;
@@ -691,6 +714,10 @@ input[type="checkbox"]{
     width: 100vw;
     //order form styles
 
+    @include media(tab-land){
+      margin-top: -50rem;
+    }
+
     @include media(tab-port){
       margin-top: 0;
     }
@@ -706,6 +733,9 @@ input[type="checkbox"]{
       overflow: hidden;
       box-shadow: 0 2rem 4rem rgba(0,0,0,.3);
 
+      @include media(tab-land){
+        padding: 4rem 2rem;
+      }
       & > * {
         //transition
         transition: all .8s ease-in-out;
@@ -762,6 +792,11 @@ input[type="checkbox"]{
     position: relative;
     width: 100vw;
     background-color: white;
+    //background: linear-gradient(to right,
+    //                            var(--cta) 50%,
+    //                            white 50%);
+
+
     @include media(tab-port){
       height: 100%;
     }
@@ -774,7 +809,7 @@ input[type="checkbox"]{
       display: inline-block;
       width: 48%;
       overflow: hidden;
-      @include media(tab-port){
+      @include media(tab-land){
         width: 100%;
         display: block;
         position: relative;
@@ -791,10 +826,9 @@ input[type="checkbox"]{
       position: relative;
       display: inline-block;
       width: 48%;
-      @include media(tab-port){
+      @include media(tab-land){
         width: 100%;
         display: block;
-        position: relative;
       }
 
       & > .section__contact--content{
@@ -806,10 +840,10 @@ input[type="checkbox"]{
       margin: 0 auto;
       padding: 30rem 0 15rem 0;
 
-      @include media(tab-port){
-        padding: 0;
-        padding-bottom: 5rem;
+      @include media(tab-land){
+        padding: 0 0 0 5rem;
       }
+
     }
     &--form{
       .text-input__container {
@@ -857,36 +891,29 @@ input[type="checkbox"]{
   position: absolute;
   top: 4rem;
   width: 45rem;
+
+  @include media(tab-land){
+    left: 54rem;
+    top: 18rem;
+  }
+
 }
 
 .footer{
   position: relative;
   width: 100vw;
-  height: 45vh;
   padding: 2rem;
-  background-color: var(--cta);
+  background-color: var(--cta-darker);
 
-  &__content{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-  }
-  // footerLogoHeight is defined here to help position legal container
-  $footerLogoHeight: 14.9rem;
   &__logo-container{
-    width: 25.3rem;
-    height: $footerLogoHeight;
-
-    display: block;
-    position: absolute;
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
+    height: 15rem;
+    & > .logo {
+      width: 100%;
+    }
   }
   &__legal-container{
+    display: inline-block;
     width: 30rem;
-    margin-top: $footerLogoHeight + 2rem;
     text-align: left;
   }
 }
