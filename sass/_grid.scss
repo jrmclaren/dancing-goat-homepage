@@ -50,14 +50,14 @@
       margin-left: calc((100% - 2 * #{$gutter-horizontal}) / 3);
 
       @include media(tab-land){
-        margin-left: calc( ((100% - 2 * #{$gutter-horizontal}) / 3) / 2 );
+        margin-left: 0;
       }
     }
     &__offset--2{
       margin-left: calc( ((100% - 2 * #{$gutter-horizontal}) / 3) * 2 );
 
       @include media(tab-land){
-        margin-left: calc( (((100% - 2 * #{$gutter-horizontal}) / 3) * 2) / 2 );
+        margin-left: 0;
       }
     }
   }

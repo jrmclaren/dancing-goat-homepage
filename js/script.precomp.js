@@ -516,7 +516,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const orderRejectCallback = (errors) => {
         // get the container
-        const errorContainer = document.getElementsByName('errors')[0];
+        const errorContainer = document.querySelectorAll('[data-name="errors"]')[0];
         // set the error text in the container
         !errorContainer.classList.contains('active') && errorContainer.classList.add('active');
         const list = errorContainer.querySelector('ul');
@@ -526,17 +526,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const preventDefaultSubmission = e => e.preventDefault && e.preventDefault();
 
     const contactCallback = (elements) => {
-        console.log('contact cb')
-        let form = document.forms[1];
-        let confirmation = document.querySelector('[data-name="contact-body"]');
-        let button = document.getElementsByName('contact_submit')[0];
+        const form = document.forms[1];
+        const confirmation = document.querySelector('[data-name="contact-body"]');
+        const button = document.getElementsByName('contact_submit')[0];
+        const errorContainer = document.querySelectorAll('[data-name="errors"]')[1];
         button.classList.add('btn--submitted');
         button.classList.add('response');
-        // form.contact_submit.textContent = `Thanks  \u2714`;
+        errorContainer.classList.contains('active') && errorContainer.classList.remove('active');
         [...form.elements].forEach( el => ( el.setAttribute('disabled', true)));
     }
 
+    const contactRejectCallback = (errors) => {
+        const errorContainer = document.querySelectorAll('[data-name="errors"]')[1];
+        // set the error text in the container
+        !errorContainer.classList.contains('active') && errorContainer.classList.add('active');
+        const list = errorContainer.querySelector('ul');
+        list.innerHTML = errors.map( error => `<li>${error.name}: ${error.name.split('_').join(' ')} is required.</li>` ).join(' ');
+    }
+
     const orderForm = new Form(document.forms[0], orderSubmitCallback, orderRejectCallback).init();
-    const contactForm = new Form(document.forms[1],contactCallback).init();
+    const contactForm = new Form(document.forms[1],contactCallback, contactRejectCallback).init();
 
 }); /*end of DOMContentLoaded*/

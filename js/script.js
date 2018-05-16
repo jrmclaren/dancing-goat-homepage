@@ -599,7 +599,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var orderRejectCallback = function orderRejectCallback(errors) {
         // get the container
-        var errorContainer = document.getElementsByName('errors')[0];
+        var errorContainer = document.querySelectorAll('[data-name="errors"]')[0];
         // set the error text in the container
         !errorContainer.classList.contains('active') && errorContainer.classList.add('active');
         var list = errorContainer.querySelector('ul');
@@ -613,20 +613,30 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     var contactCallback = function contactCallback(elements) {
-        console.log('contact cb');
         var form = document.forms[1];
         var confirmation = document.querySelector('[data-name="contact-body"]');
         var button = document.getElementsByName('contact_submit')[0];
+        var errorContainer = document.querySelectorAll('[data-name="errors"]')[1];
         button.classList.add('btn--submitted');
         button.classList.add('response');
-        // form.contact_submit.textContent = `Thanks  \u2714`;
+        errorContainer.classList.contains('active') && errorContainer.classList.remove('active');
         [].concat(_toConsumableArray(form.elements)).forEach(function (el) {
             return el.setAttribute('disabled', true);
         });
     };
 
+    var contactRejectCallback = function contactRejectCallback(errors) {
+        var errorContainer = document.querySelectorAll('[data-name="errors"]')[1];
+        // set the error text in the container
+        !errorContainer.classList.contains('active') && errorContainer.classList.add('active');
+        var list = errorContainer.querySelector('ul');
+        list.innerHTML = errors.map(function (error) {
+            return '<li>' + error.name + ': ' + error.name.split('_').join(' ') + ' is required.</li>';
+        }).join(' ');
+    };
+
     var orderForm = new Form(document.forms[0], orderSubmitCallback, orderRejectCallback).init();
-    var contactForm = new Form(document.forms[1], contactCallback).init();
+    var contactForm = new Form(document.forms[1], contactCallback, contactRejectCallback).init();
 }); /*end of DOMContentLoaded*/
 
 //# sourceMappingURL=script.js.map

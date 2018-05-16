@@ -11,6 +11,8 @@ $success: #4F8A10;;
 $warning: yellow;
 $negative: red;
 
+$animation-easing: cubic-bezier(0.075, 0.82, 0.165, 1);
+
 // grid
 $grid-width: 114rem;
 $gutter-vertical: 8rem;
@@ -20,8 +22,6 @@ $gutter-horizontal: 6rem;
 @import 'utilities';
 @import 'breakpoints';
 @import 'grid';
-
-
 
 // CSS Variables
 :root{
@@ -50,14 +50,46 @@ $gutter-horizontal: 6rem;
   }
 }
 html{
+  $load-animation-duration: 1.6s;
+  &:before,
+  &:after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    transform-origin: right;
+    animation-fill-mode: forwards !important;
+  }
+  &:before{
+    background-color: var(--cta-darker);
+    z-index: 3;
+    animation: loadReveal $load-animation-duration ;
+    animation-delay: $load-animation-duration/2;
+  }
+  &:after{
+    background-color: var(--cta);
+    z-index: 4;
+    animation-delay: 500ms;
+    animation: loadReveal $load-animation-duration $animation-easing;
+  }
   position: relative;
   box-sizing: border-box;
   overflow-x: hidden;
   scroll-behavior: smooth;
-
   // make 1rem equal 10px
   font-size: 62.5%; // 16px / 100 = 62.5% i.e. 10px = 1rem
   font-family: var(--font-family);
+}
+@keyframes loadReveal {
+  0%{
+    transform: scaleX(1);
+  }
+  100%{
+   transform: scaleX(0);
+  }
 }
 
 body{
@@ -82,7 +114,7 @@ main{
 // world, as usage rights would be
 // commercial, so this should be
 // functional, draw attention to itself
-// but not completely break the bran
+// but not completely break the brand
 // image either.
 figure{
   position: relative;
@@ -145,6 +177,21 @@ figure{
     }
   }
 }
+
+/*SVG Colour classes*/
+
+.svg-fill--cta {
+  fill: var(--cta) !important;
+}
+
+.svg-stroke--cta {
+  fill: none;
+  stroke: var(--cta) !important;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 7.27px;
+}
+
 .headline{
   font-size: 6rem;
   color: var(--cta);
@@ -460,7 +507,7 @@ input:disabled{
       &:after{
         @include radioStyles();
         // style
-        background-color: $cta;
+        background-color: var(--cta);
         border-radius: 4rem;
       }
     }
@@ -614,7 +661,6 @@ input[type="checkbox"]{
 
   &.active{
     transform: scale(85);
-    //opacity: 1;
   }
 } // end nav-bg
 
@@ -883,39 +929,37 @@ input[type="checkbox"]{
       }
     }
 
-
-
     &-form{
       top: 8rem;
       //size
-      &-error-container{
-        display: block;
-        resize: none;
+    }
+  }
 
-        outline: none;
-        // sizing
-        width: 100%;
-        height: auto;
-        // style
-        font-family: inherit;
-        background-color: rgba($cta-darker, .5);
-        border: solid 2px var(--cta-darker);
+  .error-container{
+    display: block;
+    resize: none;
 
-        color: darken($cta-darker, 20%);
-        transform: scaleY(0);
-        transition: all .2s ease-out;
+    outline: none;
+    // sizing
+    width: 100%;
+    height: auto;
+    // style
+    font-family: inherit;
+    background-color: rgba($cta-darker, .5);
+    border: solid 2px var(--cta-darker);
+    padding: 2rem 1.4rem;
+    color: darken($cta-darker, 20%);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: all .2s ease-out;
 
-        &--list{
-          list-style: none;
-        }
+    &--list{
+      list-style: none;
+    }
 
-      &.active{
-        transform: scaleY(1);
-        padding: 2rem 1.4rem;
-        margin-bottom: 4rem;
-      }
+    &.active{
+      transform: scaleY(1);
 
-      }
     }
   }
 
@@ -946,6 +990,11 @@ input[type="checkbox"]{
 
       [data-name="contact-body"]{
         transition: all .2s ease-in-out;
+
+        @include media(phone){
+          max-width: 80%;
+        }
+
       }
     }
     &--right{
@@ -964,11 +1013,8 @@ input[type="checkbox"]{
 
     &--content{
       max-width: $grid-width/2;
-
       padding-top: 15rem;
       padding-bottom: 10rem;
-      //margin: 0 auto;
-      //padding: 30rem 0 15rem 0;
     }
     &--form{
       position: relative;
@@ -985,6 +1031,7 @@ input[type="checkbox"]{
           color: white;
         }
         .text-input:not(:placeholder-shown) + .text-input__label{
+          font-size: 2.3rem;
           color: var(--cta-darker);
         }
       }
@@ -1058,6 +1105,10 @@ input[type="checkbox"]{
   }
   &__legal-container{
     max-width: $grid-width/2;
+    @include media(phone){
+      max-width: 50%;
+      padding-bottom: .4rem;
+    }
   }
 }
 
