@@ -373,7 +373,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     return element.type === 'radio';
                 }),
                 text: [].concat(_toConsumableArray(form.elements)).filter(function (element) {
-                    return element.type === 'text' || element.type === 'textarea';
+                    return element.type === 'text' || element.type === 'textarea' || element.type === 'email';
                 }),
                 checkbox: [].concat(_toConsumableArray(form.elements)).filter(function (element) {
                     return element.type === 'checkbox';
@@ -384,6 +384,7 @@ document.addEventListener('DOMContentLoaded', function () {
             this.reject = this.reject.bind(this);
             this.submitHandler = this.submitHandler.bind(this);
             this.isFormValid = this.isFormValid.bind(this);
+            this.generateErrors = this.generateErrors.bind(this);
         }
 
         _createClass(Form, [{
@@ -399,12 +400,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 var formStatus = this.isFormValid(elements);
                 console.log(formStatus);
                 // if orderStatus is all good, submit, otherwise reject and give reason
-                formStatus ? this.submit(elements) : this.reject();
+                formStatus ? this.submit(elements) : this.reject(this.generateErrors());
+                return false;
             }
         }, {
             key: 'isFormValid',
             value: function isFormValid() {
                 // if noValidate === true just return true
+                // because we don't need to validate anything
                 if (this.noValidate === true) return true;
                 // name our inputs human friendly
                 var radioInputs = this.inputs.radio,
@@ -420,14 +423,104 @@ document.addEventListener('DOMContentLoaded', function () {
                 return radioValid && textValid && checkboxValid;
             }
         }, {
+            key: 'generateErrors',
+            value: function generateErrors(elements) {
+                var _this2 = this;
+
+                // let errorReport = [];
+                /*
+                ******* Text Inputs
+                */
+                // checking for the false text inputs is
+                // fairly easy. We can leverage our checkTextInputs function
+                // to assist in constructing an object for each input that
+                // holds is valid status.
+                var textInputs = this.inputs.text.map(function (input) {
+                    return {
+                        name: input.name,
+                        valid: Form.checkTextInputs([input]),
+                        type: 'text'
+                    };
+                });
+                // After returning this array
+                // filter through it and remove the items that are valid
+                textInputs = textInputs.filter(function (item) {
+                    return !item.valid;
+                });
+
+                // radio inputs are a bit more tricky, as they'll only
+                // basically we need to grab the unique names to determined
+                // the radio groups, then we need to test that each name
+                // has a value, if it does they're all answered
+                var uniqueNames = [].concat(_toConsumableArray(new Set(this.inputs.radio.map(function (input) {
+                    return input.name;
+                }))));
+                /*
+                ******* Radio Groups
+                 */
+                // now get the NodeRadioList for each radioGroup
+                var radioGroups = uniqueNames.map(function (name) {
+                    return _this2.form[name];
+                });
+                // turn it into and array to inherit
+                // Array.prototype methods
+                radioGroups = [].concat(_toConsumableArray(radioGroups));
+                // filter radioGroups and get the groups
+                // with no value, i.e. no selection made.
+                radioGroups = radioGroups.filter(function (group) {
+                    return !group.value;
+                });
+                // prepare the errors object for each group
+                radioGroups = radioGroups.map(function (group) {
+                    return {
+                        // we have to grab the name of one
+                        // of the radio inputs inside the group
+                        // just grab the first one.
+                        // Arrays start at zero. ;)
+                        name: group[0].name,
+                        // the value of the group should be "" so
+                        // lets just turn that into a false value
+                        // if for some reason it's not "" we won't
+                        // be lying.
+                        valid: !!group.value,
+                        type: 'radio'
+                    };
+                });
+                /*
+                ******* Checkboxes
+                */
+                // lets filter all the checkboxes in the form
+                // grab those that are not checked, and are required
+                // put them into the pretty object.
+                var checkboxInputs = this.inputs.checkbox.filter(function (checkbox) {
+                    return !checkbox.checked && checkbox.required;
+                });
+                checkboxInputs = checkboxInputs.map(function (input) {
+                    return {
+                        name: input.name,
+                        valid: input.checked,
+                        type: 'checkbox'
+                    };
+                });
+                /*
+                ******* Concat the errors
+                */
+                var errorReport = textInputs.concat(radioGroups, checkboxInputs);
+
+                console.error(errorReport);
+                return errorReport;
+            }
+        }, {
             key: 'submit',
             value: function submit(elements) {
+                console.log('submit callback');
                 this.callback && this.callback(elements);
             }
         }, {
             key: 'reject',
-            value: function reject() {
-                this.rejectCallback && this.rejectCallback();
+            value: function reject(errors) {
+                console.error('reject callback');
+                this.rejectCallback ? this.rejectCallback(errors) : console.error(errors);
             }
         }], [{
             key: 'checkRadioInputs',
@@ -477,31 +570,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 }).includes(false);
             }
         }, {
-            key: 'generateErrors',
-            value: function generateErrors(elements) {
-
-                // const nameValid = !!name,
-                //       sizeValid = !!size,
-                //       typeValid = !!type;
-                // let errorReport = [];
-                // if( !nameValid ){
-                //     errorReport.push(`Name is required (so you can get your coffee)`);
-                // }
-                // if( !sizeValid ){
-                //     errorReport.push('Size is required (i.e. how addicted are you?)');
-                // }
-                // if( !typeValid ){
-                //     errorReport.push(`Type is required (some people like milk, some don't)`);
-                // }
-                // console.log(errorReport);
-                // return errorReport;
-            }
+            key: 'checkEmailInput',
+            value: function checkEmailInput(emailInputs) {}
         }]);
 
         return Form;
     }();
 
-    var submitCallback = function submitCallback(elements) {
+    var orderSubmitCallback = function orderSubmitCallback(elements) {
 
         var name = elements.name.value,
             size = elements.size.value || '',
@@ -521,18 +597,36 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     };
 
-    var rejectCallback = function rejectCallback() {
+    var orderRejectCallback = function orderRejectCallback(errors) {
         // get the container
         var errorContainer = document.getElementsByName('errors')[0];
         // set the error text in the container
-        errorContainer.classList.contains('active') ? errorContainer.innerText = 'Oh no, the computer God\'s told us no for these reasons:' : errorContainer.classList.add('active');
-        errorContainer.innerText = errorContainer.innerText += '\n ' + errors.map(function (error) {
-            return '\u2022 ' + error;
-        }).join('\n') + '  ';
+        !errorContainer.classList.contains('active') && errorContainer.classList.add('active');
+        var list = errorContainer.querySelector('ul');
+        list.innerHTML = errors.map(function (error) {
+            return '<li>' + error.name + ': ' + error.name + ' is required.</li>';
+        }).join(' ');
     };
 
-    var form = new Form(document.forms[0], submitCallback, rejectCallback).init();
-    // const contactForm = new Form(document.forms[1],preventDefaultSubmission).init();
+    var preventDefaultSubmission = function preventDefaultSubmission(e) {
+        return e.preventDefault && e.preventDefault();
+    };
+
+    var contactCallback = function contactCallback(elements) {
+        console.log('contact cb');
+        var form = document.forms[1];
+        var confirmation = document.querySelector('[data-name="contact-body"]');
+        var button = document.getElementsByName('contact_submit')[0];
+        button.classList.add('btn--submitted');
+        button.classList.add('response');
+        // form.contact_submit.textContent = `Thanks  \u2714`;
+        [].concat(_toConsumableArray(form.elements)).forEach(function (el) {
+            return el.setAttribute('disabled', true);
+        });
+    };
+
+    var orderForm = new Form(document.forms[0], orderSubmitCallback, orderRejectCallback).init();
+    var contactForm = new Form(document.forms[1], contactCallback).init();
 }); /*end of DOMContentLoaded*/
 
 //# sourceMappingURL=script.js.map

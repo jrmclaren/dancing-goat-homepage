@@ -5,6 +5,19 @@
     clear: both;
   }
 }
+
+/*
+Displayz
+ */
+
+$displayList: block, inline-block, inline, table, table-cell;
+
+@each $display in $displayList {
+  .u-display-#{$display}{
+    display: $display !important;
+  }
+}
+
 /*
 Position
  */

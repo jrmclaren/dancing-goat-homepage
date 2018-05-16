@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "purge:idea": "rm -r .idea",
-    "watch:js": "npx babel --no-babelrc js/script.precomp.js --presets=es2015  --out-file js/script.js --source-maps --watch",
+    "watch:js": "npx babel --no-babelrc js/script.precomp.js --presets=es2015 --plugins transform-object-rest-spread  --out-file js/script.js --source-maps --watch",
     "watch:sass": "node-sass sass/main.scss css/style.css -w",
     "devserver": "live-server --browser='Google Chrome'",
     "start:local": "npm-run-all --parallel devserver watch:sass watch:js",
@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-flow": "^6.23.0",
     "css-loader": "^0.28.11",
     "extract-text-webpack-plugin": "^3.0.2",

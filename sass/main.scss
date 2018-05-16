@@ -7,6 +7,10 @@ $cta: #b14d61;
 // bean darker
 $cta-darker: #9e465b;
 
+$success: #4F8A10;;
+$warning: yellow;
+$negative: red;
+
 // grid
 $grid-width: 114rem;
 $gutter-vertical: 8rem;
@@ -70,6 +74,56 @@ main{
   overflow: hidden;
   background-color: var(--cta-darker);
 }
+
+// Image caption styles
+// to credit unsplash authors
+// **not really** part of the site
+// wouldn't be included in the real
+// world, as usage rights would be
+// commercial, so this should be
+// functional, draw attention to itself
+// but not completely break the bran
+// image either.
+figure{
+  position: relative;
+  figcaption{
+    position: absolute;
+    top: 25%;
+    left: 0;
+    padding: 1rem 2rem;
+    background-color: var(--section-headline);
+    color: var(--body-color);
+    opacity: 0;
+    transition: all .2s ease-out;
+    a{
+      color: var(--cta);
+      text-decoration: none;
+    }
+    }
+  &:active{
+    figcaption{
+      opacity: 1;
+      outline: var(--cta) solid 1px;
+      box-shadow: 0 0 10px var(--cta);
+      animation: lookAtMe 1s reverse;
+    }
+  }
+  @keyframes lookAtMe {
+    0%{
+      transform: scale(1) rotate(0);
+    }
+    50%{
+      transform: scale(1.4) rotate(5deg);
+    }
+    70%{
+      transform: scale(1.4) rotate(-5deg);
+    }
+    100%{
+      transform: scale(1) rotate(0);
+    }
+  }
+}
+
 .logo{
   display: block;
   text-indent: -9999rem;
@@ -160,6 +214,17 @@ main{
   z-index: 5;
 }
 // button styles
+
+input:disabled{
+  background-color: rgba(183, 183, 183, 0.46);
+  color: #404040;
+
+  &:hover,&:active,&:focus{
+    transform: translate(0,0) !important;
+    box-shadow: 0 0 0 transparent;
+  }
+}
+
 .btn{
   //resets
   outline: none;
@@ -220,7 +285,50 @@ main{
       color: var(--cta-darker);
     }
   }
+  &--disabled{
+    color: var(--body-color);
+    background-color: #e1e1e1;
+
+    &:hover,&:active,&:focus{
+      transform: translate(0,0) !important;
+    }
+  }
+  &--submitted{
+    color: $success;
+    background-color: lighten($success, 75%);
+  }
+  &__action{
+    position: relative;
+    overflow: hidden;
+
+    & > * {
+      transition: all .4s ease-in-out;
+    }
+
+    &--default{
+      display: inline-block;
+      z-index: 3;
+    }
+    &--response{
+      position: absolute;
+      display: inline-block;
+      z-index: 4;
+      left: 2rem;
+      top: 1rem;
+      transform: translateY(-5rem);
+    }
+    &.response{
+      .btn__action--default{
+        transform: translateY(5rem);
+      }
+      .btn__action--response{
+        transform: translateY(0);
+      }
+    }
+
+  }
 }
+
 // Text Input Styles
 
 .text-input{
@@ -228,10 +336,12 @@ main{
   $textInputFontSize: 2rem;
 
   &__container{
-    padding: 4rem 0;
     position: relative;
     display: block;
-    width: 50%;
+    width: 90%;
+    height: 1.5rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 
   // positioning
@@ -275,10 +385,18 @@ main{
 }
 
 .radio-input__group{
-  padding: 2.5rem 0rem;
   position: relative;
-  display: block;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  @include media(tab-land){
+    flex-wrap: nowrap;
+    flex-direction: column;
+  }
+
   &-label{
+    flex: 0 0 100%;
     font-size: 2.8rem;
     font-weight: 900;
     text-transform: lowercase;
@@ -289,59 +407,66 @@ main{
 .radio-input-container{
   display: inline-block;
   margin: 2rem 2rem 2rem 8rem;
+  &:last-of-type{
+    margin: 2rem 2rem 0 8rem;
+  }
+
+  @include media(tab-land){
+    width: 100%;
+  }
 
   &:focus, &:active{
     outline: none;
     box-shadow: 0 2rem 4rem rgba(0,0,0,0.2);
   }
 
-}
+  .radio-input{
+    display: none;
+    position: absolute;
+    flex: 1;
+    &__label{
+      position: relative;
+      font-size: 1.8rem;
+      text-transform: lowercase;
+      cursor: pointer;
 
-.radio-input{
-  display: none;
-  position: absolute;
+      @include media(tab-land){
+        font-size: 1.4rem;
+      }
 
-  &__label{
-    position: relative;
-    font-size: 1.8rem;
-    text-transform: lowercase;
-    cursor: pointer;
+      @mixin radioStyles{
+        //position
+        position: absolute;
+        content: '';
+        top: -1rem;
+        left: -8rem;
+        //size
+        width: 4rem;
+        height: 4rem;
+        // transition
+        transition: all .3s ease-out;
+      }
 
-    @include media(tab-land){
-      font-size: 1.4rem;
-    }
+      &:before{
+        @include radioStyles();
+        z-index: 4;
 
-    @mixin radioStyles{
-      //position
-      position: absolute;
-      content: '';
-      top: -1rem;
-      left: -8rem;
-      //size
-      width: 4rem;
-      height: 4rem;
-      // transition
-      transition: all .3s ease-out;
-    }
-
-    &:before{
-      @include radioStyles();
-      z-index: 4;
-
-      //style
-      background-color: white;
-      border-radius: 4rem;
-      transform-origin: center;
-      transform: scale(.6);
-    }
-    &:after{
-      @include radioStyles();
-      // style
-      background-color: $cta;
-      border-radius: 4rem;
+        //style
+        background-color: white;
+        border-radius: 4rem;
+        transform-origin: center;
+        transform: scale(.6);
+      }
+      &:after{
+        @include radioStyles();
+        // style
+        background-color: $cta;
+        border-radius: 4rem;
+      }
     }
   }
 }
+
 
 input[type="radio"]:checked + .radio-input__label{
   &:before{
@@ -748,6 +873,7 @@ input[type="checkbox"]{
       }
       &--back{
         position: absolute;
+        width: 100%;
         top: 0;
         left: 0;
           transform: translateX(-200rem);
@@ -778,6 +904,11 @@ input[type="checkbox"]{
         color: darken($cta-darker, 20%);
         transform: scaleY(0);
         transition: all .2s ease-out;
+
+        &--list{
+          list-style: none;
+        }
+
       &.active{
         transform: scaleY(1);
         padding: 2rem 1.4rem;
@@ -791,63 +922,58 @@ input[type="checkbox"]{
   &__contact{
     position: relative;
     width: 100vw;
-    background-color: white;
-    //background: linear-gradient(to right,
-    //                            var(--cta) 50%,
-    //                            white 50%);
+    margin: 0 auto;
 
+    &--content-parent{
+      display: flex;
+      margin: 0 auto;
 
-    @include media(tab-port){
-      height: 100%;
+      @include media(tab-land){
+        display: flex;
+        flex-direction: column;
+      }
     }
 
     &--left{
-      display: inline-block;
-      vertical-align: middle;
-      position: relative;
+      display: flex;
+      flex: 1;
+      justify-content: center;
+      padding-left: $gutter-vertical;
+      align-content: center;
       background-color: var(--cta);
-      display: inline-block;
-      width: 48%;
       overflow: hidden;
-      @include media(tab-land){
-        width: 100%;
-        display: block;
-        position: relative;
 
-        & > .section__contact--content{
-          padding-top: 15rem;
-        }
 
+      [data-name="contact-body"]{
+        transition: all .2s ease-in-out;
       }
     }
     &--right{
-      display: inline-block;
-      vertical-align: middle;
-      position: relative;
-      display: inline-block;
-      width: 48%;
-      @include media(tab-land){
-        width: 100%;
-        display: block;
-      }
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      padding-right: $gutter-vertical;
+      flex: 1;
+      background-color: white;
 
-      & > .section__contact--content{
-        padding-top: 5rem;
+      @include media(tab-land){
+        padding-right: 0;
+        padding-left: 0;
       }
     }
+
     &--content{
       max-width: $grid-width/2;
-      margin: 0 auto;
-      padding: 30rem 0 15rem 0;
 
-      @include media(tab-land){
-        padding: 0 0 0 5rem;
-      }
-
+      padding-top: 15rem;
+      padding-bottom: 10rem;
+      //margin: 0 auto;
+      //padding: 30rem 0 15rem 0;
     }
     &--form{
+      position: relative;
+      transition: transform .4s ease-out, opacity .4s ease-out 250ms;
       .text-input__container {
-
         .text-input{
           //size
           width: 100%;
@@ -904,16 +1030,62 @@ input[type="checkbox"]{
   width: 100vw;
   padding: 2rem;
   background-color: var(--cta-darker);
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+
+  @include media(tab-land){
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+
+    & > * {
+      &:not(:last-child){}
+      margin-bottom: 2rem;
+    }
+  }
+
+  & > * {
+    flex: 0 0 50%;
+  }
 
   &__logo-container{
     height: 15rem;
+    max-width: $grid-width/2;
     & > .logo {
       width: 100%;
     }
   }
   &__legal-container{
-    display: inline-block;
-    width: 30rem;
-    text-align: left;
+    max-width: $grid-width/2;
+  }
+}
+
+.confirmation-coffee-container{
+  position: relative;
+  display: block;
+  width: 50rem;
+  height: 50rem;
+  margin: 0 auto;
+  overflow: hidden;
+  animation: fillUp 2s ease-out;
+  -webkit-clip-path: circle(50.0% at 50% 50%);
+  clip-path: circle(50.0% at 50% 50%);
+  img{
+    position: absolute;
+    width: 100rem;
+    height: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+@keyframes fillUp {
+  0%{
+    -webkit-clip-path: circle(0.0% at 50% 50%);
+    clip-path: circle(0.0% at 50% 50%);
+  }
+  100%{
+    -webkit-clip-path: circle(50.0% at 50% 50%);
+    clip-path: circle(50.0% at 50% 50%);
   }
 }

@@ -10,17 +10,12 @@
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet' />
 </head>
 <body>
-<!--
-TODO: Add a z-index to each section.
-TODO: make goat image and header text on top of page 'fixed' (really this is scss but I'll put it here
-because I'll need to add the above z-index system, which I'll likely do with utility classes eg z-1-10
--->
 <header class="header">
     <div class="header__nav-btn-box">
         <div class="menu-container">
             <input type="checkbox" id="menu"  tabindex="-1"/>
             <label for="menu" class="menu-container__inner">
-                <svg id="menu"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+                <svg   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
                     <defs>
                         <style>
                         </style>
@@ -64,7 +59,7 @@ because I'll need to add the above z-index system, which I'll likely do with uti
     <section id="top" class="section section__home">
 
         <div class="row">
-            <div class="col-1-of-2">
+            <div class="col-1-of-1">
                 <div class="section__home-logo-box">
                     <i class="logo logo__hero--dark">
                         the dancing goat
@@ -83,14 +78,15 @@ because I'll need to add the above z-index system, which I'll likely do with uti
         </div>
 
 
-        <div class="section__home-hero-image-box">
+        <figure class="section__home-hero-image-box">
             <img src="./img/hero_image@300x.png" alt="hero" />
-        </div>
+            <figcaption>Image sourced from <a href="https://www.unsplash.com">unsplash.com</a>. Photographer: <a href="https://unsplash.com/photos/Q5oFixaamNg">Medena Rose</a></figcaption>
+        </figure>
     </section>
     <section class="section section__story">
 
-        <div class="section__headline-box">
-            <h2 id="story" class="section__headline">
+        <div class="section__headline-box section__headline-box--story">
+            <h2 id="story" class="section__headline ">
                 our story
             </h2>
         </div>
@@ -123,9 +119,10 @@ because I'll need to add the above z-index system, which I'll likely do with uti
         </div>
     </section>
 
-    <div class="coffee-feature-container">
+    <figure class="coffee-feature-container">
         <img src="./img/coffee-feature.png" alt="coffee" class="coffee-feature">
-    </div>
+        <figcaption>Image sourced from <a href="https://www.unsplash.com">unsplash.com</a>. Photographer: <a href="https://unsplash.com/photos/tA90pRfL2gM">Nathan Dumlao</a></figcaption>
+    </figure>
 
     <section class="section section__order">
         <div id="order" class="section__headline-box section__headline-box--order">
@@ -137,8 +134,7 @@ because I'll need to add the above z-index system, which I'll likely do with uti
         <div class="section__order-form-container">
             <div class="section__order-form-container--front">
                <div class="row">
-                   <form action="#" class="section__order-form">
-
+                   <form action="#" class="section__order-form" novalidate>
                        <div class="row">
                            <div class="section__order-form-headline">
                                <h4 class="headline headline--2">
@@ -150,6 +146,7 @@ because I'll need to add the above z-index system, which I'll likely do with uti
                            </p>
                        </div>
                         <div class="row">
+                            <!--Name-->
                             <div class="text-input__container">
                                 <input type="text"
                                        id="name"
@@ -158,6 +155,7 @@ because I'll need to add the above z-index system, which I'll likely do with uti
                                        placeholder="name"
                                        data-error="Name is required (so you can get your coffee)"
                                        tabindex="1"
+                                       required
                                 />
                                 <label class="text-input__label" for="name">
                                     Name
@@ -167,26 +165,24 @@ because I'll need to add the above z-index system, which I'll likely do with uti
                        <div class="row">
                            <div class="col-1-of-2">
                                <div  class="radio-input__group ">
+                                   <!--Size-->
                                    <div class="radio-input__group-label">Size</div>
                                    <div class="radio-input-container"
                                         tabindex="2"
                                         data-error="Size is required (i.e. how addicted are you?)"
                                    >
-                                       <!--Small-->
-                                       <input id="small" type="radio" class="radio-input" name="size"  value="small"  />
+                                       <input id="small" type="radio" class="radio-input" name="size"  value="small" required />
                                        <label for="small"  class="radio-input__label">
                                            Small
                                        </label>
                                    </div>
                                    <div class="radio-input-container">
-                                       <!--Medium-->
                                        <input id="medium" type="radio" class="radio-input" name="size" value="medium" />
                                        <label for="medium"  class="radio-input__label">
                                            Medium
                                        </label>
                                    </div>
                                    <div class="radio-input-container">
-                                       <!--Bucket-->
                                        <input id="bucket" type="radio" class="radio-input" name="size" value="bucket" />
                                        <label for="bucket"  class="radio-input__label">
                                            Bucket
@@ -194,14 +190,14 @@ because I'll need to add the above z-index system, which I'll likely do with uti
                                    </div>
                                </div>
                            </div>
+                           <!--Type -->
                            <div class="col-1-of-2">
                                <div  class="radio-input__group">
                                    <div class="radio-input__group-label">type</div>
-
                                    <div class="radio-input-container"
                                         tabindex="3"
                                         data-error="Type is required (some people like milk, some don't)">
-                                       <input id="flattie" type="radio" class="radio-input" name="type" value="flattie"  />
+                                       <input id="flattie" type="radio" class="radio-input" name="type" value="flattie" required  />
                                        <label for="flattie" class="radio-input__label">
                                            Flattie
                                        </label>
@@ -221,24 +217,31 @@ because I'll need to add the above z-index system, which I'll likely do with uti
                                </div>
                            </div>
                        </div>
-                       <div class="text-input__container u-margin__bottom--l">
+                       <!--Comments-->
+                       <div class="text-input__container">
                            <input id="comments" type="text" class="text-input" name="comments" placeholder="comments"  />
                            <label for="comments" class="text-input__label">
                                Comments for the barista
                            </label>
                        </div>
-                       <button class="btn" type="submit" tabindex="4">Make it so <i class="icon icon__arrow-right">&rarr;</i></button>
-                       <div class="section__order-form-error-container u-margin__top--l" name="errors" readonly>
-                           <h3 class="headline headline--3">Oh no, the computer God's told us no for these reasons: </h3>
+                       <!--Submit-->
+                       <button class="btn u-margin__top--xl" type="submit" name="submit" tabindex="4">Make it so <i class="icon icon__arrow-right">&rarr;</i></button>
+                      <!--Errors-->
+                       <div class="section__order-form-error-container u-margin__top--l" name="errors">
+                           <div class="row">
+                               <h3 class="headline headline--3">Oh no, the computer God's told us no for these reasons: </h3>
+                               <ul class="section__order-form-error-container--list"><!--Errors will be populated as list items here--></ul>
+                           </div>
                        </div>
                    </form>
                </div>
             </div>
             <div class="section__order-form-container--back">
+                <figure class="order-confirmation-image-container">
+                    <img src="./img/confirmation@300x.png" alt="confirmed" class="order-confirmation-image">
+                    <figcaption>Image sourced from <a href="https://www.unsplash.com">unsplash.com</a>. Photographer: <a href="https://unsplash.com/photos/MUH7BsIaj8g">Ben Konfrst</a></figcaption>
+                </figure>
                 <div class="row">
-                    <div class="order-confirmation-image-container">
-                        <img src="./img/confirmation@300x.png" alt="confirmed" class="order-confirmation-image">
-                    </div>
                     <div class="col-1-of-3 col-1-of-3__offset--2">
                         <div class="confirmation-text-box">
                             <div class="section__order-form-headline">
@@ -263,79 +266,84 @@ because I'll need to add the above z-index system, which I'll likely do with uti
         </div>
     </section>
     <section class="section section__contact">
-        <div class="section__contact--left">
-            <!--Section headline-->
-            <div class="section__headline-box">
-                <h4 id="contact" class="section__headline section__headline--bean">
-                    contact
-                </h4>
-            </div>
+        <div class="section__headline-box">
+            <h4 id="contact" class="section__headline section__headline--bean">
+                contact
+            </h4>
+        </div>
+        <div class="section__contact--content-parent">
+            <div class="section__contact--left">
+                <!--Section headline-->
                 <!--Left content-->
                 <div class="section__contact--content">
+
                     <h6 class="headline headline--2 text-white">
-                        <div>send us</div>
-                        <div>loveletters 😍</div>
+                        <span class="u-display-block">send us</span>
+                        <span class="u-display-block">loveletters 😍</span>
                     </h6>
-                    <p class="body-text text-white">
+                    <p class="body-text text-white" data-name="contact-body">
                         we take hate mail too, but we don't love it 😢
                     </p>
-
-                    <form action="" id="contactForm" class="section__contact--form u-margin__ends--l">
-                        <div class="text-input__container">
-                            <input id="contact-name" type="text" class="text-input" placeholder="name" />
-                            <label class="text-input__label" for="contact-name">Name</label>
+                    <form id="contactForm" class="section__contact--form u-margin__ends--l" novalidate>
+                        <div class="row">
+                            <div class="text-input__container">
+                                <input id="contact_name" name="contact_name" type="text" class="text-input" placeholder="name" required />
+                                <label class="text-input__label" for="contact_name">Name</label>
+                            </div>
                         </div>
-                        <div class="text-input__container">
-                            <input id="contact-email" type="text" class="text-input" placeholder="email" />
-                            <label class="text-input__label" for="contact-email">email</label>
+                        <div class="row">
+                            <div class="text-input__container">
+                                <input id="contact_email" name="contact_email" type="email" class="text-input" placeholder="email" required />
+                                <label class="text-input__label" for="contact_email">email</label>
+                            </div>
                         </div>
-                        <div class="text-input__container">
-                            <input id="contact-message" type="text" class="text-input" placeholder="message" />
-                            <label class="text-input__label" for="contact-message">message</label>
+                        <div class="row">
+                            <div class="text-input__container">
+                                <input id="contact_message" name="contact_message" type="text" class="text-input" placeholder="message" required />
+                                <label class="text-input__label" for="contact_message">message</label>
+                            </div>
                         </div>
-
-                        <button class="btn btn--light">Whooosh &rarr;</button>
+                        <button name="contact_submit" class="btn btn--light btn__action">
+                            <span class="btn__action--default">Whooosh &rarr;</span>
+                            <span class="btn__action--response">Thanks &nbsp; &#10004;</span>
+                        </button>
                     </form>
                 </div>
-        </div>
-        <div class="section__contact--right">
+            </div>
+            <div class="section__contact--right">
+                <div class="section__contact--content">
+                    <div class="headline headline--2 text-body">
+                        our location
+                    </div>
 
-            <div class="section__contact--content u-padding__ends--l">
-                <div class="headline headline--2 text-body">
-                    our location
+                    <p class="body-text">
+                        2 Grey Street, <br/>
+                        South Brisbane 4001, QLD
+                    </p>
+
+                    <div id="map" class="u-margin__ends--m" style="width:40rem; height: 30rem;">
+                        <span id="pin"></span>
+                    </div>
+                    <small class="text-cta">This is fake in case you didn't already know.</small>
                 </div>
-
-                <p class="body-text">
-                    2 Grey Street,
-                    South Brisbane 4001, QLD
-                </p>
-
-                <div id="map" class="u-margin__ends--m" style="width:40rem; height: 30rem;">
-                    <span id="pin"></span>
-                </div>
-                <small class="text-cta">This is fake in case you didn't already know.</small>
             </div>
         </div>
     </section>
 </main>
 <!--Footer Section-->
 <footer class="footer">
+            <div class="footer__logo-container">
+                <i class="logo logo__secondary--white">the dancing goat</i>
+            </div>
 
-    <div class="footer__content">
-        <div class="footer__logo-container">
-            <i class="logo logo__secondary--white">the dancing goat</i>
-        </div>
-        <div class="footer__legal-container">
-            <!--
-            TODO: add hover image credits before launching! :)
-            -->
-            <span class="legal text-white">
-                Design & Copy by Jason McLaren 2018. Images sourced from unsplash.com, hover image for credits.This coffee shop is fictional, but my love for coffee is real. Check out the accompanying style guide
+
+            <div class="footer__legal-container">
+                <span class="legal text-white">
+                Design & Copy by Jason McLaren 2018. Images sourced from unsplash.com, press and hold image for credits.This coffee shop is fictional, but my love for coffee is real. Check out the accompanying style guide
                 for this brand here.
             </span>
-        </div>
-    </div>
+            </div>
 </footer>
+<script src="js/script.js" ></script>
 </body>
-<script src="js/script.js" type="text/javascript"></script>
 </html>
