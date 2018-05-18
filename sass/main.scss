@@ -204,8 +204,8 @@ figure{
     line-height: 6.2rem;
   }
   @include media(phone){
-    font-size: 5.2rem;
-    line-height: 5.2rem;
+    font-size: 4rem;
+    line-height: 4.2rem;
   }
 
   &--2 {
@@ -223,12 +223,45 @@ figure{
   }
   &--3{
     font-size: 3rem;
+    line-height: 3.2rem;
     font-weight: 900;
     color: inherit;
+    @include media(phone){
+      font-size: 2rem;
+      line-height: 2.2rem;
+    }
   }
 
 }
 
+
+.body-text{
+  font-size: 2.8rem;
+  color: var(--body-color);
+  line-height: 3.4rem;
+  letter-spacing: 0;
+  font-weight: 700;
+
+  @include media(tab-port){
+    font-size: 2rem;
+    line-height: 2.4rem;
+  }
+
+}
+
+.legal{
+  font-size: 1rem;
+  color: currentColor;
+  line-height: 1;
+  &__link{
+    &:link,
+    &:visited{
+      text-decoration: none;
+      text-transform: uppercase;
+      color: white;
+    }
+  }
+}
 .text-white{
   color: white !important;
 }
@@ -237,20 +270,6 @@ figure{
 }
 .text-cta{
   color: var(--cta) !important;
-}
-
-.body-text{
-  font-size: 2.8rem;
-  color: var(--body-color);
-  line-height: 3.4rem;
-  letter-spacing: 0;
-  font-weight: 700;
-}
-
-.legal{
-  font-size: 1rem;
-  color: currentColor;
-  line-height: 1;
 }
 
 .header{
@@ -414,6 +433,7 @@ input:disabled{
     font-weight: 900;
     top: 0;
     transition: all .2s ease-out;
+    white-space: nowrap;
   }
 
   &:not(:placeholder-shown) ~ .text-input__label{
@@ -789,11 +809,15 @@ input[type="checkbox"]{
     letter-spacing: -0.01rem;
     text-align: left;
     font-weight: 900;
+    white-space: nowrap;
     color: var(--section-headline);
 
     @include media(tab-port){
       font-size: 10rem;
       letter-spacing: -0.5rem;
+    }
+    @include media(phone){
+      font-size: 8rem;
     }
     &--bean{
       color: var(--cta-darker);
@@ -811,20 +835,17 @@ input[type="checkbox"]{
       width: 30rem;
       height: 17.1rem;
       padding-top: 8rem;
-      padding-bottom: 4rem;
     }
     &-headline-box{
       width: 54.2rem;
       height: 17.4rem;
 
       @include media(phone){
-        width: 35rem;
+        width: 28rem;
       }
       @include media(tab-land){
         left: 10rem;
       }
-
-
     }
     &-hero-image-box{
       position: absolute;
@@ -832,7 +853,6 @@ input[type="checkbox"]{
       right: 0;
       width: 80vw;
       height: auto;
-      //background: linear-gradient(to right, rgba($cta,.5), rgba($cta-darker,.5)) url('../img/hero_image@300x.png');
       img{
         height: 100%;
         width: 100%;
@@ -841,15 +861,15 @@ input[type="checkbox"]{
       @include media(tab-land){
         width: 60vw;
       }
-
       @include media(tab-port){
-        width: 70vw;
+        width: 80vw;
       }
-
+      @include media(phone){
+        width: 115vw;
+      }
     }
   }//end __home
   &__story{
-
     background-color: white;
     height: 100vh;
     overflow: hidden;
@@ -866,6 +886,9 @@ input[type="checkbox"]{
         @include media(tab-port){
           margin-top: 10rem;
         }
+        @include media(phone){
+          width: 28rem;
+        }
       }
       &--right{
         //SIZING
@@ -873,7 +896,9 @@ input[type="checkbox"]{
         @include media(tab-port){
           margin-bottom: 10rem;
         }
-
+        @include media(phone){
+          width: 28rem;
+        }
       }
     }
   }
@@ -941,7 +966,7 @@ input[type="checkbox"]{
 
     outline: none;
     // sizing
-    width: 100%;
+    width: 80%;
     height: auto;
     // style
     font-family: inherit;
@@ -987,6 +1012,11 @@ input[type="checkbox"]{
       background-color: var(--cta);
       overflow: hidden;
 
+      @include media(phone){
+        padding-left: 2rem;
+        max-width: 50rem;
+        margin: 0 auto;
+      }
 
       [data-name="contact-body"]{
         transition: all .2s ease-in-out;
@@ -1009,6 +1039,12 @@ input[type="checkbox"]{
         padding-right: 0;
         padding-left: 0;
       }
+
+      @include media(phone){
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+
     }
 
     &--content{
@@ -1130,13 +1166,14 @@ input[type="checkbox"]{
     transform: translateX(-50%);
   }
 }
-@keyframes fillUp {
-  0%{
-    -webkit-clip-path: circle(0.0% at 50% 50%);
-    clip-path: circle(0.0% at 50% 50%);
-  }
-  100%{
-    -webkit-clip-path: circle(50.0% at 50% 50%);
-    clip-path: circle(50.0% at 50% 50%);
-  }
+
+.map{
+  min-width: 20rem;
+  min-height: 30rem;
+  width: 95%;
+  height: auto;
+  max-width:40rem;
+  max-height: 30rem;
+
 }
+

@@ -328,4 +328,7 @@ $padding-xl: 5rem;
 }
 @include zIndexClasses();
 
+.u-text-nowrap{
+  white-space: nowrap!important;
+}
 

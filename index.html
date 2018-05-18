@@ -128,7 +128,7 @@
                 <div class="col-1-of-3">
                     <!-- left textbox -->
                     <div class="section__story-textbox section__story-textbox--left">
-                        <h3 class="headline headline--2">
+                        <h3 class="headline headline--2 u-text-nowrap">
                             we remember*
                         </h3>
 
@@ -168,7 +168,7 @@
             <div class="section__order-form-container--front">
                <div class="row">
                    <form action="#" class="section__order-form" novalidate>
-                       <div class="row">
+                       <div class="row row--no-padding">
                            <div class="section__order-form-headline">
                                <h4 class="headline headline--2">
                                    order ahead
@@ -178,7 +178,7 @@
                                be good to your future self.
                            </p>
                        </div>
-                        <div class="row">
+                        <div class="row row--no-padding">
                             <!--Name-->
                             <div class="text-input__container">
                                 <input type="text"
@@ -195,7 +195,7 @@
                                 </label>
                             </div>
                         </div>
-                       <div class="row">
+                       <div class="row row--no-padding">
                            <div class="col-1-of-2">
                                <div  class="radio-input__group ">
                                    <!--Size-->
@@ -318,19 +318,19 @@
                         we take hate mail too, but we don't love it 😢
                     </p>
                     <form id="contactForm" class="section__contact--form u-margin__ends--l" novalidate>
-                        <div class="row">
+                        <div class="row row--no-padding">
                             <div class="text-input__container">
                                 <input id="contact_name" name="contact_name" type="text" class="text-input" placeholder="name" required />
                                 <label class="text-input__label" for="contact_name">Name</label>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row row--no-padding">
                             <div class="text-input__container">
                                 <input id="contact_email" name="contact_email" type="email" class="text-input" placeholder="email" required />
                                 <label class="text-input__label" for="contact_email">email</label>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row row--no-padding">
                             <div class="text-input__container">
                                 <input id="contact_message" name="contact_message" type="text" class="text-input" placeholder="message" required />
                                 <label class="text-input__label" for="contact_message">message</label>
@@ -340,18 +340,13 @@
                             <span class="btn__action--default">Whooosh &rarr;</span>
                             <span class="btn__action--response">Thanks &nbsp; &#10004;</span>
                         </button>
-
+                        <!--Errors-->
                         <div class="error-container u-margin__top--l" data-name="errors">
                             <div class="row">
-                                <h5 class="headline headline--3">
-                                    Oh no, the computer God's said no for these reasons:
-                                </h5>
-                                <ul class="error-container--list">
-                                    <!--Errors will populate here-->
-                                </ul>
+                                <h3 class="headline headline--3">Oh no, the computer God's told us no for these reasons: </h3>
+                                <ul class="error-container--list"><!--Errors will be populated as list items here--></ul>
                             </div>
                         </div>
-
                     </form>
                 </div>
             </div>
@@ -366,10 +361,10 @@
                         South Brisbane 4001, QLD
                     </p>
 
-                    <div id="map" class="u-margin__ends--m" style="width:40rem; height: 30rem;">
+                    <div id="map" class="u-margin__ends--m map" style="">
                         <span id="pin"></span>
                     </div>
-                    <small class="text-cta">This is fake in case you didn't already know.</small>
+                    <small class="text-cta">This is a fake cafe, don't come here.</small>
                 </div>
             </div>
         </div>
@@ -384,8 +379,8 @@
 
             <div class="footer__legal-container">
                 <span class="legal text-white">
-                Design & Copy by Jason McLaren 2018. Images sourced from unsplash.com, press and hold image for credits.This coffee shop is fictional, but my love for coffee is real. Check out the accompanying style guide
-                for this brand here.
+                Design & Copy by Jason McLaren 2018. Images sourced from unsplash.com, press and hold images for credits.
+                <br/>This coffee shop is fictional, but my love for coffee is real. <a class="legal__link" href="https://github.com/jrmclaren">Github</a> | <a class="legal__link" href="https://www.linkedin.com/in/jason-mclaren">LinkedIn</a>
             </span>
             </div>
 </footer>
