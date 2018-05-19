@@ -1,0 +1,86 @@
+
+// Text Input Styles
+
+input:disabled{
+  background-color: rgba(183, 183, 183, 0.46);
+  color: #404040;
+
+  &:hover,&:active,&:focus{
+    transform: translate(0,0) !important;
+    box-shadow: 0 0 0 transparent;
+  }
+}
+.text-input{
+
+  $textInputFontSize: 2rem;
+
+  &__container{
+    position: relative;
+    display: block;
+    width: 90%;
+    height: 1.5rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  // positioning
+  position: absolute;
+  top: 0;
+  //styles
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1.2px solid black;
+  padding: 1.2rem 1rem;
+  transition: all .4s ease-out;
+  font-family: inherit;
+  font-size: $textInputFontSize;
+  caret-color: var(--cta-darker);
+  transition: all .4s ease-out;
+
+  // label
+  &__label{
+    position: absolute;
+    font-size: $textInputFontSize;
+    padding: 1.2rem 1rem;
+    font-weight: 900;
+    top: 0;
+    transition: all .2s ease-out;
+    white-space: nowrap;
+  }
+
+  &:not(:placeholder-shown) ~ .text-input__label{
+    transform: translateY(-4rem);
+    color: var(--cta-darker);
+  }
+
+  &:focus, &:active {
+    outline: none;
+    border-bottom-color: var(--cta);
+    box-shadow: 0 2rem 4rem rgba(0,0,0,0.2);
+  }
+}
+.text-input::placeholder{
+  opacity: 0;
+}
+
+.radio-input__group{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  @include media(tab-land){
+    flex-wrap: nowrap;
+    flex-direction: column;
+  }
+
+  &-label{
+    flex: 0 0 100%;
+    font-size: 2.8rem;
+    font-weight: 900;
+    text-transform: lowercase;
+    margin-bottom: 2rem;
+  }
+}
+

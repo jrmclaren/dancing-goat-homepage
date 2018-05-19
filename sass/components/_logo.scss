@@ -1,0 +1,21 @@
+.logo{
+  display: block;
+  text-indent: -9999rem;
+  width: 100%;
+  height: 100%;
+  &__hero{
+    &--dark{
+      background: url(../img/logo_hero--dark.svg);
+      background-repeat: no-repeat;
+    }
+    &--light{}
+  }
+  &__secondary{
+    &--bean{}
+    &--black{}
+    &--white{
+      background: url(../img/logo_secondary--white.svg);
+      background-repeat: no-repeat;
+    }
+  }
+}

@@ -1,0 +1,300 @@
+
+.section {
+  @mixin tabletPadding {
+    @include media(tab-land) {
+      padding: 0 2rem;
+    }
+  }
+
+  width: 100vw;
+  position: relative;
+
+  &__headline-box{
+    position: absolute;
+    width: 100vw;
+    top: 2.5rem;
+
+    &--story{
+      @include media(tab-land){
+        margin-left: -2rem;
+      }
+    }
+
+    &--order {
+      top: 0;
+      margin-top: -14rem;
+      opacity: .5;
+    }
+  }
+  &__headline{
+    width: 100%;
+    font-size: 20rem;
+    line-height: 6.5rem;
+    letter-spacing: -0.01rem;
+    text-align: left;
+    font-weight: 900;
+    white-space: nowrap;
+    color: var(--section-headline);
+
+    @include media(tab-port){
+      font-size: 10rem;
+      letter-spacing: -0.5rem;
+    }
+    @include media(phone){
+      font-size: 8rem;
+    }
+    &--bean{
+      color: var(--cta-darker);
+    }
+  }
+
+  &__home{
+    background: linear-gradient(to bottom,
+            rgba(255,255,255,1),
+            rgba(217,217,217,1));
+    height: 100vh;
+    @include tabletPadding();
+
+    &-logo-box{
+      width: 30rem;
+      height: 17.1rem;
+      padding-top: 8rem;
+    }
+    &-headline-box{
+      width: 54.2rem;
+      height: 17.4rem;
+
+      @include media(phone){
+        width: 28rem;
+      }
+      @include media(tab-land){
+        left: 10rem;
+      }
+    }
+    &-hero-image-box{
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 80vw;
+      height: auto;
+      img{
+        height: 100%;
+        width: 100%;
+      }
+
+      @include media(tab-land){
+        width: 60vw;
+      }
+      @include media(tab-port){
+        width: 80vw;
+      }
+      @include media(phone){
+        width: 115vw;
+      }
+    }
+  }//end __home
+  &__story{
+    background-color: white;
+    height: 100vh;
+    overflow: hidden;
+    @include tabletPadding;
+    &-textbox{
+
+      margin-top: 14rem;
+      @include media(tab-port){
+        margin-top: 0;
+      }
+      &--left{
+        //SIZING
+        width: 44.7rem;
+        @include media(tab-port){
+          margin-top: 10rem;
+        }
+        @include media(phone){
+          width: 28rem;
+        }
+      }
+      &--right{
+        //SIZING
+        width: 32.4rem;
+        @include media(tab-port){
+          margin-bottom: 10rem;
+        }
+        @include media(phone){
+          width: 28rem;
+        }
+      }
+    }
+  }
+  &__order {
+    //positioning
+    position: relative;
+    margin-top: -85rem;
+    //sizing
+    width: 100vw;
+    //order form styles
+
+    @include media(tab-land){
+      margin-top: -50rem;
+    }
+
+    @include media(tab-port){
+      margin-top: 0;
+    }
+
+    &-form-container{
+      //style
+      position: relative;
+      max-width: $grid-width + 10rem;
+      margin: 0 auto;
+      padding: 4rem 3rem;
+      background-color: white;
+      //border-radius: 80px 80px 0 0;
+      overflow: hidden;
+      box-shadow: 0 2rem 4rem rgba(0,0,0,.3);
+
+      @include media(tab-land){
+        padding: 4rem 2rem;
+      }
+      & > * {
+        //transition
+        transition: all .8s ease-in-out;
+      }
+
+      &--front{
+        &.submitted{
+          transform:  translateX(200rem);
+        }
+      }
+      &--back{
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        transform: translateX(-200rem);
+        &.submitted{
+          transform: translateX(0);
+        }
+      }
+    }
+
+    &-form{
+      top: 8rem;
+      //size
+    }
+  }
+
+  .error-container{
+    display: block;
+    resize: none;
+
+    outline: none;
+    // sizing
+    width: 80%;
+    height: auto;
+    // style
+    font-family: inherit;
+    background-color: rgba($cta-darker, .5);
+    border: solid 2px var(--cta-darker);
+    padding: 2rem 1.4rem;
+    color: darken($cta-darker, 20%);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: all .2s ease-out;
+
+    &--list{
+      list-style: none;
+    }
+
+    &.active{
+      transform: scaleY(1);
+
+    }
+  }
+
+  &__contact{
+    position: relative;
+    width: 100vw;
+    margin: 0 auto;
+
+    &--content-parent{
+      display: flex;
+      margin: 0 auto;
+
+      @include media(tab-land){
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    &--left{
+      display: flex;
+      flex: 1;
+      justify-content: center;
+      padding-left: $gutter-vertical;
+      align-content: center;
+      background-color: var(--cta);
+      overflow: hidden;
+
+      @include media(phone){
+        padding-left: 2rem;
+        max-width: 50rem;
+        margin: 0 auto;
+      }
+
+      [data-name="contact-body"]{
+        transition: all .2s ease-in-out;
+
+        @include media(phone){
+          max-width: 80%;
+        }
+
+      }
+    }
+    &--right{
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      padding-right: $gutter-vertical;
+      flex: 1;
+      background-color: white;
+
+      @include media(tab-land){
+        padding-right: 0;
+        padding-left: 0;
+      }
+
+      @include media(phone){
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+
+    }
+
+    &--content{
+      max-width: $grid-width/2;
+      padding-top: 15rem;
+      padding-bottom: 10rem;
+    }
+    &--form{
+      position: relative;
+      transition: transform .4s ease-out, opacity .4s ease-out 250ms;
+      .text-input__container {
+        .text-input{
+          //size
+          width: 100%;
+          // style
+          border-bottom-color: white;
+          color: white;
+        }
+        .text-input__label{
+          color: white;
+        }
+        .text-input:not(:placeholder-shown) + .text-input__label{
+          font-size: 2.3rem;
+          color: var(--cta-darker);
+        }
+      }
+    }
+  }
+}// end .section

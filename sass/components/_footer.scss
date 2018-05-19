@@ -1,0 +1,40 @@
+
+.footer{
+  position: relative;
+  width: 100vw;
+  padding: 2rem;
+  background-color: var(--cta-darker);
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+
+  @include media(tab-land){
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+
+    & > * {
+      &:not(:last-child){}
+      margin-bottom: 2rem;
+    }
+  }
+
+  & > * {
+    flex: 0 0 50%;
+  }
+
+  &__logo-container{
+    height: 15rem;
+    max-width: $grid-width/2;
+    & > .logo {
+      width: 100%;
+    }
+  }
+  &__legal-container{
+    max-width: $grid-width/2;
+    @include media(phone){
+      max-width: 50%;
+      padding-bottom: .4rem;
+    }
+  }
+}

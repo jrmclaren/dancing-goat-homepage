@@ -1,0 +1,103 @@
+.btn{
+  //resets
+  outline: none;
+  border: none;
+  //styles
+  padding: 1rem 2rem;
+  font-weight: 700;
+  font-size: 1.8rem;
+  background-color: var(--cta);
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all .3s ease-out;
+
+  &:hover{
+    transform: translateY(-.4rem);
+    background-color: var(--cta-darker);
+    box-shadow: 0 2rem 4rem rgba(0,0,0,0.2);
+  }
+
+  &:active{
+    transform: translateY(-.2rem);
+    background-color: var(--cta);
+    box-shadow: 0 2rem 2rem rgba(0,0,0,0.1);
+  }
+
+  &--outline{
+    background-color: transparent;
+    background: linear-gradient(to right,
+            rgba($cta,1) 50%,                         rgba(0,0,0,0) 50%);
+    background-size: 200%;
+    background-position: -100%;
+    color: var(--cta);
+    border: 2px solid currentColor;
+    &:hover{
+      color: white;
+      border-color: transparent;
+      background-position: 100%;
+    }
+  }
+  &--light{
+    background-color: white;
+    color: var(--cta);
+    &:hover{
+      background-color: white;
+    }
+    &:active{
+      color: var(--cta-darker);
+    }
+  }
+  &--text{
+    background-color: transparent;
+    color: var(--cta);
+    &:hover{
+      background-color: transparent;
+    }
+    &:active{
+      color: var(--cta-darker);
+    }
+  }
+  &--disabled{
+    color: var(--body-color);
+    background-color: #e1e1e1;
+
+    &:hover,&:active,&:focus{
+      transform: translate(0,0) !important;
+    }
+  }
+  &--submitted{
+    color: $success;
+    background-color: lighten($success, 75%);
+  }
+  &__action{
+    position: relative;
+    overflow: hidden;
+
+    & > * {
+      transition: all .4s ease-in-out;
+    }
+
+    &--default{
+      display: inline-block;
+      z-index: 3;
+    }
+    &--response{
+      position: absolute;
+      display: inline-block;
+      z-index: 4;
+      left: 2rem;
+      top: 1rem;
+      transform: translateY(-5rem);
+    }
+    &.response{
+      .btn__action--default{
+        transform: translateY(5rem);
+      }
+      .btn__action--response{
+        transform: translateY(0);
+      }
+    }
+
+  }
+}

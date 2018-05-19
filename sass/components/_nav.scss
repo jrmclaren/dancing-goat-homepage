@@ -1,0 +1,244 @@
+// burger menu position
+@mixin burgerMenuPositioning(){
+  // the menu icon position
+  position: fixed;
+  right: 5rem;
+  top:2.5rem;
+}
+
+.header{
+  width: 100vw;
+  position: fixed;
+  top: 10.9rem;
+  font-size: 1.3rem;
+  z-index: 5;
+}
+// Nav Menu styles
+// TODO: migrate into .header
+// TODO: Convert values to rem
+.menu-container{
+  // positioning
+  @include burgerMenuPositioning();
+  // size
+  width: 8rem;
+  height: 8rem;
+  // container styles
+  background-color: white;
+  border-radius: 20rem;
+  box-shadow: 0 0 4rem rgba(0,0,0,0.12);
+  cursor: pointer;
+  transition: all .2s ease-out;
+  z-index: 120;
+
+  /*.menu-container*/&__inner{
+  position: absolute;
+  width: 6rem;
+  height: auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  svg{
+    * {
+      transition: all .2s ease-out;
+    }
+    .fill--cta {
+      fill: var(--cta);
+    }
+    path[name="top"]{
+      transform-origin: right center;
+    }
+    path[name="middle"]{
+      transform-origin: center center;
+    }
+    path[name="bottom"]{
+      transform-origin: center center;
+    }
+  } // end svg
+} // end __inner
+
+  /*.menu-container*/&:hover, &:focus{
+                       transform: translateY(-8px);
+                       svg{
+                         .fill--cta{
+                           fill: var(--cta-darker);
+                         }
+                         path[name="top"]{
+                           transform: rotate(15deg);
+                         }
+                         path[name="bottom"]{
+                           transform: translateY(-10px);
+                         }
+                       }
+                     } // end :hover + :focus
+
+  // make the black cross.
+  &:active{
+    background-color: var(--cta);
+    transform: translateY(-.4rem);
+    svg{
+      .fill--cta{
+        fill: var(--cta);
+      }
+      path[name="top"]{
+        transform-origin: center center;
+        transform: rotate(43deg) translateY(15rem) scaleX(1.7);
+        fill: white !important;
+      }
+      path[name="bottom"]{
+        transform: translateX(-125px) translateY(-120px) rotate(-48deg) scaleX(1.9);
+        fill: white !important;
+      }
+      path[name="middle"]{
+        transform: scale(2.8);
+        border-radius: 200px;
+        fill: transparent;
+      }
+    } // end svg
+  } // end :active
+} // end menu-container
+
+.active {
+  background-color: transparent;
+  box-shadow: 0 0 0 rgba(0,0,0,0);
+} // end active
+
+input[type="checkbox"]{
+  display: none;
+  visibility: hidden;
+} // end input[type=checkbox]
+
+
+#menu:checked{
+  & ~ .menu-container__inner{
+    // transform: translateY(-4px);
+    svg{
+      .fill--cta{
+        fill: var(--cta);
+      }
+      path[name="top"]{
+        transform-origin: center center;
+        transform: rotate(43deg) translateY(15rem) scaleX(1.7);
+        fill: white !important;
+      }
+      path[name="bottom"]{
+        transform: translateX(-12.5rem) translateY(-12.0rem) rotate(-48deg) scaleX(1.9);
+        fill: white !important;
+      }
+      path[name="middle"]{
+        transform: scale(2.8);
+        fill: transparent;
+      }
+    } // end svg
+  }
+} // #menu:checked
+
+.nav-bg{
+
+  @include burgerMenuPositioning();
+
+  // styles
+  width: 8rem;
+  height: 8rem;
+  transform: scale(0);
+  //opacity: 0.01;
+  transition: all .6s ease-out;
+  z-index: 3;
+  border-radius: 200px;
+  background-color: var(--cta);
+  background: radial-gradient(circle at 100%, var(--cta), var(--cta-darker));
+  transform-origin: center center;
+
+  &.active{
+    transform: scale(85);
+  }
+} // end nav-bg
+
+.nav{
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  z-index: -5;
+  transform: translateY(-100vh);
+  transition: transform .6s ease-out;
+  background-color: transparent;
+
+  &__logo-box{
+    width: 30rem;
+    height: 17.1rem;
+    padding-top: 8rem;
+    opacity: 0;
+    transition: opacity .4s ease-out .6s;
+
+    @include media(tab-land){ padding-left: 2rem;}
+
+  }
+
+  ul{
+    list-style: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: top;
+    opacity:0;
+    transition: all .4s ease-out .2s;
+    li{
+      color: white;
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: -.22rem;
+      background: linear-gradient(to left,
+              rgba(255,255,255,1) 50%,
+              rgba(255,255,255,0) 50%,
+              rgba(255,255,255,0) 100%);
+      background-size: 220%;
+      cursor: default;
+      transition: all .2s ease-out;
+      padding: 1.0rem 1.5rem;
+      &:hover{
+        background-position: 100%;
+        color: var(--cta);
+        transform: translateX(10px);
+      }
+      &:not(:last-child){
+        margin-bottom: 15px;
+      }
+      a{
+        &:link,
+        &:visited{
+          text-decoration: none;
+          color: currentColor;
+        }
+      }
+
+    }
+  }
+  &.active{
+    transform: translateY(0);
+    z-index: 5;
+    .nav__logo-box{
+      opacity: 1;
+    }
+
+    ul{
+      opacity: 1;
+      transform: translate(-50%, -50%);
+      transition: opacity .4s ease-out;
+      transition-delay: 0s;
+      li{
+        cursor: pointer;
+        a{
+          &:link,
+          &:visited{
+            text-decoration: none;
+          }
+          &:active{
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+} // end nav

@@ -1,0 +1,100 @@
+// CSS Variables
+:root{
+  --cta: #b14d61;
+  --cta-darker: #9e465b;
+  --section-headline: rgb(242,242,242);
+  --body-color: rgb(51,51,51);
+  --font-family: Raleway, sans-serif;
+}
+
+// reset
+*{
+  &, &:after, &:before{
+    margin: 0;
+    padding: 0;
+  }
+}
+html{
+  $load-animation-duration: 1.6s;
+  &:before,
+  &:after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    transform-origin: right;
+    animation-fill-mode: forwards !important;
+  }
+  &:before{
+    background-color: var(--cta-darker);
+    z-index: 3;
+    animation: loadReveal $load-animation-duration ;
+    animation-delay: $load-animation-duration/2;
+  }
+  &:after{
+    background-color: var(--cta);
+    z-index: 4;
+    animation-delay: 500ms;
+    animation: loadReveal $load-animation-duration $animation-easing;
+  }
+  position: relative;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  // make 1rem equal 10px
+  font-size: 62.5%; // 16px / 100 = 62.5% i.e. 10px = 1rem
+  font-family: var(--font-family);
+}
+
+body{
+  background-color: #f4f4f4;
+  margin: 2rem;
+  overflow: hidden;
+  @include media(tab-port){
+    margin: 0;
+  }
+}
+
+main{
+  position: relative;
+  overflow: hidden;
+  background-color: var(--cta-darker);
+}
+
+// Image caption styles
+// to credit unsplash authors
+// **not really** part of the site
+// wouldn't be included in the real
+// world, as usage rights would be
+// commercial, so this should be
+// functional, draw attention to itself
+// but not completely break the brand
+// image either.
+figure{
+  position: relative;
+  figcaption{
+    position: absolute;
+    top: 25%;
+    left: 0;
+    padding: 1rem 2rem;
+    background-color: var(--section-headline);
+    color: var(--body-color);
+    opacity: 0;
+    transition: all .2s ease-out;
+    a{
+      color: var(--cta);
+      text-decoration: none;
+    }
+  }
+  &:active{
+    figcaption{
+      opacity: 1;
+      outline: var(--cta) solid 1px;
+      box-shadow: 0 0 10px var(--cta);
+      animation: lookAtMe 1s reverse;
+    }
+  }
+}

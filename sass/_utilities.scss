@@ -6,6 +6,10 @@
   }
 }
 
+@mixin debug($c){
+  border: solid 2px $c;
+}
+
 /*
 Displayz
  */

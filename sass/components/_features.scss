@@ -1,0 +1,59 @@
+.confirmation-coffee-container{
+  position: relative;
+  display: block;
+  width: 50rem;
+  height: 50rem;
+  margin: 0 auto;
+  overflow: hidden;
+  animation: fillUp 2s ease-out;
+  -webkit-clip-path: circle(50.0% at 50% 50%);
+  clip-path: circle(50.0% at 50% 50%);
+  img{
+    position: absolute;
+    width: 100rem;
+    height: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.map{
+  min-width: 20rem;
+  min-height: 30rem;
+  width: 95%;
+  height: auto;
+  max-width:40rem;
+  max-height: 30rem;
+}
+
+
+.coffee-feature-container{
+  // position
+  position: relative;
+  margin-top: -35rem;
+  //size
+  width: 100vw;
+  height: auto;
+  overflow: hidden;
+  @include media(tab-port){
+    margin-top: -14rem;
+  }
+}
+.coffee-feature{
+  width: 100%;
+}
+.order-confirmation-image-container{
+  width: 100%;
+}
+.order-confirmation-image{
+  width: 100%;
+}
+.confirmation-text-box{
+  position: absolute;
+  top: 4rem;
+  width: 45rem;
+  @include media(tab-land){
+    left: 54rem;
+    top: 18rem;
+  }
+}

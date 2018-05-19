@@ -1,0 +1,14 @@
+
+/*SVG Colour classes*/
+
+.svg-fill--cta {
+  fill: var(--cta) !important;
+}
+
+.svg-stroke--cta {
+  fill: none;
+  stroke: var(--cta) !important;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 7.27px;
+}

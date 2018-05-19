@@ -1,0 +1,80 @@
+
+.headline{
+  font-size: 6rem;
+  color: var(--cta);
+  font-weight: 900;
+  line-height: 6.5rem;
+  letter-spacing: -0.01rem;
+
+  @include media(tab-port){
+    font-size: 6rem;
+    line-height: 6.2rem;
+  }
+  @include media(phone){
+    font-size: 4rem;
+    line-height: 4.2rem;
+  }
+
+  &--2 {
+    font-size: 6rem;
+    font-weight: 900;
+    color: var(--cta);
+    letter-spacing: -0.01rem;
+    margin-bottom: 1.6rem;
+    @include media(tab-port){
+      font-size: 5rem;
+    }
+    @include media(phone){
+      font-size: 4rem;
+    }
+  }
+  &--3{
+    font-size: 3rem;
+    line-height: 3.2rem;
+    font-weight: 900;
+    color: inherit;
+    @include media(phone){
+      font-size: 2rem;
+      line-height: 2.2rem;
+    }
+  }
+}
+
+.body-text{
+  font-size: 2.8rem;
+  color: var(--body-color);
+  line-height: 3.4rem;
+  letter-spacing: 0;
+  font-weight: 700;
+
+  @include media(tab-port){
+    font-size: 2rem;
+    line-height: 2.4rem;
+  }
+
+}
+
+.legal{
+  font-size: 1rem;
+  color: currentColor;
+  line-height: 1;
+  &__link{
+    &:link,
+    &:visited{
+      text-decoration: none;
+      text-transform: uppercase;
+      color: white;
+    }
+  }
+}
+
+// Text color utilities
+.text-white{
+  color: white !important;
+}
+.text-body{
+  color: var(--body-color) !important;
+}
+.text-cta{
+  color: var(--cta) !important;
+}
