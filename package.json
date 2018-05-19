@@ -1,23 +1,21 @@
 {
   "name": "dancing-goat-website",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Landing page for fictional coffee shop `the dancing goat`",
   "main": "index.js",
   "author": "Jason McLaren <17043524+jrmclaren@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "purge:idea": "rm -r .idea",
     "watch:js": "npx babel --no-babelrc js/script.precomp.js --presets=es2015 --plugins transform-object-rest-spread  --out-file js/script.js --source-maps --watch",
     "watch:sass": "node-sass sass/main.scss css/style.css -w",
-    "devserver": "live-server --browser='Google Chrome'",
-    "start:local": "npm-run-all --parallel devserver watch:sass watch:js",
+    "heroku-postbuild": "yarn run build",
     "start": "node server/server.js",
+    "build": "npm-run-all build:css compile:js",
     "start:development": "nodemon server/server.js",
-    "compile:js": "npx babel js/ --out-dir build/js/",
-    "webpack": "webpack",
+    "compile:js": "npx babel --no-babelrc js/script.precomp.js --presets=babili  --out-file js/script.js",
     "compile:sass": "node-sass sass/main.scss css/style.comp.css",
-    "prefix:css": "node-sass --use autoprefixer -b 'last 10 versions' css/style.comp.css -o css/style.prefix.css",
-    "compress:css": "node-sass css/style.prefix.css --output-style compressed -o css/style.css",
+    "prefix:css": "node-sass --use autoprefixer -b 'last 10 versions' css/style.comp.css css/prefixed.css",
+    "compress:css": "node-sass --output-style compressed css/prefixed.css css/style.css",
     "build:css": "npm-run-all compile:sass prefix:css compress:css"
   },
   "dependencies": {
@@ -37,6 +35,7 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-babili": "^0.1.4",
     "babel-preset-flow": "^6.23.0",
     "css-loader": "^0.28.11",
     "extract-text-webpack-plugin": "^3.0.2",
