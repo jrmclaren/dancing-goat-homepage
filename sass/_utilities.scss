@@ -10,6 +10,12 @@
   border: solid 2px $c;
 }
 
+//Animations
+
+.u-animation-play{
+  animation-play-state: running !important;
+}
+
 /*
 Displayz
  */

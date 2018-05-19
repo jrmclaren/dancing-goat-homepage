@@ -506,6 +506,15 @@ document.addEventListener('DOMContentLoaded', () => {
         let nameSpan = document.querySelector('[data-nameSpan]');
         let orderSummarySpan = document.querySelector('[data-orderSummarySpan]');
 
+        let replayAnimation = () => {
+            let element = document.getElementsByTagName('html')[0];
+            element.classList.remove('reveal-slider');
+            void element.offsetWidth;
+            element.classList.add('reveal-slider');
+            window.location.hash = '#order';
+        }
+        replayAnimation();
+
         nameSpan.textContent = name.toLowerCase();
         orderSummarySpan.textContent = `Your ${size} ${type} will be ready for you. Until then, we chillin'`
 

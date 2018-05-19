@@ -149,7 +149,6 @@
       margin: 0 auto;
       padding: 4rem 3rem;
       background-color: white;
-      //border-radius: 80px 80px 0 0;
       overflow: hidden;
       box-shadow: 0 2rem 4rem rgba(0,0,0,.3);
 
@@ -160,10 +159,12 @@
         //transition
         transition: all .8s ease-in-out;
       }
-
       &--front{
         &.submitted{
           transform:  translateX(200rem);
+          @include media(phone){
+            height: 55rem;
+          }
         }
       }
       &--back{
@@ -175,9 +176,35 @@
         &.submitted{
           transform: translateX(0);
         }
-      }
-    }
 
+
+        .order-confirmation-image-container{
+          width: 100%;
+        }
+        .order-confirmation-image{
+          width: 100%;
+        }
+        .confirmation-text-box{
+          position: absolute;
+          top: 4rem;
+          width: 45rem;
+          @include media(tab-land){
+            left: 54rem;
+            top: 18rem;
+          }
+          @include media(tab-port){
+            position: relative;
+            left: 0;
+            top: 0;
+            padding-top: 2rem;
+            width: 28rem;
+          }
+        }
+
+      }
+
+
+    }
     &-form{
       top: 8rem;
       //size

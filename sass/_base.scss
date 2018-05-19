@@ -15,31 +15,6 @@
   }
 }
 html{
-  $load-animation-duration: 1.6s;
-  &:before,
-  &:after{
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100%;
-    transform-origin: right;
-    animation-fill-mode: forwards !important;
-  }
-  &:before{
-    background-color: var(--cta-darker);
-    z-index: 3;
-    animation: loadReveal $load-animation-duration ;
-    animation-delay: $load-animation-duration/2;
-  }
-  &:after{
-    background-color: var(--cta);
-    z-index: 4;
-    animation-delay: 500ms;
-    animation: loadReveal $load-animation-duration $animation-easing;
-  }
   position: relative;
   box-sizing: border-box;
   overflow-x: hidden;

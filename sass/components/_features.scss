@@ -42,18 +42,3 @@
 .coffee-feature{
   width: 100%;
 }
-.order-confirmation-image-container{
-  width: 100%;
-}
-.order-confirmation-image{
-  width: 100%;
-}
-.confirmation-text-box{
-  position: absolute;
-  top: 4rem;
-  width: 45rem;
-  @include media(tab-land){
-    left: 54rem;
-    top: 18rem;
-  }
-}
