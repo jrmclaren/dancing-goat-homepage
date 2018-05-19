@@ -39,7 +39,7 @@
   }
 
   .col-1-of-1 {
-    width: 100% - #{$gutter-horizontal};
+    width: calc(100% - #{$gutter-horizontal});
   }
 
   .col-1-of-2 {

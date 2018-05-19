@@ -402,9 +402,11 @@ html {
 body {
   background-color: #f4f4f4;
   margin: 2rem;
-  overflow: hidden; }
+  overflow: hidden;
+  border-radius: 1rem; }
   @media only screen and (max-width: 56.25em) {
     body {
+      border-radius: 0;
       margin: 0; } }
 
 main {
@@ -462,7 +464,7 @@ figure {
         .row [class^="col-"]:not(:last-child) {
           width: 100% !important; } }
   .row .col-1-of-1 {
-    width: 100% - 6rem; }
+    width: calc(100% - 6rem); }
   .row .col-1-of-2 {
     width: calc((100% - 6rem) / 2); }
   .row .col-1-of-3 {
