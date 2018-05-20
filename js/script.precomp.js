@@ -555,5 +555,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const orderForm = new Form(document.forms[0], orderSubmitCallback, orderRejectCallback).init();
     const contactForm = new Form(document.forms[1],contactCallback, contactRejectCallback).init();
-
 }); /*end of DOMContentLoaded*/
